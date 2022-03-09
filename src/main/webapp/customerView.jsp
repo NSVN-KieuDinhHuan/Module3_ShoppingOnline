@@ -73,12 +73,11 @@
                 </li>
                 <li class="account">
                   <a href="#">
-                    My Account
+                    ${usename}
                     <i class="fa fa-angle-down"></i>
                   </a>
                   <ul class="account_selection">
-                    <li><a href="/signin.jsp"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
-                    <li><a href="/register.jsp"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
+                    <li><a href="/index.jsp"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
                   </ul>
                 </li>
               </ul>
