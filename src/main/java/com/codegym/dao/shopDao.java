@@ -15,6 +15,7 @@ public class shopDao implements IShopDao {
     public static final String SQL_SELECT_ALL_PRODUCT = "SELECT * FROM product;";
     public static final String SQL_FIND_PRODUCT_BY_CATEGORY = "SELECT * FROM product Where category_id=?;";
     public static final String SQL_ADD_USER = "INSERT INTO user(username, email,address, phone, password, role_id,status) VALUES (?,?,?,?,?,1,true);";
+    public static final String SQL_FIND_USER_BY_EMAIL = "SELECT * FROM user Where email=?;";
 
     @Override
     public List<Product> displayAll() {
@@ -70,6 +71,29 @@ public class shopDao implements IShopDao {
 
     }
 
+    @Override
+    public User findUserbyEmail(String email) {
+        User user=null;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_USER_BY_EMAIL);
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("username");
+                String address = resultSet.getString("address");
+                String phone = resultSet.getString("phone");
+                String password = resultSet.getString("password");
+                int role_id = resultSet.getInt("role_id");
+                boolean staus = resultSet.getBoolean("role_id");
+                user = new User(id, name, email, address, phone, password,role_id,staus);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
     @Override
     public void Payment() {
 

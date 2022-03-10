@@ -38,6 +38,11 @@ public class ShopService implements IShopService {
     }
 
     @Override
+    public User findUserbyEmail(String email) {
+        return shopDao.findUserbyEmail(email);
+    }
+
+    @Override
     public void Payment() {
 
     }

@@ -78,22 +78,23 @@ public class ShopServlet extends HttpServlet {
 
 
     private void signIn(HttpServletRequest request, HttpServletResponse response)  {
-        username = request.getParameter("username");
+        String email=request.getParameter("email");
         String password = request.getParameter("password");
+        User user=shopService.findUserbyEmail(email);
         RequestDispatcher rq;
-        request.setAttribute("usename",username);
-        if (username.equals("admin") && password.equals("123456")) {
+        if(user!=null&& user.getPassword().equals(password) && user.getRole_id()==1){
+            username = user.getName();
+            rq = request.getRequestDispatcher("/customerView.jsp");
+
+        }else if(user!=null&& user.getPassword().equals(password) && user.getRole_id()==2){
             rq = request.getRequestDispatcher("/list.jsp");
-//            rq.forward(request, response);
-        }else if(username.equals("KIEUHUAN") && password.equals("123456")) {
-             rq = request.getRequestDispatcher("/customerView.jsp");
-//            rq.forward(request, response);
         }else {
-            String error = "username or password wrong";
+            String error = "Username or Password is wrong";
             request.setAttribute("error", error);
             rq = request.getRequestDispatcher("/signin.jsp");
-//            rq.forward(request, response);
         }
+        request.setAttribute("usename",username);
+
         try {
             rq.forward(request, response);
         } catch (ServletException e) {
@@ -105,18 +106,20 @@ public class ShopServlet extends HttpServlet {
     }
 
     private void register(HttpServletRequest request, HttpServletResponse response) {
+        String notification = null;
         String username = request.getParameter("username");
         String email= request.getParameter("email");
         String address= request.getParameter("address");
         String phone = request.getParameter("phone");
         String password = request.getParameter("password");
         User user=new User(username,email,address,phone,password);
-        shopService.register(user);
-        String notification = null;
-        if (shopService.register(user)) {
-           notification="Sucssefull";
+         Boolean checkRegister=shopService.register(user);
+
+        if (checkRegister=true) {
+           notification="Da Dang ky thanh cong";
         }
-         request.setAttribute("notify",notification);
+
+        request.setAttribute("notify",notification);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/register.jsp");
         try {
             dispatcher.forward(request, response);
@@ -130,10 +133,11 @@ public class ShopServlet extends HttpServlet {
     private void showCategories(HttpServletRequest request, HttpServletResponse response)  {
         List<Product> products = shopService.displayAll();
         String category_id = request.getParameter("category_id");
-        if (category_id!=null) {
+        if (category_id!=null && category_id!="") {
             products = shopService.findbycategory(Integer.parseInt(category_id));
         }
 
+        request.setAttribute("categorySevelet",category_id);
         request.setAttribute("usename",username);
         request.setAttribute("showAllproducts", products);
 

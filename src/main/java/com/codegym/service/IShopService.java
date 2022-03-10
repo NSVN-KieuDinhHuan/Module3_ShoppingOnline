@@ -11,6 +11,7 @@ public interface IShopService {
     List<Product> addProductIntoCart();
     List<Product>findbycategory(int category_id);
     boolean register(User user);
+    User findUserbyEmail(String email);
     void Payment();
 }
 

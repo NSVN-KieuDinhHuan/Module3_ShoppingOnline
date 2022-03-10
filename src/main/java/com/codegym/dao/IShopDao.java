@@ -10,6 +10,7 @@ public interface IShopDao{
     Product findByName(int id);
     List<Product> addProductIntoCart();
     List<Product>findbycategory(int category_id);
+    User findUserbyEmail(String email);
     void Payment();
     boolean register(User user);
 }

@@ -9,7 +9,21 @@ public class User {
     private  String Password;
     private int role_id;
     private boolean status;
-    public User() {
+
+    public int getRole_id() {
+        return role_id;
+    }
+
+    public void setRole_id(int role_id) {
+        this.role_id = role_id;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     public User(String name, String email, String address, String phone, String password) {
