@@ -1,8 +1,7 @@
 package com.codegym.dao;
 
-import com.codegym.mode.Category;
-import com.codegym.mode.Product;
-import com.codegym.mode.User;
+import com.codegym.model.Product;
+import com.codegym.model.User;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
 package com.codegym.controller;
 
 import com.codegym.dao.shopDao;
-import com.codegym.mode.Product;
-import com.codegym.mode.User;
+import com.codegym.model.Product;
+import com.codegym.model.User;
 import com.codegym.service.IShopService;
 import com.codegym.service.ShopService;
 
@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet(name = "ShopServlet", value = "/home")

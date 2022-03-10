@@ -1,8 +1,8 @@
 package com.codegym.service;
 
 import com.codegym.dao.IShopDao;
-import com.codegym.mode.Product;
-import com.codegym.mode.User;
+import com.codegym.model.Product;
+import com.codegym.model.User;
 
 import java.util.List;
 
