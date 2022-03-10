@@ -106,12 +106,12 @@ public class ShopServlet extends HttpServlet {
     }
 
     private void register(HttpServletRequest request, HttpServletResponse response) {
-        String password = request.getParameter("password");
         String username = request.getParameter("username");
-        String phone = request.getParameter("phone");
-        String address= request.getParameter("address");
         String email= request.getParameter("email");
-        User user=new User(username,email,phone,address,password);
+        String address= request.getParameter("address");
+        String phone = request.getParameter("phone");
+        String password = request.getParameter("password");
+        User user=new User(username,email,address,phone,password);
         shopService.register(user);
         String notification = null;
         if (shopService.register(user)) {

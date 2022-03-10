@@ -4,28 +4,30 @@ public class User {
     private int id;
     private  String name;
     private  String email;
-    private  String phone;
     private  String address;
+    private  String phone;
     private  String Password;
+    private String role_id;
     private boolean status;
     public User() {
     }
 
-    public User(String name, String email, String phone, String address, String password) {
+    public User(String name, String email, String address, String phone, String password) {
         this.name = name;
         this.email = email;
-        this.phone = phone;
         this.address = address;
+        this.phone = phone;
         Password = password;
     }
 
-    public User(int id, String name, String email, String phone, String address, String password, boolean status) {
+    public User(int id, String name, String email, String address, String phone, String password, String role_id, boolean status) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.phone = phone;
         this.address = address;
+        this.phone = phone;
         Password = password;
+        this.role_id = role_id;
         this.status = status;
     }
 
