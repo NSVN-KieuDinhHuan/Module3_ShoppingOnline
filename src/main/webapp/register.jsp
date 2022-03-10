@@ -14,7 +14,7 @@
         /* config.css */
 
         :root {
-            --baseColor: #032cfa;
+            --baseColor: rgba(62, 138, 96, 0.45);
         }
 
         /* helpers/align.css */
@@ -158,7 +158,7 @@
             --loginBorderRadus: 0.25rem;
             --loginColor: #eee;
 
-            --loginInputBackgroundColor: #3b4148;
+            --loginInputBackgroundColor: #8e8f9b;
             --loginInputHoverBackgroundColor: #434a52;
 
             --loginLabelBackgroundColor: #363b41;
@@ -227,9 +227,13 @@
 <body class="align">
 
 <div class="grid">
-    <c:if test="${notify!=null}">
-        <p class="alert alert-success">${notify}</p>
-    </c:if>
+
+
+    <div style="text-align: center;color: #24fa03;font-size: 20px">
+        <c:if test="${notify!=null}">
+            <p class="alert alert-success">${notify}</p>
+        </c:if>
+    </div>
 
     <form action="/home?action=register" method="POST" class="form login">
 
@@ -262,7 +266,7 @@
 
     </form>
 
-    <p class="text--center">Resgister? <a href="/signin.jsp">login now</a> <svg class="icon">
+    <p class="text--center">Do you want to login? <a href="/signin.jsp">login now</a> <svg class="icon">
         <use xlink:href="#icon-arrow-right"></use>
     </svg></p>
 

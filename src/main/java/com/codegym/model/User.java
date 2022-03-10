@@ -1,4 +1,4 @@
-package com.codegym.mode;
+package com.codegym.model;
 
 public class User {
     private int id;
@@ -8,6 +8,7 @@ public class User {
     private  String phone;
     private  String Password;
     private int role_id;
+    private boolean status;
 
     public int getRole_id() {
         return role_id;
@@ -23,10 +24,6 @@ public class User {
 
     public void setStatus(boolean status) {
         this.status = status;
-    }
-
-    private boolean status;
-    public User() {
     }
 
     public User(String name, String email, String address, String phone, String password) {

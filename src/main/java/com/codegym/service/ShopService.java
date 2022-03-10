@@ -1,8 +1,8 @@
 package com.codegym.service;
 
 import com.codegym.dao.IShopDao;
-import com.codegym.mode.Product;
-import com.codegym.mode.User;
+import com.codegym.model.Product;
+import com.codegym.model.User;
 
 import java.util.List;
 
@@ -35,6 +35,11 @@ public class ShopService implements IShopService {
     @Override
     public boolean register(User user) {
         return shopDao.register(user);
+    }
+
+    @Override
+    public User findUserbyEmail(String email) {
+        return shopDao.findUserbyEmail(email);
     }
 
     @Override

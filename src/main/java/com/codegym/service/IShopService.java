@@ -1,7 +1,7 @@
 package com.codegym.service;
 
-import com.codegym.mode.Product;
-import com.codegym.mode.User;
+import com.codegym.model.Product;
+import com.codegym.model.User;
 
 import java.util.List;
 
@@ -11,6 +11,7 @@ public interface IShopService {
     List<Product> addProductIntoCart();
     List<Product>findbycategory(int category_id);
     boolean register(User user);
+    User findUserbyEmail(String email);
     void Payment();
 }
 

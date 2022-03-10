@@ -1,8 +1,7 @@
 package com.codegym.dao;
 
-import com.codegym.mode.Category;
-import com.codegym.mode.Product;
-import com.codegym.mode.User;
+import com.codegym.model.Product;
+import com.codegym.model.User;
 
 import java.util.List;
 
@@ -11,6 +10,7 @@ public interface IShopDao{
     Product findByName(int id);
     List<Product> addProductIntoCart();
     List<Product>findbycategory(int category_id);
+    User findUserbyEmail(String email);
     void Payment();
     boolean register(User user);
 }

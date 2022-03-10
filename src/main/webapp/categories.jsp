@@ -205,10 +205,10 @@
 							<h5>Product Category</h5>
 						</div>
 						<ul class="sidebar_categories">
-							<li><a href="/home?action=categories&category_id=1">Men</a></li>
-							<li ><a href="/home?action=categories&category_id=2">women</a></li>
-							<li><a href="/home?action=categories&category_id=3">Accessories</a></li>
-							<li><a href="#">Shop</a></li>
+							<li><a href="/home?action=categories&category_id=3">Men</a></li>
+							<li ><a href="/home?action=categories&category_id=1">women</a></li>
+							<li><a href="/home?action=categories&category_id=2">Accessories</a></li>
+							<li><a href="/home?action=categories&category_id=4">All products</a></li>
 						</ul>
 					</div>
 
@@ -315,26 +315,36 @@
 								<!-- Product Grid -->
 
 								<div class="product-grid">
-
-								<%
-								%>
+                                    <div class="row">
                               <c:forEach var="product"  items="${showAllproducts}">
 								  <!-- Product 3 -->
+
 									<div class="product-item">
+
+
 										<div class="product product_filter">
+
 											<div class="product_image">
 												<img src=${product.productImage} alt="#">
 											</div>
+
 											<div class="favorite"></div>
+
 											<div class="product_info">
 												<h6 class="product_name"><a href="/single.jsp">${product.name}</a></h6>
 												<div class="product_price">${product.price} $</div>
 											</div>
-										</div>
-										<div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
-									</div>
-							  </c:forEach>
 
+										</div>
+
+										<div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
+
+
+									</div>
+
+							       </c:forEach>
+
+                                  </div>
 								</div>
 								<!-- Product Sorting -->
 
