@@ -118,7 +118,12 @@
                 <li><a href="contact.jsp">contact</a></li>
               </ul>
               <ul class="navbar_user">
-                <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+                <li>
+                  <input type="text" name="search" placeholder="search">
+                  <button type="submit" class="btn btn-search">
+                    <i class="fa fa-search"></i>
+                  </button>
+                </li>
                 <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>
                 <li class="checkout">
                   <a href="#">

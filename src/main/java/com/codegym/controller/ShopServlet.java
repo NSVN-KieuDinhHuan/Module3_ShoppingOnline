@@ -85,7 +85,7 @@ public class ShopServlet extends HttpServlet {
         if (username.equals("admin") && password.equals("123456")) {
             rq = request.getRequestDispatcher("/list.jsp");
 //            rq.forward(request, response);
-        }else if(username.equals("KIEUHUAN") && password.equals("123456")) {
+        }else if(username.equals("phamhuy") && password.equals("123456")) {
              rq = request.getRequestDispatcher("/customerView.jsp");
 //            rq.forward(request, response);
         }else {
