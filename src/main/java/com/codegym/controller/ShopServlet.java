@@ -82,12 +82,13 @@ public class ShopServlet extends HttpServlet {
         String password = request.getParameter("password");
         User user=shopService.findUserbyEmail(email);
         RequestDispatcher rq;
-        if(user!=null&& user.getPassword().equals(password) && user.getRole_id()==1){
+        if(user!=null&& user.getPassword().equals(password) && user.getRole_id()==2){
             username = user.getName();
             rq = request.getRequestDispatcher("/customerView.jsp");
 
-        }else if(user!=null&& user.getPassword().equals(password) && user.getRole_id()==2){
-            rq = request.getRequestDispatcher("/list.jsp");
+        }else if(user!=null&& user.getPassword().equals(password) && user.getRole_id()==1){
+            username = user.getName();
+            rq = request.getRequestDispatcher("/adminTemplate/index.jsp");
         }else {
             String error = "Username or Password is wrong";
             request.setAttribute("error", error);
