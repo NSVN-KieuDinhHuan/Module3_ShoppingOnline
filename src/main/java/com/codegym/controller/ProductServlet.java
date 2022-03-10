@@ -31,7 +31,7 @@ public class ProductServlet extends HttpServlet {
     private void showListProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Product> products = productService.findAll();
         request.setAttribute("products",products);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/product/list.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/product/list.jsp");
         dispatcher.forward(request, response);
     }
 
