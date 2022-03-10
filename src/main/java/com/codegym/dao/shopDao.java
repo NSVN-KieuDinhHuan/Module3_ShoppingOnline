@@ -15,7 +15,7 @@ public class shopDao implements IShopDao {
     private Connection connection = DBConnection.getConnection();
     public static final String SQL_SELECT_ALL_PRODUCT = "SELECT * FROM product;";
     public static final String SQL_FIND_PRODUCT_BY_CATEGORY = "SELECT * FROM product Where category_id=?;";
-    public static final String SQL_ADD_USER = "INSERT INTO user(username, address, phone, password, role_id,status) VALUES (?,?,?,?,1,true);";
+    public static final String SQL_ADD_USER = "INSERT INTO user(username, email,address, phone, password, role_id,status) VALUES (?,?,?,?,?,1,true);";
 
     @Override
     public List<Product> displayAll() {
@@ -81,9 +81,10 @@ public class shopDao implements IShopDao {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_ADD_USER);
             preparedStatement.setString(1, user.getName());
-            preparedStatement.setString(2, user.getAddress());
-            preparedStatement.setString(3, user.getPhone());
-            preparedStatement.setString(4, user.getEmail());
+            preparedStatement.setString(2, user.getEmail());
+            preparedStatement.setString(3, user.getAddress());
+            preparedStatement.setString(4, user.getPhone());
+            preparedStatement.setString(5, user.getPassword());
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
