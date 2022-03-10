@@ -244,18 +244,17 @@
 									<ul class="product_sorting">
 										<li>
 											<select name="cars" id="cars">
-												<option value="volvo"><li class="type_sorting_btn" data-isotope-option='{ "sortBy": "original-order" }'><span><a href="/home?action=categories&sorting=0">Default Sorting</a></span></li></option>
-												<option value="saab"><li class="type_sorting_btn" data-isotope-option='{ "sortBy": "price" }'><span><a href="/home?action=categories&sorting=1">Price</a></span></li></option>
+												<option value="volvo">Volvo</option>
+												<option value="saab">Saab</option>
 												<option value="mercedes">Mercedes</option>
-
+											</select>
 											<span class="type_sorting_text">Default Sorting</span>
 											<i class="fa fa-angle-down"></i>
 											<ul class="sorting_type">
-
-
-
+												<li class="type_sorting_btn" data-isotope-option='{ "sortBy": "original-order" }'><span><a href="/home?action=categories&sorting=0">Default Sorting</a></span></li>
+												<li class="type_sorting_btn" data-isotope-option='{ "sortBy": "price" }'><span><a href="/home?action=categories&sorting=1">Price</a></span></li>
+												<li class="type_sorting_btn" data-isotope-option='{ "sortBy": "name" }'><span><a href="/home?action=categories&sorting=2">Product Name</a></span></li>
 											</ul>
-											</select>
 										</li>
 										<li>
 											<span>Show</span>
