@@ -104,8 +104,8 @@
 						</div>
 						<nav class="navbar">
 							<ul class="navbar_menu">
-								<li><a href="/customerView.jsp">home</a></li>
-								<li><a href="/categories.jsp">shop</a></li>
+								<li><a href="/home?action=home">home</a></li>
+								<li><a href="/home?action=categories">shop</a></li>
 								<li><a href="#">promotion</a></li>
 								<li><a href="#">pages</a></li>
 								<li><a href="#">blog</a></li>
