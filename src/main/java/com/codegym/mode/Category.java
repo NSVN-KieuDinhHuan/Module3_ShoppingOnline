@@ -1,4 +1,4 @@
-package com.codegym.model;
+package com.codegym.mode;
 
 public class Category {
     private int id;
