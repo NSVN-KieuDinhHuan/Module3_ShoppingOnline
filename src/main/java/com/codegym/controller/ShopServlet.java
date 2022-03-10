@@ -133,10 +133,11 @@ public class ShopServlet extends HttpServlet {
     private void showCategories(HttpServletRequest request, HttpServletResponse response)  {
         List<Product> products = shopService.displayAll();
         String category_id = request.getParameter("category_id");
-        if (category_id!=null) {
+        if (category_id!=null && category_id!="") {
             products = shopService.findbycategory(Integer.parseInt(category_id));
         }
 
+        request.setAttribute("categorySevelet",category_id);
         request.setAttribute("usename",username);
         request.setAttribute("showAllproducts", products);
 

@@ -193,7 +193,20 @@
 				<div class="breadcrumbs d-flex flex-row align-items-center">
 					<ul>
 						<li><a href="/home?action=categories">Shop</a></li>
-<%--						<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Men's</a></li>--%>
+
+						<c:if test="${categorySevelet==3}">
+							<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Men's</a></li>
+						</c:if>
+						<c:if test="${categorySevelet==2}">
+							<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Accessories</a></li>
+						</c:if>
+						<c:if test="${categorySevelet==1}">
+							<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>women</a></li>
+						</c:if>
+						<c:if test="${categorySevelet==''}">
+							<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>All products</a></li>
+						</c:if>
+
 					</ul>
 				</div>
 
@@ -208,60 +221,12 @@
 							<li><a href="/home?action=categories&category_id=3">Men</a></li>
 							<li ><a href="/home?action=categories&category_id=1">women</a></li>
 							<li><a href="/home?action=categories&category_id=2">Accessories</a></li>
-							<li><a href="/home?action=categories&category_id=4">All products</a></li>
+							<li><a href="/home?action=categories&category_id=">All products</a></li>
 						</ul>
 					</div>
-
-					<!-- Price Range Filtering -->
-					<div class="sidebar_section">
-						<div class="sidebar_title">
-							<h5>Filter by Price</h5>
-						</div>
-						<p>
-							<input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
-						</p>
-						<div id="slider-range"></div>
-						<div class="filter_button"><span>filter</span></div>
-					</div>
-
-					<!-- Sizes -->
-					<div class="sidebar_section">
-						<div class="sidebar_title">
-							<h5>Sizes</h5>
-						</div>
-						<ul class="checkboxes">
-							<li><i class="fa fa-square-o" aria-hidden="true"></i><span>S</span></li>
-							<li class="active"><i class="fa fa-square" aria-hidden="true"></i><span>M</span></li>
-							<li><i class="fa fa-square-o" aria-hidden="true"></i><span>L</span></li>
-							<li><i class="fa fa-square-o" aria-hidden="true"></i><span>XL</span></li>
-							<li><i class="fa fa-square-o" aria-hidden="true"></i><span>XXL</span></li>
-						</ul>
-					</div>
-
-					<!-- Color -->
-					<div class="sidebar_section">
-						<div class="sidebar_title">
-							<h5>Color</h5>
-						</div>
-						<ul class="checkboxes">
-							<li><i class="fa fa-square-o" aria-hidden="true"></i><span>Black</span></li>
-							<li class="active"><i class="fa fa-square" aria-hidden="true"></i><span>Pink</span></li>
-							<li><i class="fa fa-square-o" aria-hidden="true"></i><span>White</span></li>
-							<li><i class="fa fa-square-o" aria-hidden="true"></i><span>Blue</span></li>
-							<li><i class="fa fa-square-o" aria-hidden="true"></i><span>Orange</span></li>
-							<li><i class="fa fa-square-o" aria-hidden="true"></i><span>White</span></li>
-							<li><i class="fa fa-square-o" aria-hidden="true"></i><span>Blue</span></li>
-							<li><i class="fa fa-square-o" aria-hidden="true"></i><span>Orange</span></li>
-							<li><i class="fa fa-square-o" aria-hidden="true"></i><span>White</span></li>
-							<li><i class="fa fa-square-o" aria-hidden="true"></i><span>Blue</span></li>
-							<li><i class="fa fa-square-o" aria-hidden="true"></i><span>Orange</span></li>
-						</ul>
-						<div class="show_more">
-							<span><span>+</span>Show More</span>
-						</div>
-					</div>
-
 				</div>
+
+
 
 				<!-- Main Content -->
 
@@ -297,18 +262,6 @@
 											</ul>
 										</li>
 									</ul>
-									<div class="pages d-flex flex-row align-items-center">
-										<div class="page_current">
-											<span>1</span>
-											<ul class="page_selection">
-												<li><a href="#">1</a></li>
-												<li><a href="#">2</a></li>
-												<li><a href="#">3</a></li>
-											</ul>
-										</div>
-										<div class="page_total"><span>of</span> 3</div>
-										<div id="next_page" class="page_next"><a href="#"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
-									</div>
 
 								</div>
 
@@ -349,20 +302,20 @@
 								<!-- Product Sorting -->
 
 								<div class="product_sorting_container product_sorting_container_bottom clearfix">
-									<ul class="product_sorting">
-										<li>
-											<span>Show:</span>
-											<span class="num_sorting_text">04</span>
-											<i class="fa fa-angle-down"></i>
-											<ul class="sorting_num">
-												<li class="num_sorting_btn"><span>01</span></li>
-												<li class="num_sorting_btn"><span>02</span></li>
-												<li class="num_sorting_btn"><span>03</span></li>
-												<li class="num_sorting_btn"><span>04</span></li>
-											</ul>
-										</li>
-									</ul>
-									<span class="showing_results">Showing 1–3 of 12 results</span>
+<%--									<ul class="product_sorting">--%>
+<%--										<li>--%>
+<%--											<span>Show:</span>--%>
+<%--											<span class="num_sorting_text">04</span>--%>
+<%--											<i class="fa fa-angle-down"></i>--%>
+<%--											<ul class="sorting_num">--%>
+<%--												<li class="num_sorting_btn"><span>01</span></li>--%>
+<%--												<li class="num_sorting_btn"><span>02</span></li>--%>
+<%--												<li class="num_sorting_btn"><span>03</span></li>--%>
+<%--												<li class="num_sorting_btn"><span>04</span></li>--%>
+<%--											</ul>--%>
+<%--										</li>--%>
+<%--									</ul>--%>
+<%--									<span class="showing_results">Showing 1–3 of 12 results</span>--%>
 									<div class="pages d-flex flex-row align-items-center">
 										<div class="page_current">
 											<span>1</span>
