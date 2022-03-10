@@ -1,21 +1,22 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Colo Shop Categories</title>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="Colo Shop Template">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
-<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
-<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
-<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
-<link rel="stylesheet" type="text/css" href="plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
-<link rel="stylesheet" type="text/css" href="styles/categories_styles.css">
-<link rel="stylesheet" type="text/css" href="styles/categories_responsive.css">
+	<title>Colo Shop Categories</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="Colo Shop Template">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link href="/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+	<link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+	<link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/animate.css">
+	<link rel="stylesheet" type="text/css" href="/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="/styles/categories_styles.css">
+	<link rel="stylesheet" type="text/css" href="/styles/categories_responsive.css">
 </head>
 
 <body>
@@ -66,12 +67,23 @@
 								</li>
 								<li class="account">
 									<a href="#">
-										My Account
+										<c:if test="${usename!=null}">
+											${usename}
+										</c:if>
+										<c:if test="${usename==null}">
+											My Account
+
+										</c:if>
 										<i class="fa fa-angle-down"></i>
 									</a>
 									<ul class="account_selection">
-										<li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
-										<li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
+										<c:if test="${usename!=null}">
+											<li><a href="/home?action=logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
+										</c:if>
+										<c:if test="${usename==null}">
+											<li><a href="/signin.jsp"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
+											<li><a href="/register.jsp"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
+										</c:if>
 									</ul>
 								</li>
 							</ul>
@@ -92,12 +104,12 @@
 						</div>
 						<nav class="navbar">
 							<ul class="navbar_menu">
-								<li><a href="index.html">home</a></li>
-								<li><a href="#">shop</a></li>
+								<li><a href="/home?action=home">home</a></li>
+								<li><a href="/home?action=categories">shop</a></li>
 								<li><a href="#">promotion</a></li>
 								<li><a href="#">pages</a></li>
 								<li><a href="#">blog</a></li>
-								<li><a href="contact.jsp">contact</a></li>
+								<li><a href="/contact.jsp">contact</a></li>
 							</ul>
 							<ul class="navbar_user">
 								<li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
@@ -162,12 +174,12 @@
 						<li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
 					</ul>
 				</li>
-				<li class="menu_item"><a href="#">home</a></li>
-				<li class="menu_item"><a href="#">shop</a></li>
-				<li class="menu_item"><a href="#">promotion</a></li>
-				<li class="menu_item"><a href="#">pages</a></li>
-				<li class="menu_item"><a href="#">blog</a></li>
-				<li class="menu_item"><a href="#">contact</a></li>
+				<li><a href="/home?action=home">home</a></li>
+				<li><a href="/home?action=categories">shop</a></li>
+				<li><a href="#">promotion</a></li>
+				<li><a href="#">pages</a></li>
+				<li><a href="#">blog</a></li>
+				<li><a href="/contact.jsp">contact</a></li>
 			</ul>
 		</div>
 	</div>
@@ -180,8 +192,8 @@
 
 				<div class="breadcrumbs d-flex flex-row align-items-center">
 					<ul>
-						<li><a href="index.html">Home</a></li>
-						<li class="active"><a href="index.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Men's</a></li>
+						<li><a href="/home?action=categories">Shop</a></li>
+<%--						<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Men's</a></li>--%>
 					</ul>
 				</div>
 
@@ -193,11 +205,9 @@
 							<h5>Product Category</h5>
 						</div>
 						<ul class="sidebar_categories">
-							<li><a href="#">Men</a></li>
-							<li class="active"><a href="#"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>Women</a></li>
-							<li><a href="#">Accessories</a></li>
-							<li><a href="#">New Arrivals</a></li>
-							<li><a href="#">Collection</a></li>
+							<li><a href="/home?action=categories&category_id=1">Men</a></li>
+							<li ><a href="/home?action=categories&category_id=2">women</a></li>
+							<li><a href="/home?action=categories&category_id=3">Accessories</a></li>
 							<li><a href="#">Shop</a></li>
 						</ul>
 					</div>
@@ -306,205 +316,26 @@
 
 								<div class="product-grid">
 
-									<!-- Product 1 -->
-
-									<div class="product-item men">
-										<div class="product discount product_filter">
-											<div class="product_image">
-												<img src="images/product_1.png" alt="">
-											</div>
-											<div class="favorite favorite_left"></div>
-											<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
-											<div class="product_info">
-												<h6 class="product_name"><a href="single.jsp">Fujifilm X100T 16 MP Digital Camera (Silver)</a></h6>
-												<div class="product_price">$520.00<span>$590.00</span></div>
-											</div>
-										</div>
-										<div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
-									</div>
-
-									<!-- Product 2 -->
-
-									<div class="product-item women">
+								<%
+								%>
+                              <c:forEach var="product"  items="${showAllproducts}">
+								  <!-- Product 3 -->
+									<div class="product-item">
 										<div class="product product_filter">
 											<div class="product_image">
-												<img src="images/product_2.png" alt="">
-											</div>
-											<div class="favorite"></div>
-											<div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>new</span></div>
-											<div class="product_info">
-												<h6 class="product_name"><a href="single.jsp">Samsung CF591 Series Curved 27-Inch FHD Monitor</a></h6>
-												<div class="product_price">$610.00</div>
-											</div>
-										</div>
-										<div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
-									</div>
-
-									<!-- Product 3 -->
-
-									<div class="product-item women">
-										<div class="product product_filter">
-											<div class="product_image">
-												<img src="images/product_3.png" alt="">
+												<img src=${product.productImage} alt="#">
 											</div>
 											<div class="favorite"></div>
 											<div class="product_info">
-												<h6 class="product_name"><a href="single.jsp">Blue Yeti USB Microphone Blackout Edition</a></h6>
-												<div class="product_price">$120.00</div>
+												<h6 class="product_name"><a href="/single.jsp">${product.name}</a></h6>
+												<div class="product_price">${product.price} $</div>
 											</div>
 										</div>
 										<div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
 									</div>
+							  </c:forEach>
 
-									<!-- Product 4 -->
-
-									<div class="product-item accessories">
-										<div class="product product_filter">
-											<div class="product_image">
-												<img src="images/product_4.png" alt="">
-											</div>
-											<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>
-											<div class="favorite favorite_left"></div>
-											<div class="product_info">
-												<h6 class="product_name"><a href="single.jsp">DYMO LabelWriter 450 Turbo Thermal Label Printer</a></h6>
-												<div class="product_price">$410.00</div>
-											</div>
-										</div>
-										<div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
-									</div>
-
-									<!-- Product 5 -->
-
-									<div class="product-item women men">
-										<div class="product product_filter">
-											<div class="product_image">
-												<img src="images/product_5.png" alt="">
-											</div>
-											<div class="favorite"></div>
-											<div class="product_info">
-												<h6 class="product_name"><a href="single.jsp">Pryma Headphones, Rose Gold & Grey</a></h6>
-												<div class="product_price">$180.00</div>
-											</div>
-										</div>
-										<div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
-									</div>
-
-									<!-- Product 6 -->
-
-									<div class="product-item accessories">
-										<div class="product discount product_filter">
-											<div class="product_image">
-												<img src="images/product_6.png" alt="">
-											</div>
-											<div class="favorite favorite_left"></div>
-											<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
-											<div class="product_info">
-												<h6 class="product_name"><a href="single.jsp">Fujifilm X100T 16 MP Digital Camera (Silver)</a></h6>
-												<div class="product_price">$520.00<span>$590.00</span></div>
-											</div>
-										</div>
-										<div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
-									</div>
-
-									<!-- Product 7 -->
-
-									<div class="product-item women">
-										<div class="product product_filter">
-											<div class="product_image">
-												<img src="images/product_7.png" alt="">
-											</div>
-											<div class="favorite"></div>
-											<div class="product_info">
-												<h6 class="product_name"><a href="single.jsp">Samsung CF591 Series Curved 27-Inch FHD Monitor</a></h6>
-												<div class="product_price">$610.00</div>
-											</div>
-										</div>
-										<div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
-									</div>
-
-									<!-- Product 8 -->
-
-									<div class="product-item accessories">
-										<div class="product product_filter">
-											<div class="product_image">
-												<img src="images/product_8.png" alt="">
-											</div>
-											<div class="favorite"></div>
-											<div class="product_info">
-												<h6 class="product_name"><a href="single.jsp">Blue Yeti USB Microphone Blackout Edition</a></h6>
-												<div class="product_price">$120.00</div>
-											</div>
-										</div>
-										<div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
-									</div>
-
-									<!-- Product 9 -->
-
-									<div class="product-item men">
-										<div class="product product_filter">
-											<div class="product_image">
-												<img src="images/product_9.png" alt="">
-											</div>
-											<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>
-											<div class="favorite favorite_left"></div>
-											<div class="product_info">
-												<h6 class="product_name"><a href="single.jsp">DYMO LabelWriter 450 Turbo Thermal Label Printer</a></h6>
-												<div class="product_price">$410.00</div>
-											</div>
-										</div>
-										<div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
-									</div>
-
-									<!-- Product 10 -->
-
-									<div class="product-item men">
-										<div class="product product_filter">
-											<div class="product_image">
-												<img src="images/product_10.png" alt="">
-											</div>
-											<div class="favorite"></div>
-											<div class="product_info">
-												<h6 class="product_name"><a href="single.jsp">Pryma Headphones, Rose Gold & Grey</a></h6>
-												<div class="product_price">$180.00</div>
-											</div>
-										</div>
-										<div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
-									</div>
-
-									<!-- Product 11 -->
-
-									<div class="product-item women men">
-										<div class="product product_filter">
-											<div class="product_image">
-												<img src="images/product_5.png" alt="">
-											</div>
-											<div class="favorite"></div>
-											<div class="product_info">
-												<h6 class="product_name"><a href="single.jsp">Pryma Headphones, Rose Gold & Grey</a></h6>
-												<div class="product_price">$180.00</div>
-											</div>
-										</div>
-										<div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
-									</div>
-
-									<!-- Product 12 -->
-
-									<div class="product-item accessories">
-										<div class="product discount product_filter">
-											<div class="product_image">
-												<img src="images/product_6.png" alt="">
-											</div>
-											<div class="favorite favorite_left"></div>
-											<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
-											<div class="product_info">
-												<h6 class="product_name"><a href="single.jsp">Fujifilm X100T 16 MP Digital Camera (Silver)</a></h6>
-												<div class="product_price">$520.00<span>$590.00</span></div>
-											</div>
-										</div>
-										<div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
-									</div>
 								</div>
-
 								<!-- Product Sorting -->
 
 								<div class="product_sorting_container product_sorting_container_bottom clearfix">
@@ -621,7 +452,7 @@
 						<ul class="footer_nav">
 							<li><a href="#">Blog</a></li>
 							<li><a href="#">FAQs</a></li>
-							<li><a href="contact.jsp">Contact us</a></li>
+							<li><a href="contact.html">Contact us</a></li>
 						</ul>
 					</div>
 				</div>
@@ -649,14 +480,14 @@
 
 </div>
 
-<script src="js/jquery-3.2.1.min.js"></script>
-<script src="styles/bootstrap4/popper.js"></script>
-<script src="styles/bootstrap4/bootstrap.min.js"></script>
-<script src="plugins/Isotope/isotope.pkgd.min.js"></script>
-<script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-<script src="plugins/easing/easing.js"></script>
-<script src="plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-<script src="js/categories_custom.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="/plugins/Isotope/isotope.pkgd.min.js"></script>
+<script src="/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="/plugins/easing/easing.js"></script>
+<script src="/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+<%--<script src="/js/categories_custom.js"></script>--%>
 </body>
 
 </html>

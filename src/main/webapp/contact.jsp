@@ -67,12 +67,23 @@
 								</li>
 								<li class="account">
 									<a href="#">
-										My Account
+										<c:if test="${usename!=null}">
+											${usename}
+										</c:if>
+										<c:if test="${usename==null}">
+											My Account
+
+										</c:if>
 										<i class="fa fa-angle-down"></i>
 									</a>
 									<ul class="account_selection">
-										<li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
-										<li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
+										<c:if test="${usename!=null}">
+											<li><a href="/home?action=logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
+										</c:if>
+										<c:if test="${usename==null}">
+											<li><a href="/signin.jsp"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
+											<li><a href="/register.jsp"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
+										</c:if>
 									</ul>
 								</li>
 							</ul>
@@ -93,8 +104,8 @@
 						</div>
 						<nav class="navbar">
 							<ul class="navbar_menu">
-								<li><a href="index.html">home</a></li>
-								<li><a href="#">shop</a></li>
+								<li><a href="/customerView.jsp">home</a></li>
+								<li><a href="/categories.jsp">shop</a></li>
 								<li><a href="#">promotion</a></li>
 								<li><a href="#">pages</a></li>
 								<li><a href="#">blog</a></li>
