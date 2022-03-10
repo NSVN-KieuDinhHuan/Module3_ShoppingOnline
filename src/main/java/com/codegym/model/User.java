@@ -1,25 +1,32 @@
 package com.codegym.model;
 
 public class User {
-    protected int id;
-    protected String name;
-    protected String DateOfBirth;
-    protected String email;
-    protected String phone;
-    protected String address;
-    protected String Password;
-
+    private int id;
+    private  String name;
+    private  String email;
+    private  String phone;
+    private  String address;
+    private  String Password;
+    private boolean status;
     public User() {
     }
 
-    public User(int id, String name, String dateOfBirth, String email, String phone, String address, String password) {
-        this.id = id;
+    public User(String name, String email, String phone, String address, String password) {
         this.name = name;
-        DateOfBirth = dateOfBirth;
         this.email = email;
         this.phone = phone;
         this.address = address;
         Password = password;
+    }
+
+    public User(int id, String name, String email, String phone, String address, String password, boolean status) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        Password = password;
+        this.status = status;
     }
 
     public int getId() {
@@ -38,13 +45,6 @@ public class User {
         this.name = name;
     }
 
-    public String getDateOfBirth() {
-        return DateOfBirth;
-    }
-
-    public void setDateOfBirth(String dateOfBirth) {
-        DateOfBirth = dateOfBirth;
-    }
 
     public String getEmail() {
         return email;

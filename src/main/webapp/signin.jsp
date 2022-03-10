@@ -231,7 +231,7 @@
         <p class="alert alert-success">${error}</p>
     </c:if>
 
-    <form action="/users?action=singin" method="POST" class="form login">
+    <form action="/home?action=singin" method="POST" class="form login">
 
         <div class="form__field">
             <label for="login__username"><svg class="icon">

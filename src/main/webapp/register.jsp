@@ -227,11 +227,11 @@
 <body class="align">
 
 <div class="grid">
-    <c:if test="${error!=null}">
-        <p class="alert alert-success">${error}</p>
+    <c:if test="${notify!=null}">
+        <p class="alert alert-success">${notify}</p>
     </c:if>
 
-    <form action="/users?action=register" method="POST" class="form login">
+    <form action="/home?action=register" method="POST" class="form login">
 
 
 
@@ -251,7 +251,7 @@
         </div>
         <div class="form__field">
 
-            <input autocomplete="address" id="address" type="text" name="adress" class="form__input" placeholder="Address " required>
+            <input autocomplete="address" id="address" type="text" name="address" class="form__input" placeholder="Address " required>
         </div>
         <div class="form__field">
             <input id="phone" type="text" name="phone" class="form__input" placeholder="Phone number" required>

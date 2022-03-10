@@ -68,12 +68,23 @@
 								</li>
 								<li class="account">
 									<a href="#">
-										My Account
+										<c:if test="${usename!=null}">
+											${usename}
+										</c:if>
+										<c:if test="${usename==null}">
+											My Account
+
+										</c:if>
 										<i class="fa fa-angle-down"></i>
 									</a>
 									<ul class="account_selection">
-										<li><a href=""><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
-										<li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
+										<c:if test="${usename!=null}">
+											<li><a href="/home?action=logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
+										</c:if>
+										<c:if test="${usename==null}">
+											<li><a href="/signin.jsp"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
+											<li><a href="/register.jsp"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
+										</c:if>
 									</ul>
 								</li>
 							</ul>
@@ -94,8 +105,8 @@
 						</div>
 						<nav class="navbar">
 							<ul class="navbar_menu">
-								<li><a href="index.jsp">home</a></li>
-								<li><a href="#">shop</a></li>
+								<li><a href="/home?action=home">home</a></li>
+								<li><a href="/home?action=categories">shop</a></li>
 								<li><a href="#">promotion</a></li>
 								<li><a href="#">pages</a></li>
 								<li><a href="#">blog</a></li>
@@ -124,55 +135,7 @@
 
 	<div class="fs_menu_overlay"></div>
 
-	<!-- Hamburger Menu -->
 
-	<div class="hamburger_menu">
-		<div class="hamburger_close"><i class="fa fa-times" aria-hidden="true"></i></div>
-		<div class="hamburger_menu_content text-right">
-			<ul class="menu_top_nav">
-				<li class="menu_item has-children">
-					<a href="#">
-						usd
-						<i class="fa fa-angle-down"></i>
-					</a>
-					<ul class="menu_selection">
-						<li><a href="#">cad</a></li>
-						<li><a href="#">aud</a></li>
-						<li><a href="#">eur</a></li>
-						<li><a href="#">gbp</a></li>
-					</ul>
-				</li>
-				<li class="menu_item has-children">
-					<a href="#">
-						English
-						<i class="fa fa-angle-down"></i>
-					</a>
-					<ul class="menu_selection">
-						<li><a href="#">French</a></li>
-						<li><a href="#">Italian</a></li>
-						<li><a href="#">German</a></li>
-						<li><a href="#">Spanish</a></li>
-					</ul>
-				</li>
-				<li class="menu_item has-children">
-					<a href="#">
-						My Account
-						<i class="fa fa-angle-down"></i>
-					</a>
-					<ul class="menu_selection">
-						<li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
-						<li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
-					</ul>
-				</li>
-				<li class="menu_item"><a href="#">home</a></li>
-				<li class="menu_item"><a href="#">shop</a></li>
-				<li class="menu_item"><a href="#">promotion</a></li>
-				<li class="menu_item"><a href="#">pages</a></li>
-				<li class="menu_item"><a href="#">blog</a></li>
-				<li class="menu_item"><a href="#">contact</a></li>
-			</ul>
-		</div>
-	</div>
 
 	<div class="container single_product_container">
 		<div class="row">
