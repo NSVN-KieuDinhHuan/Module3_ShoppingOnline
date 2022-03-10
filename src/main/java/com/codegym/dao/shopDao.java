@@ -16,6 +16,8 @@ public class shopDao implements IShopDao {
     public static final String SQL_FIND_PRODUCT_BY_CATEGORY = "SELECT * FROM product Where category_id=?;";
     public static final String SQL_ADD_USER = "INSERT INTO user(username, email,address, phone, password, role_id,status) VALUES (?,?,?,?,?,1,true);";
     public static final String SQL_FIND_USER_BY_EMAIL = "SELECT * FROM user Where email=?;";
+    public static final String SQL_SORT_PRODUCT_BY_PRICE = "SELECT * FROM product  ORDER BY price DESC;";
+
 
     @Override
     public List<Product> displayAll() {
@@ -94,6 +96,30 @@ public class shopDao implements IShopDao {
         }
         return user;
     }
+
+    @Override
+    public List<Product> sortProductByPrice() {
+        List<Product> products = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_SORT_PRODUCT_BY_PRICE);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                double price = resultSet.getDouble("price");
+                String description = resultSet.getString("description");
+                int categoryId = resultSet.getInt("category_id");
+                String productImage=resultSet.getString("image");
+                Product product = new Product(id, name, price, description,categoryId,productImage);
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return products;
+
+    }
+
     @Override
     public void Payment() {
 

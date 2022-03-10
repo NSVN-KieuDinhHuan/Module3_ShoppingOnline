@@ -243,12 +243,15 @@
 								<div class="product_sorting_container product_sorting_container_top">
 									<ul class="product_sorting">
 										<li>
+											<section>
+
+											</section>
 											<span class="type_sorting_text">Default Sorting</span>
 											<i class="fa fa-angle-down"></i>
 											<ul class="sorting_type">
-												<li class="type_sorting_btn" data-isotope-option='{ "sortBy": "original-order" }'><span>Default Sorting</span></li>
-												<li class="type_sorting_btn" data-isotope-option='{ "sortBy": "price" }'><span>Price</span></li>
-												<li class="type_sorting_btn" data-isotope-option='{ "sortBy": "name" }'><span>Product Name</span></li>
+												<li class="type_sorting_btn" data-isotope-option='{ "sortBy": "original-order" }'><span><a href="/home?action=categories&sorting=0">Default Sorting</a></span></li>
+												<li class="type_sorting_btn" data-isotope-option='{ "sortBy": "price" }'><span><a href="/home?action=categories&sorting=1">Price</a></span></li>
+												<li class="type_sorting_btn" data-isotope-option='{ "sortBy": "name" }'><span><a href="/home?action=categories&sorting=2">Product Name</a></span></li>
 											</ul>
 										</li>
 										<li>
