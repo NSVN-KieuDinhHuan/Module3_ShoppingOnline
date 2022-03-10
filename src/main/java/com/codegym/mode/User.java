@@ -20,7 +20,7 @@ public class User {
         Password = password;
     }
 
-    public User(int id, String name, String email, String address, String phone, String password, String role_id, boolean status) {
+    public User(int id, String name, String email, String address, String phone, String password, int role_id, boolean status) {
         this.id = id;
         this.name = name;
         this.email = email;
