@@ -7,7 +7,24 @@ public class User {
     private  String address;
     private  String phone;
     private  String Password;
-    private String role_id;
+    private int role_id;
+
+    public int getRole_id() {
+        return role_id;
+    }
+
+    public void setRole_id(int role_id) {
+        this.role_id = role_id;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
     private boolean status;
     public User() {
     }
@@ -20,7 +37,7 @@ public class User {
         Password = password;
     }
 
-    public User(int id, String name, String email, String address, String phone, String password, String role_id, boolean status) {
+    public User(int id, String name, String email, String address, String phone, String password, int role_id, boolean status) {
         this.id = id;
         this.name = name;
         this.email = email;

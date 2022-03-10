@@ -237,28 +237,23 @@
 
 
         <div class="form__field">
-            <label for="login__username"><svg class="icon">
-                <use xlink:href="#icon-user"></use>
-            </svg><span class="hidden">Username</span></label>
-            <input autocomplete="username" id="login__username" type="text" name="username" class="form__input" placeholder="Username" required>
-        </div>
-
-        <div class="form__field">
-            <label for="login__password"><svg class="icon">
-                <use xlink:href="#icon-lock"></use>
-            </svg><span class="hidden">Password</span></label>
-            <input id="login__password" type="password" name="password" class="form__input" placeholder="Password" required>
-        </div>
-        <div class="form__field">
-
-            <input autocomplete="address" id="address" type="text" name="address" class="form__input" placeholder="Address " required>
+            <input autocomplete="username" id="login__username" type="text" name="username" class="form__input" placeholder="Ho Va Ten" required>
         </div>
         <div class="form__field">
             <input id="phone" type="text" name="phone" class="form__input" placeholder="Phone number" required>
         </div>
         <div class="form__field">
+            <input autocomplete="address" id="address" type="text" name="address" class="form__input" placeholder="Address " required>
+        </div>
+        <div class="form__field">
             <input id="email" type="text" name="email" class="form__input" placeholder="email" required>
         </div>
+
+
+        <div class="form__field">
+            <input id="login__password" type="password" name="password" class="form__input" placeholder="Password" required>
+        </div>
+
 
         <div class="form__field">
             <input type="submit" value="REGISTER">
