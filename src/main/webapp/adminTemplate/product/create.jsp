@@ -235,13 +235,9 @@
                     <div class="card card-primary">
                         <div class="card-header">
                             <h3 class="card-title">Input product information below</h3>
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                            </div>
                         </div>
                         <div class="card-body">
+                            <c:if test="${message != null}"><p class="success">${message}</p></c:if>
                             <div class="form-group">
                                 <label for="inputName">Product Name</label>
                                 <input type="text" id="inputName" class="form-control" name="name">
@@ -254,9 +250,9 @@
                                 <label for="inputStatus">Category</label>
                                 <select id="inputStatus" class="form-control custom-select" name="category_id">
                                     <option selected disabled>Select one</option>
-                                    <option>On Hold</option>
-                                    <option>Canceled</option>
-                                    <option>Success</option>
+                                    <c:forEach items="${categories}" var="category">
+                                        <option value="${category.id}">${category.name}</option>
+                                    </c:forEach>
                                 </select>
                             </div>
                             <div class="form-group">
