@@ -20,7 +20,7 @@ public class shopDao implements IShopDao {
     public static final String SQL_SORT_PRODUCT_HIGHT_TO_LOW_PRICE = "SELECT * FROM product ORDER BY price DESC;";
     public static final String SQL_SORT_PRODUCT_BY_NAME="SELECT * FROM product ORDER BY name DESC;";
     public static final String SQL_FIND_PRODUCT_BY_NAME="SELECT * FROM product where name like ?";
-
+    public static final String SQL_FIND_PRODUCT_BY_ID="SELECT * FROM product where id=?;";
 
     @Override
     public List<Product> displayAll() {
@@ -45,9 +45,28 @@ public class shopDao implements IShopDao {
     }
 
     @Override
-    public Product findByName(int id) {
-        return null;
+    public Product findProductByID(int id) {
+        Product product = null;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_PRODUCT_BY_ID);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int category_id=resultSet.getInt("category_id");
+                String name = resultSet.getString("name");
+                double price = resultSet.getDouble("price");
+                String description = resultSet.getString("description");
+                String productImage = resultSet.getString("image");
+                product=new Product(id, name, price, description,category_id,productImage);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return product;
+
     }
+
+
 
     @Override
     public List<Product> addProductIntoCart() {

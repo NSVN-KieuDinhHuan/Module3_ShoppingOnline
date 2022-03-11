@@ -48,6 +48,9 @@ public class ShopServlet extends HttpServlet {
             }case "contact": {
                 showContact(request, response);
                 break;
+            }case "detailProduct": {
+                detailProduct(request, response);
+                break;
             }case "payment": {
                 payment(request, response);
                 break;
@@ -58,7 +61,28 @@ public class ShopServlet extends HttpServlet {
         }
     }
 
+    private void detailProduct(HttpServletRequest request, HttpServletResponse response) {
+        String productID=request.getParameter("productID");
+        if (productID!=null) {
+            productIDsCart.add(productID);
+            productID=null;
+        }
+        request.setAttribute("productNumberInCart",productIDsCart.size());
+        int product_id=Integer.parseInt(request.getParameter("id"));
+        Product product=shopService.findProductByID(product_id);
+        request.setAttribute("product",product);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/single.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void payment(HttpServletRequest request, HttpServletResponse response) {
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("/payment.jsp");
         try {
             dispatcher.forward(request, response);
@@ -184,14 +208,12 @@ public class ShopServlet extends HttpServlet {
     private void showCategories(HttpServletRequest request, HttpServletResponse response)  {
         List<Product> products = shopService.displayAll();
         HttpSession session = request.getSession();
+        session.setAttribute("allProduct",products);
+
         User user =(User) session.getAttribute("user");
         String category_id = request.getParameter("category_id");
         String sorting=request.getParameter("sorting");
-        String productID=request.getParameter("productID");
-        if (productID!=null) {
-            productIDsCart.add(productID);
-            productID=null;
-        }
+
         String search=(String) session.getAttribute("searchContent");
         if (user!=null){
             request.setAttribute("username",user.getName());
@@ -206,7 +228,7 @@ public class ShopServlet extends HttpServlet {
         if (search!=null){
             products=shopService.findProductByName(search);
         }
-        request.setAttribute("productNumberInCart",productIDsCart.size());
+
         request.setAttribute("search",search);
         request.setAttribute("sorting",sorting);
         request.setAttribute("categorySevelet",category_id);

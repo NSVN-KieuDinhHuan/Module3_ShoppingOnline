@@ -13,6 +13,7 @@ public interface IShopService {
     User findUserbyEmail(String email);
     List<Product> sortProduct(int sortID);
     List<Product> findProductByName(String keyword);
+    Product findProductByID(int id);
     void Payment();
 }
 

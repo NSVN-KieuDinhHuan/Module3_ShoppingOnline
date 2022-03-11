@@ -50,6 +50,11 @@ public class ShopService implements IShopService {
         return shopDao.findProductByName(keyword);
     }
 
+    @Override
+    public Product findProductByID(int id) {
+        return shopDao.findProductByID(id);
+    }
+
 
     @Override
     public void Payment() {
