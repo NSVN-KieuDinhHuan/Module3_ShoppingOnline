@@ -40,4 +40,10 @@ public class ProductService implements IProductService{
     public boolean delete(int id) {
         return productDao.delete(id);
     }
+
+    @Override
+    public List<Product> searchByName(String name) {
+        name = "%"+name+"%";
+        return productDao.searchByName(name);
+    }
 }

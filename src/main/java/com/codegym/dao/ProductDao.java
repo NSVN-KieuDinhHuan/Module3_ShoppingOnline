@@ -18,12 +18,13 @@ public class ProductDao implements IProductDao{
             PreparedStatement preparedStatement = connection.prepareStatement("select * from product");
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
+                int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
                 Double price = resultSet.getDouble("price");
                 String description = resultSet.getString("description");
                 int category_id = resultSet.getInt("category_id");
                 String image = resultSet.getString("image");
-                Product product = new Product(name,price,description,category_id,image);
+                Product product = new Product(id,name,price,description,category_id,image);
                 products.add(product);
             }
         } catch (SQLException e) {
@@ -50,5 +51,28 @@ public class ProductDao implements IProductDao{
     @Override
     public boolean delete(int id) {
         return false;
+    }
+
+    @Override
+    public List<Product> searchByName(String name) {
+        List<Product> products = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from product where name like ?");
+            preparedStatement.setString(1,name);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                int id = resultSet.getInt("id");
+                String nameOutput = resultSet.getString("name");
+                Double price = resultSet.getDouble("price");
+                String description = resultSet.getString("description");
+                int category_id = resultSet.getInt("category_id");
+                String image = resultSet.getString("image");
+                Product product = new Product(id,nameOutput,price,description,category_id,image);
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return products;
     }
 }

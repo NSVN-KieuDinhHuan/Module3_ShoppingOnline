@@ -22,6 +22,9 @@ public class ProductServlet extends HttpServlet {
             action = "";
         }
         switch (action){
+            case "view": {
+                break;
+            }
             default:{
                 showListProduct(request, response);
             }
@@ -29,10 +32,19 @@ public class ProductServlet extends HttpServlet {
     }
 
     private void showListProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Product> products = productService.findAll();
-        request.setAttribute("products",products);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/product/list.jsp");
-        dispatcher.forward(request, response);
+        String q = request.getParameter("q");
+        if(q == null){
+            List<Product> products = productService.findAll();
+            request.setAttribute("products",products);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/product/list.jsp");
+            dispatcher.forward(request, response);
+        } else {
+            List<Product> products = productService.searchByName(q);
+            request.setAttribute("products",products);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/product/list.jsp");
+            dispatcher.forward(request, response);
+        }
+
     }
 
     @Override
