@@ -67,7 +67,7 @@ public class ProductDao implements IProductDao{
                 String description = resultSet.getString("description");
                 int category_id = resultSet.getInt("category_id");
                 String image = resultSet.getString("image");
-                Product product = new Product(id,name,price,description,category_id,image);
+                Product product = new Product(id,nameOutput,price,description,category_id,image);
                 products.add(product);
             }
         } catch (SQLException e) {
