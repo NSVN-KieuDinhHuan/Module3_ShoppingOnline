@@ -15,6 +15,11 @@ public class shopDao implements IShopDao {
     public static final String SQL_SELECT_ALL_PRODUCT = "SELECT * FROM product;";
     public static final String SQL_FIND_PRODUCT_BY_CATEGORY = "SELECT * FROM product Where category_id=?;";
     public static final String SQL_ADD_USER = "INSERT INTO user(username, email,address, phone, password, role_id,status) VALUES (?,?,?,?,?,1,true);";
+    public static final String SQL_FIND_USER_BY_EMAIL = "SELECT * FROM user Where email=?;";
+    public static final String SQL_SORT_PRODUCT_LOW_TO_HIGHT_PRICE= "SELECT * FROM product ORDER BY price ASC;";
+    public static final String SQL_SORT_PRODUCT_HIGHT_TO_LOW_PRICE = "SELECT * FROM product ORDER BY price DESC;";
+    public static final String SQL_SORT_PRODUCT_BY_NAME="SELECT * FROM product ORDER BY name DESC;";
+
 
     @Override
     public List<Product> displayAll() {
@@ -62,6 +67,64 @@ public class shopDao implements IShopDao {
                 String description = resultSet.getString("description");
                 String productImage = resultSet.getString("image");
                 products.add( new Product(id, name, price, description,category_id,productImage));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return products;
+
+    }
+
+    @Override
+    public User findUserbyEmail(String email) {
+        User user=null;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_USER_BY_EMAIL);
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("username");
+                String address = resultSet.getString("address");
+                String phone = resultSet.getString("phone");
+                String password = resultSet.getString("password");
+                int role_id = resultSet.getInt("role_id");
+                boolean staus = resultSet.getBoolean("role_id");
+                user = new User(id, name, email, address, phone, password,role_id,staus);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+    @Override
+    public List<Product> sortProduct(int sortID) {
+        List<Product> products = new ArrayList<>();
+        String SQL=null;
+        if (sortID==1) {
+            SQL = SQL_SORT_PRODUCT_LOW_TO_HIGHT_PRICE;
+        }else if(sortID==2) {
+            SQL = SQL_SORT_PRODUCT_HIGHT_TO_LOW_PRICE;
+        }else if(sortID==3) {
+            SQL = SQL_SORT_PRODUCT_BY_NAME;
+        }else {
+            SQL=SQL_SELECT_ALL_PRODUCT;
+        }
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                double price = resultSet.getDouble("price");
+                String description = resultSet.getString("description");
+                int categoryId = resultSet.getInt("category_id");
+                String productImage=resultSet.getString("image");
+                Product product = new Product(id, name, price, description,categoryId,productImage);
+                products.add(product);
             }
         } catch (SQLException e) {
             e.printStackTrace();

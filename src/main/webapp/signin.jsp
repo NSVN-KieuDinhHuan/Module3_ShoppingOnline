@@ -14,7 +14,7 @@
     /* config.css */
 
     :root {
-        --baseColor: #032cfa;
+        --baseColor: rgb(3, 44, 250);
     }
 
     /* helpers/align.css */
@@ -66,7 +66,7 @@
     :root {
         --htmlFontSize: 100%;
 
-        --bodyBackgroundColor: rgba(38, 122, 74, 0.45);
+        --bodyBackgroundColor: url(images/backgroun3.jpg);
         --bodyColor: var(--baseColor);
         --bodyFontFamily: "Open Sans";
         --bodyFontFamilyFallback: sans-serif;
@@ -85,7 +85,7 @@
     }
 
     body {
-        background-color: var(--bodyBackgroundColor);
+        background-image: var(--bodyBackgroundColor);
         color: var(--bodyColor);
         font-family: var(--bodyFontFamily), var(--bodyFontFamilyFallback);
         font-size: var(--bodyFontSize);
@@ -163,9 +163,9 @@
 
         --loginLabelBackgroundColor: #363b41;
 
-        --loginSubmitBackgroundColor: #ea4c88;
+        --loginSubmitBackgroundColor: #0c2ef2;
         --loginSubmitColor: #eee;
-        --loginSubmitHoverBackgroundColor: #d44179;
+        --loginSubmitHoverBackgroundColor: #0c2ef2;
     }
 
     .login {
@@ -227,17 +227,18 @@
 <body class="align">
 
 <div class="grid">
+    <div style="text-align: center;color: red;font-size: 20px">
     <c:if test="${error!=null}">
-        <p class="alert alert-success">${error}</p>
+        <p class="alert alert-danger">${error}</p>
     </c:if>
-
+    </div>
     <form action="/home?action=singin" method="POST" class="form login">
 
         <div class="form__field">
             <label for="login__username"><svg class="icon">
                 <use xlink:href="#icon-user"></use>
             </svg><span class="hidden">Username</span></label>
-            <input autocomplete="username" id="login__username" type="text" name="username" class="form__input" placeholder="Username" required>
+            <input autocomplete="email" id="login__username" type="text" name="email" class="form__input" placeholder="Email" required>
         </div>
 
         <div class="form__field">
@@ -253,7 +254,7 @@
 
     </form>
 
-    <p class="text--center">Not a member? <a href="/register.jsp">Sign up now</a> <svg class="icon">
+    <p class="text--center">Not a member? <a href="/register.jsp">Register now</a> <svg class="icon">
         <use xlink:href="#icon-arrow-right"></use>
     </svg></p>
 

@@ -14,7 +14,7 @@
         /* config.css */
 
         :root {
-            --baseColor: #032cfa;
+            --baseColor: url(images/backgroun3.jpg);
         }
 
         /* helpers/align.css */
@@ -66,7 +66,7 @@
         :root {
             --htmlFontSize: 100%;
 
-            --bodyBackgroundColor: rgba(38, 122, 74, 0.45);
+            --bodyBackgroundColor: url(images/backgroun3.jpg);
             --bodyColor: var(--baseColor);
             --bodyFontFamily: "Open Sans";
             --bodyFontFamilyFallback: sans-serif;
@@ -85,7 +85,7 @@
         }
 
         body {
-            background-color: var(--bodyBackgroundColor);
+            background-image: var(--bodyBackgroundColor);
             color: var(--bodyColor);
             font-family: var(--bodyFontFamily), var(--bodyFontFamilyFallback);
             font-size: var(--bodyFontSize);
@@ -158,14 +158,14 @@
             --loginBorderRadus: 0.25rem;
             --loginColor: #eee;
 
-            --loginInputBackgroundColor: #3b4148;
+            --loginInputBackgroundColor: #434a52;
             --loginInputHoverBackgroundColor: #434a52;
 
             --loginLabelBackgroundColor: #363b41;
 
-            --loginSubmitBackgroundColor: #ea4c88;
+            --loginSubmitBackgroundColor: #042cf4;
             --loginSubmitColor: #eee;
-            --loginSubmitHoverBackgroundColor: #d44179;
+            --loginSubmitHoverBackgroundColor: #042cf4;
         }
 
         .login {
@@ -227,9 +227,13 @@
 <body class="align">
 
 <div class="grid">
-    <c:if test="${notify!=null}">
-        <p class="alert alert-success">${notify}</p>
-    </c:if>
+
+
+    <div style="text-align: center;color: #f90404;font-size: 20px">
+        <c:if test="${notify!=null}">
+            <p class="alert alert-success">${notify}</p>
+        </c:if>
+    </div>
 
     <form action="/home?action=register" method="POST" class="form login">
 
@@ -237,28 +241,23 @@
 
 
         <div class="form__field">
-            <label for="login__username"><svg class="icon">
-                <use xlink:href="#icon-user"></use>
-            </svg><span class="hidden">Username</span></label>
-            <input autocomplete="username" id="login__username" type="text" name="username" class="form__input" placeholder="Username" required>
-        </div>
-
-        <div class="form__field">
-            <label for="login__password"><svg class="icon">
-                <use xlink:href="#icon-lock"></use>
-            </svg><span class="hidden">Password</span></label>
-            <input id="login__password" type="password" name="password" class="form__input" placeholder="Password" required>
-        </div>
-        <div class="form__field">
-
-            <input autocomplete="address" id="address" type="text" name="address" class="form__input" placeholder="Address " required>
+            <input autocomplete="username" id="login__username" type="text" name="username" class="form__input" placeholder="Ho Va Ten" required>
         </div>
         <div class="form__field">
             <input id="phone" type="text" name="phone" class="form__input" placeholder="Phone number" required>
         </div>
         <div class="form__field">
+            <input autocomplete="address" id="address" type="text" name="address" class="form__input" placeholder="Address " required>
+        </div>
+        <div class="form__field">
             <input id="email" type="text" name="email" class="form__input" placeholder="email" required>
         </div>
+
+
+        <div class="form__field">
+            <input id="login__password" type="password" name="password" class="form__input" placeholder="Password" required>
+        </div>
+
 
         <div class="form__field">
             <input type="submit" value="REGISTER">
@@ -267,7 +266,7 @@
 
     </form>
 
-    <p class="text--center">Resgister? <a href="/signin.jsp">login now</a> <svg class="icon">
+    <p class="text--center">Do you want to login? <a href="/signin.jsp">login now</a> <svg class="icon">
         <use xlink:href="#icon-arrow-right"></use>
     </svg></p>
 
