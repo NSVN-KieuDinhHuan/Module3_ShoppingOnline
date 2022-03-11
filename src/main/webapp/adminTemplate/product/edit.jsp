@@ -229,7 +229,7 @@
         </section>
         <!-- Main content -->
         <section class="content">
-            <form action="/products?action=create" method="post">
+            <form action="/products?action=edit&id=${product.id}" method="post">
             <div class="row">
                 <div class="col-md-6">
                     <div class="card card-primary">

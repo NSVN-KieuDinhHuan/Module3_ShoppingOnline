@@ -96,6 +96,33 @@ public class ProductServlet extends HttpServlet {
                 createNewProduct(request, response);
                 break;
             }
+            case "edit":{
+                int id = Integer.parseInt(request.getParameter("id"));
+                String name = request.getParameter("name");
+                Double price = Double.valueOf(request.getParameter("price"));
+                String description = request.getParameter("description");
+                int category_id = Integer.parseInt(request.getParameter("category_id"));
+                String image = request.getParameter("image");
+                Product product = new Product(name,price,description,category_id,image);
+                boolean isUpdated = productService.update(id,product);
+                String message;
+                if(isUpdated){
+                    message = "Successfully edited!";
+                } else {
+                    message = "Edit failed";
+                }
+                request.setAttribute("message",message);
+                request.setAttribute("isUpdated",isUpdated);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/product/edit.jsp");
+                try {
+                    dispatcher.forward(request,response);
+                } catch (ServletException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+            }
         }
     }
 
