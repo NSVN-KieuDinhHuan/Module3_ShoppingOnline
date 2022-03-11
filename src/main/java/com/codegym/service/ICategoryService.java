@@ -1,10 +1,10 @@
-package com.codegym.dao;
+package com.codegym.service;
 
 import com.codegym.model.Category;
 import com.codegym.model.Product;
 
 import java.util.List;
 
-public interface ICategoryDao extends IGeneralDao<Category>{
+public interface ICategoryService extends IGeneralService<Category>{
     List<Product> getProductListByCategory(int category_id);
 }
