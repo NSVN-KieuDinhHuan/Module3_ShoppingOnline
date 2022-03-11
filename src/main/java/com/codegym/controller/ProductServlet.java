@@ -37,10 +37,26 @@ public class ProductServlet extends HttpServlet {
                 showEditForm(request, response);
                 break;
             }
+            case "delete":{
+                showDeleteForm(request, response);
+                break;
+            }
             default:{
                 showListProduct(request, response);
             }
         }
+    }
+
+    private void showDeleteForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Product product = productService.findByID(id);
+        request.setAttribute("product",product);
+        Category category = categoryService.findByID(product.getCategory_id());
+        request.setAttribute("category",category);
+        List<Category> categories = categoryService.findAll();
+        request.setAttribute("categories",categories);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/product/delete.jsp");
+        dispatcher.forward(request, response);
     }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -97,25 +113,23 @@ public class ProductServlet extends HttpServlet {
                 break;
             }
             case "edit":{
+                editProduct(request, response);
+                break;
+            }
+            case "delete":{
                 int id = Integer.parseInt(request.getParameter("id"));
-                String name = request.getParameter("name");
-                Double price = Double.valueOf(request.getParameter("price"));
-                String description = request.getParameter("description");
-                int category_id = Integer.parseInt(request.getParameter("category_id"));
-                String image = request.getParameter("image");
-                Product product = new Product(name,price,description,category_id,image);
-                boolean isUpdated = productService.update(id,product);
+                boolean isUpdated = productService.delete(id);
                 String message;
                 if(isUpdated){
-                    message = "Successfully edited!";
+                    message = "Successfully deleted!";
                 } else {
-                    message = "Edit failed";
+                    message = "Delete failed";
                 }
                 request.setAttribute("message",message);
                 request.setAttribute("isUpdated",isUpdated);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/product/edit.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/product/delete.jsp");
                 try {
-                    dispatcher.forward(request,response);
+                    dispatcher.forward(request, response);
                 } catch (ServletException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -123,6 +137,33 @@ public class ProductServlet extends HttpServlet {
                 }
                 break;
             }
+        }
+    }
+
+    private void editProduct(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        Double price = Double.valueOf(request.getParameter("price"));
+        String description = request.getParameter("description");
+        int category_id = Integer.parseInt(request.getParameter("category_id"));
+        String image = request.getParameter("image");
+        Product product = new Product(name,price,description,category_id,image);
+        boolean isUpdated = productService.update(id,product);
+        String message;
+        if(isUpdated){
+            message = "Successfully edited!";
+        } else {
+            message = "Edit failed";
+        }
+        request.setAttribute("message",message);
+        request.setAttribute("isUpdated",isUpdated);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/product/edit.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
