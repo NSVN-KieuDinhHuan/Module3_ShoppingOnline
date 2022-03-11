@@ -30,16 +30,34 @@ public class ProductServlet extends HttpServlet {
                 break;
             }
             case "create":{
-                List<Category> categories = categoryService.findAll();
-                request.setAttribute("categories",categories);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/product/create.jsp");
-                dispatcher.forward(request,response);
+                showCreateForm(request, response);
+                break;
+            }
+            case "edit":{
+                showEditForm(request, response);
                 break;
             }
             default:{
                 showListProduct(request, response);
             }
         }
+    }
+
+    private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Category> categories = categoryService.findAll();
+        request.setAttribute("categories",categories);
+        int id = Integer.parseInt(request.getParameter("id"));
+        Product product = productService.findByID(id);
+        request.setAttribute("product",product);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/product/edit.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void showCreateForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Category> categories = categoryService.findAll();
+        request.setAttribute("categories",categories);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/product/create.jsp");
+        dispatcher.forward(request, response);
     }
 
     private void showProductDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -75,32 +93,36 @@ public class ProductServlet extends HttpServlet {
         }
         switch (action){
             case "create":{
-                String name = request.getParameter("name");
-                Double price = Double.valueOf(request.getParameter("price"));
-                String description = request.getParameter("description");
-                int category_id = Integer.parseInt(request.getParameter("category_id"));
-                String image = request.getParameter("image");
-                Product product = new Product(name,price,description,category_id,image);
-                productService.create(product);
-                boolean isUpdated = productService.create(product);
-                String message;
-                if(isUpdated){
-                    message = "Created successfully!";
-                } else {
-                    message = "Created failed!";
-                }
-                request.setAttribute("message",message);
-                request.setAttribute("isUpdated",isUpdated);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/product/create.jsp");
-                try {
-                    dispatcher.forward(request,response);
-                } catch (ServletException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                createNewProduct(request, response);
                 break;
             }
+        }
+    }
+
+    private void createNewProduct(HttpServletRequest request, HttpServletResponse response) {
+        String name = request.getParameter("name");
+        Double price = Double.valueOf(request.getParameter("price"));
+        String description = request.getParameter("description");
+        int category_id = Integer.parseInt(request.getParameter("category_id"));
+        String image = request.getParameter("image");
+        Product product = new Product(name,price,description,category_id,image);
+        productService.create(product);
+        boolean isUpdated = productService.create(product);
+        String message;
+        if(isUpdated){
+            message = "Created successfully!";
+        } else {
+            message = "Created failed!";
+        }
+        request.setAttribute("message",message);
+        request.setAttribute("isUpdated",isUpdated);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/product/create.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
