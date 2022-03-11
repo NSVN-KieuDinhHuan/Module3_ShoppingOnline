@@ -20,6 +20,8 @@ public class ShopServlet extends HttpServlet {
     IShopService shopService;
     String username;
 
+
+
     public ShopServlet() {
         this.shopService = new ShopService(new shopDao());
 
@@ -82,12 +84,13 @@ public class ShopServlet extends HttpServlet {
         String password = request.getParameter("password");
         User user=shopService.findUserbyEmail(email);
         RequestDispatcher rq;
-        if(user!=null&& user.getPassword().equals(password) && user.getRole_id()==1){
+        if(user!=null&& user.getPassword().equals(password) && user.getRole_id()==2){
             username = user.getName();
             rq = request.getRequestDispatcher("/customerView.jsp");
 
-        }else if(user!=null&& user.getPassword().equals(password) && user.getRole_id()==2){
-            rq = request.getRequestDispatcher("/list.jsp");
+        }else if(user!=null&& user.getPassword().equals(password) && user.getRole_id()==1){
+            username = user.getName();
+            rq = request.getRequestDispatcher("/adminTemplate/index.jsp");
         }else {
             String error = "Username or Password is wrong";
             request.setAttribute("error", error);
@@ -113,7 +116,7 @@ public class ShopServlet extends HttpServlet {
         String phone = request.getParameter("phone");
         String password = request.getParameter("password");
         User user=new User(username,email,address,phone,password);
-         Boolean checkRegister=shopService.register(user);
+        Boolean checkRegister=shopService.register(user);
 
         if (checkRegister=true) {
            notification="Da Dang ky thanh cong";
@@ -133,11 +136,16 @@ public class ShopServlet extends HttpServlet {
     private void showCategories(HttpServletRequest request, HttpServletResponse response)  {
         List<Product> products = shopService.displayAll();
         String category_id = request.getParameter("category_id");
+        String sorting=request.getParameter("sorting");
         if (category_id!=null && category_id!="") {
             products = shopService.findbycategory(Integer.parseInt(category_id));
         }
-
+        if(sorting!=null && sorting!="0") {
+            products = shopService.sortProduct(Integer.parseInt(sorting));
+        }
+        request.setAttribute("sorting",sorting);
         request.setAttribute("categorySevelet",category_id);
+
         request.setAttribute("usename",username);
         request.setAttribute("showAllproducts", products);
 

@@ -43,6 +43,12 @@ public class ShopService implements IShopService {
     }
 
     @Override
+    public List<Product> sortProduct(int sortID) {
+        return shopDao.sortProduct(sortID);
+    }
+
+
+    @Override
     public void Payment() {
 
     }
