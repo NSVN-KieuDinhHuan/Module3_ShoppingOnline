@@ -1,6 +1,8 @@
 package com.codegym.controller;
 
+import com.codegym.model.Category;
 import com.codegym.model.Product;
+import com.codegym.service.CategoryService;
 import com.codegym.service.ProductService;
 
 import javax.servlet.RequestDispatcher;
@@ -15,6 +17,7 @@ import java.util.List;
 @WebServlet(name = "ProductServlet", value = "/products")
 public class ProductServlet extends HttpServlet {
     ProductService productService = new ProductService();
+    CategoryService categoryService = new CategoryService();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -26,7 +29,9 @@ public class ProductServlet extends HttpServlet {
             {
                int id = Integer.parseInt(request.getParameter("id"));
                 Product product = productService.findByID(id);
+                Category category = categoryService.findByID(product.getCategory_id());
                 request.setAttribute("product",product);
+                request.setAttribute("category",category);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/product/view.jsp");
                 dispatcher.forward(request,response);
                 break;

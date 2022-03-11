@@ -252,7 +252,7 @@
                             </div>
                         </div>
                         <div class="col-12 col-md-12 col-lg-8 order-1 order-md-2">
-                            <h3 class="text-primary"><i class="fas fa-paint-brush">${product.name}</i> </h3>
+                            <h3 class="text-primary">${product.name} </h3>
                             <p class="text-muted">${product.description}</p>
                             <br>
                             <div class="text-muted">
@@ -262,7 +262,7 @@
                             </div>
                             <div class="text-muted">
                                 <p class="text-sm">Category
-                                    <b class="d-block">${product.category_id}</b>
+                                    <b class="d-block">${category.name}</b>
                                 </p>
                             </div>
                         </div>
