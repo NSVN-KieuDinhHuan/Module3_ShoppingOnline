@@ -11,6 +11,7 @@ public interface IShopDao{
     List<Product> addProductIntoCart();
     List<Product>findbycategory(int category_id);
     User findUserbyEmail(String email);
+    List<Product> sortProduct(int sortID);
     void Payment();
     boolean register(User user);
 }

@@ -238,7 +238,7 @@
                                 <form action="/products">
                                 <div class="form-inline" align="right">
                                     <div class="input-group" data-widget="sidebar-search">
-                                        <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search" name="q">
+                                        <input class="form-control form-control-sidebar" type="search" placeholder="Input product name" aria-label="Search" name="q">
                                         <div class="input-group-append">
                                             <button class="btn btn-sidebar">
                                                 <i class="fas fa-search fa-fw"></i>
