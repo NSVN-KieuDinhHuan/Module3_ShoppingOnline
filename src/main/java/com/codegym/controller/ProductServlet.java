@@ -25,14 +25,14 @@ public class ProductServlet extends HttpServlet {
             action = "";
         }
         switch (action){
-            case "view":
-            {
-               int id = Integer.parseInt(request.getParameter("id"));
-                Product product = productService.findByID(id);
-                Category category = categoryService.findByID(product.getCategory_id());
-                request.setAttribute("product",product);
-                request.setAttribute("category",category);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/product/view.jsp");
+            case "view": {
+                showProductDetail(request, response);
+                break;
+            }
+            case "create":{
+                List<Category> categories = categoryService.findAll();
+                request.setAttribute("categories",categories);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/product/create.jsp");
                 dispatcher.forward(request,response);
                 break;
             }
@@ -40,6 +40,16 @@ public class ProductServlet extends HttpServlet {
                 showListProduct(request, response);
             }
         }
+    }
+
+    private void showProductDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Product product = productService.findByID(id);
+        Category category = categoryService.findByID(product.getCategory_id());
+        request.setAttribute("product",product);
+        request.setAttribute("category",category);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/product/view.jsp");
+        dispatcher.forward(request, response);
     }
 
     private void showListProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
