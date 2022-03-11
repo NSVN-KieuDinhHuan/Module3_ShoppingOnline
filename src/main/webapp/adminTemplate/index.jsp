@@ -195,6 +195,13 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="/users" class="nav-link">
+              <p>
+                User Management
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="/signin.jsp" class="nav-link">
               <button>
                 Sign out
