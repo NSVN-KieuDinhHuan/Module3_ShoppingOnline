@@ -112,12 +112,12 @@
 								<li><a href="/home?action=contact">contact</a></li>
 							</ul>
 							<ul class="navbar_user">
-								<li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+<%--								<li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>--%>
+<%--								<li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>--%>
 								<li class="checkout">
 									<a href="#">
 										<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-										<span id="checkout_items" class="checkout_items">2</span>
+										<span id="checkout_items" class="checkout_items">${productNumberInCart}</span>
 									</a>
 								</li>
 							</ul>
@@ -276,7 +276,7 @@
 
 										</div>
 
-										<div class="red_button add_to_cart_button"><a href="/home?action=categories&addToCart=1">add to cart</a></div>
+										<div class="red_button add_to_cart_button"><a href="/home?action=categories&productID=${product.id}">add to cart</a></div>
 
 
 									</div>

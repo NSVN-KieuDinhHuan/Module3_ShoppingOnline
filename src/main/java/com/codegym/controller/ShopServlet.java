@@ -14,14 +14,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "ShopServlet", value = "/home")
 public class ShopServlet extends HttpServlet {
     IShopService shopService;
+    List<String> productIDsCart;
     public ShopServlet() {
         this.shopService = new ShopService(new shopDao());
-
+        productIDsCart=new ArrayList<>();
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
@@ -144,6 +146,7 @@ public class ShopServlet extends HttpServlet {
     private void showContact(HttpServletRequest request, HttpServletResponse response)  {
         HttpSession session = request.getSession();
         User user =(User) session.getAttribute("user");
+        request.setAttribute("productNumberInCart",productIDsCart.size());
         if (user!=null){
             request.setAttribute("username",user.getName());
         }
@@ -168,9 +171,11 @@ public class ShopServlet extends HttpServlet {
         User user =(User) session.getAttribute("user");
         String category_id = request.getParameter("category_id");
         String sorting=request.getParameter("sorting");
-        String addToCart = request.getParameter("addToCart");
-
-
+        String productID=request.getParameter("productID");
+        if (productID!=null) {
+            productIDsCart.add(productID);
+            productID=null;
+        }
         String search=(String) session.getAttribute("searchContent");
         if (user!=null){
             request.setAttribute("username",user.getName());
@@ -185,6 +190,7 @@ public class ShopServlet extends HttpServlet {
         if (search!=null){
             products=shopService.findProductByName(search);
         }
+        request.setAttribute("productNumberInCart",productIDsCart.size());
         request.setAttribute("search",search);
         request.setAttribute("sorting",sorting);
         request.setAttribute("categorySevelet",category_id);
@@ -205,6 +211,7 @@ public class ShopServlet extends HttpServlet {
     private void showhome(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         User user =(User) session.getAttribute("user");
+        request.setAttribute("productNumberInCart",productIDsCart.size());
         if (user!=null) {
             request.setAttribute("username", user.getName());
         }
