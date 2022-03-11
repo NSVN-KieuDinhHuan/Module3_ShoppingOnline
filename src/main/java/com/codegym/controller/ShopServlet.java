@@ -96,7 +96,7 @@ public class ShopServlet extends HttpServlet {
             request.setAttribute("error", error);
             rq = request.getRequestDispatcher("/signin.jsp");
         }
-        request.setAttribute("usename",username);
+        request.setAttribute("username",username);
 
         try {
             rq.forward(request, response);
