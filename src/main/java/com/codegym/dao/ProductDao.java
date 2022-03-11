@@ -35,21 +35,68 @@ public class ProductDao implements IProductDao{
 
     @Override
     public Product findByID(int id) {
-        return null;
+        Product product = new Product();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select*from product where id = ?");
+            preparedStatement.setInt(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                String name = resultSet.getString("name");
+                Double price = resultSet.getDouble("price");
+                String description = resultSet.getString("description");
+                int category_id = resultSet.getInt("category_id");
+                String image = resultSet.getString("image");
+                product = new Product(id,name,price,description,category_id,image);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return product;
     }
 
     @Override
     public boolean create(Product product) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("insert into product (name,price,description,category_id,image)" +
+                    "values (?,?,?,?,?)");
+            preparedStatement.setString(1,product.getName());
+            preparedStatement.setDouble(2,product.getPrice());
+            preparedStatement.setString(3,product.getDescription());
+            preparedStatement.setInt(4,product.getCategory_id());
+            preparedStatement.setString(5,product.getProductImage());
+            return preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 
     @Override
     public boolean update(int id, Product product) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("update product set name=?,price=?,description=?,category_id=?,image=? where id=?");
+            preparedStatement.setString(1,product.getName());
+            preparedStatement.setDouble(2,product.getPrice());
+            preparedStatement.setString(3,product.getDescription());
+            preparedStatement.setInt(4,product.getCategory_id());
+            preparedStatement.setString(5,product.getProductImage());
+            preparedStatement.setInt(6,id);
+            return preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 
     @Override
     public boolean delete(int id) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("delete from product where id=?");
+            preparedStatement.setInt(1,id);
+            return preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 

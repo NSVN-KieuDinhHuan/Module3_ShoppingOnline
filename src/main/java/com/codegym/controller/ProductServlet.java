@@ -15,6 +15,7 @@ import java.util.List;
 @WebServlet(name = "ProductServlet", value = "/products")
 public class ProductServlet extends HttpServlet {
     ProductService productService = new ProductService();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -22,6 +23,15 @@ public class ProductServlet extends HttpServlet {
             action = "";
         }
         switch (action){
+            case "view":
+            {
+               int id = Integer.parseInt(request.getParameter("id"));
+                Product product = productService.findByID(id);
+                request.setAttribute("product",product);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/product/view.jsp");
+                dispatcher.forward(request,response);
+                break;
+            }
             default:{
                 showListProduct(request, response);
             }
