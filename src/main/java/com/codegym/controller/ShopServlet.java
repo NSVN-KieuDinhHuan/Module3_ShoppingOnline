@@ -12,24 +12,27 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "ShopServlet", value = "/home")
 public class ShopServlet extends HttpServlet {
     IShopService shopService;
-    String username;
-
-
-
     public ShopServlet() {
         this.shopService = new ShopService(new shopDao());
 
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
-
         String action = request.getParameter("action");
+        String searchContent=request.getParameter("search");
+        HttpSession session = request.getSession();
+        session.setAttribute("searchContent", searchContent);
+        if (searchContent!=null){
+            action="categories";
+        }
+
         if (action == null) {
             action = "";
         }
@@ -40,6 +43,9 @@ public class ShopServlet extends HttpServlet {
             }case "categories": {
                 showCategories(request, response);
                 break;
+            }case "contact": {
+                showContact(request, response);
+                break;
             } default: {
                 showhome(request, response);
                 break;
@@ -48,8 +54,7 @@ public class ShopServlet extends HttpServlet {
     }
 
     private void logout(HttpServletRequest request, HttpServletResponse response) {
-        username=null;
-        request.setAttribute("usename",username);
+        request.setAttribute("username",null);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/customerView.jsp");
         try {
             dispatcher.forward(request, response);
@@ -83,20 +88,22 @@ public class ShopServlet extends HttpServlet {
         String email=request.getParameter("email");
         String password = request.getParameter("password");
         User user=shopService.findUserbyEmail(email);
+        HttpSession session = request.getSession();
         RequestDispatcher rq;
         if(user!=null&& user.getPassword().equals(password) && user.getRole_id()==2){
-            username = user.getName();
+            session.setAttribute("user", user);
+            request.setAttribute("username",user.getName());
             rq = request.getRequestDispatcher("/customerView.jsp");
-
         }else if(user!=null&& user.getPassword().equals(password) && user.getRole_id()==1){
-            username = user.getName();
+            session.setAttribute("user", user);
+            request.setAttribute("username",user.getName());
             rq = request.getRequestDispatcher("/adminTemplate/index.jsp");
         }else {
             String error = "Username or Password is wrong";
             request.setAttribute("error", error);
             rq = request.getRequestDispatcher("/signin.jsp");
         }
-        request.setAttribute("usename",username);
+
 
         try {
             rq.forward(request, response);
@@ -119,7 +126,7 @@ public class ShopServlet extends HttpServlet {
         Boolean checkRegister=shopService.register(user);
 
         if (checkRegister=true) {
-           notification="Da Dang ky thanh cong";
+           notification="Login sussesful";
         }
 
         request.setAttribute("notify",notification);
@@ -133,20 +140,54 @@ public class ShopServlet extends HttpServlet {
             e.printStackTrace();
         }
     }
+
+    private void showContact(HttpServletRequest request, HttpServletResponse response)  {
+        HttpSession session = request.getSession();
+        User user =(User) session.getAttribute("user");
+        if (user!=null){
+            request.setAttribute("username",user.getName());
+        }
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/contact.jsp");
+        try {
+            dispatcher.forward(request, response);
+
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
     private void showCategories(HttpServletRequest request, HttpServletResponse response)  {
         List<Product> products = shopService.displayAll();
+        HttpSession session = request.getSession();
+        User user =(User) session.getAttribute("user");
         String category_id = request.getParameter("category_id");
         String sorting=request.getParameter("sorting");
+        String addToCart = request.getParameter("addToCart");
+
+
+        String search=(String) session.getAttribute("searchContent");
+        if (user!=null){
+            request.setAttribute("username",user.getName());
+        }
         if (category_id!=null && category_id!="") {
             products = shopService.findbycategory(Integer.parseInt(category_id));
         }
         if(sorting!=null && sorting!="0") {
             products = shopService.sortProduct(Integer.parseInt(sorting));
         }
+
+        if (search!=null){
+            products=shopService.findProductByName(search);
+        }
+        request.setAttribute("search",search);
         request.setAttribute("sorting",sorting);
         request.setAttribute("categorySevelet",category_id);
-
-        request.setAttribute("usename",username);
         request.setAttribute("showAllproducts", products);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/categories.jsp");
@@ -162,7 +203,11 @@ public class ShopServlet extends HttpServlet {
 
 
     private void showhome(HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute("usename",username);
+        HttpSession session = request.getSession();
+        User user =(User) session.getAttribute("user");
+        if (user!=null) {
+            request.setAttribute("username", user.getName());
+        }
         RequestDispatcher dispatcher = request.getRequestDispatcher("/customerView.jsp");
         try {
                 dispatcher.forward(request, response);
