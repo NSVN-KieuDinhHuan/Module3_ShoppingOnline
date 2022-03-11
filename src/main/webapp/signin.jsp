@@ -66,7 +66,7 @@
     :root {
         --htmlFontSize: 100%;
 
-        --bodyBackgroundColor: rgb(255, 255, 255);
+        --bodyBackgroundColor: url(images/backgroun3.jpg);
         --bodyColor: var(--baseColor);
         --bodyFontFamily: "Open Sans";
         --bodyFontFamilyFallback: sans-serif;
@@ -85,7 +85,7 @@
     }
 
     body {
-        background-color: var(--bodyBackgroundColor);
+        background-image: var(--bodyBackgroundColor);
         color: var(--bodyColor);
         font-family: var(--bodyFontFamily), var(--bodyFontFamilyFallback);
         font-size: var(--bodyFontSize);
@@ -163,9 +163,9 @@
 
         --loginLabelBackgroundColor: #363b41;
 
-        --loginSubmitBackgroundColor: #ea4c88;
+        --loginSubmitBackgroundColor: #0c2ef2;
         --loginSubmitColor: #eee;
-        --loginSubmitHoverBackgroundColor: #d44179;
+        --loginSubmitHoverBackgroundColor: #0c2ef2;
     }
 
     .login {

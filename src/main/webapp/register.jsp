@@ -14,7 +14,7 @@
         /* config.css */
 
         :root {
-            --baseColor: rgba(62, 138, 96, 0.45);
+            --baseColor: url(images/backgroun3.jpg);
         }
 
         /* helpers/align.css */
@@ -66,8 +66,7 @@
         :root {
             --htmlFontSize: 100%;
 
-            --bodyBackgroundColor: rgba(38, 122, 74, 0.45);
-            --bodyColor: var(--baseColor);
+            --bodyBackgroundColor: url(images/backgroun3.jpg);            --bodyColor: var(--baseColor);
             --bodyFontFamily: "Open Sans";
             --bodyFontFamilyFallback: sans-serif;
             --bodyFontSize: 0.875rem;
@@ -85,7 +84,7 @@
         }
 
         body {
-            background-color: var(--bodyBackgroundColor);
+            background-image: var(--bodyBackgroundColor);
             color: var(--bodyColor);
             font-family: var(--bodyFontFamily), var(--bodyFontFamilyFallback);
             font-size: var(--bodyFontSize);
@@ -158,14 +157,14 @@
             --loginBorderRadus: 0.25rem;
             --loginColor: #eee;
 
-            --loginInputBackgroundColor: #8e8f9b;
+            --loginInputBackgroundColor: #434a52;
             --loginInputHoverBackgroundColor: #434a52;
 
             --loginLabelBackgroundColor: #363b41;
 
-            --loginSubmitBackgroundColor: #ea4c88;
+            --loginSubmitBackgroundColor: #042cf4;
             --loginSubmitColor: #eee;
-            --loginSubmitHoverBackgroundColor: #d44179;
+            --loginSubmitBackgroundColor: #042cf4;
         }
 
         .login {

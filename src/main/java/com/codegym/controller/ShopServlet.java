@@ -48,6 +48,9 @@ public class ShopServlet extends HttpServlet {
             }case "contact": {
                 showContact(request, response);
                 break;
+            }case "payment": {
+                payment(request, response);
+                break;
             } default: {
                 showhome(request, response);
                 break;
@@ -55,7 +58,20 @@ public class ShopServlet extends HttpServlet {
         }
     }
 
+    private void payment(HttpServletRequest request, HttpServletResponse response) {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/payment.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void logout(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        session.removeAttribute("user");
         request.setAttribute("username",null);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/customerView.jsp");
         try {
