@@ -20,6 +20,8 @@ public class ShopServlet extends HttpServlet {
     IShopService shopService;
     String username;
 
+
+
     public ShopServlet() {
         this.shopService = new ShopService(new shopDao());
 
@@ -114,7 +116,7 @@ public class ShopServlet extends HttpServlet {
         String phone = request.getParameter("phone");
         String password = request.getParameter("password");
         User user=new User(username,email,address,phone,password);
-         Boolean checkRegister=shopService.register(user);
+        Boolean checkRegister=shopService.register(user);
 
         if (checkRegister=true) {
            notification="Da Dang ky thanh cong";
@@ -138,13 +140,12 @@ public class ShopServlet extends HttpServlet {
         if (category_id!=null && category_id!="") {
             products = shopService.findbycategory(Integer.parseInt(category_id));
         }
-        if(sorting!=null) {
-           if(sorting.equals("1")) {
-               products = shopService.sortProductByPrice();
-           }
+        if(sorting!=null && sorting!="0") {
+            products = shopService.sortProduct(Integer.parseInt(sorting));
         }
-
+        request.setAttribute("sorting",sorting);
         request.setAttribute("categorySevelet",category_id);
+
         request.setAttribute("usename",username);
         request.setAttribute("showAllproducts", products);
 

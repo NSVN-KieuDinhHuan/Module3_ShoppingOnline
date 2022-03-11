@@ -203,7 +203,7 @@
 						<c:if test="${categorySevelet==1}">
 							<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>women</a></li>
 						</c:if>
-						<c:if test="${categorySevelet==''}">
+						<c:if test="${categorySevelet==0}">
 							<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>All products</a></li>
 						</c:if>
 
@@ -218,9 +218,9 @@
 							<h5>Product Category</h5>
 						</div>
 						<ul class="sidebar_categories">
-							<li><a href="/home?action=categories&category_id=3">Men</a></li>
 							<li ><a href="/home?action=categories&category_id=1">women</a></li>
 							<li><a href="/home?action=categories&category_id=2">Accessories</a></li>
+							<li><a href="/home?action=categories&category_id=3">Men</a></li>
 							<li><a href="/home?action=categories&category_id=">All products</a></li>
 						</ul>
 					</div>
@@ -243,17 +243,26 @@
 								<div class="product_sorting_container product_sorting_container_top">
 									<ul class="product_sorting">
 										<li>
-											<select name="cars" id="cars">
-												<option value="volvo">Volvo</option>
-												<option value="saab">Saab</option>
-												<option value="mercedes">Mercedes</option>
-											</select>
-											<span class="type_sorting_text">Default Sorting</span>
+                                            <c:choose>
+                                                <c:when test="${sorting==1}">
+                                                    <span class="type_sorting_text">price: Low to High </span>
+                                                </c:when>
+                                                <c:when test="${sorting==2}">
+                                                    <span class="type_sorting_text">price: High to Low</span>
+                                                </c:when>
+												<c:when test="${sorting==3}">
+													<span class="type_sorting_text">Product Name</span>
+												</c:when>
+                                                <c:otherwise>
+                                                    <span class="type_sorting_text">Default Sorting</span>
+                                                </c:otherwise>
+                                            </c:choose>
 											<i class="fa fa-angle-down"></i>
 											<ul class="sorting_type">
-												<li class="type_sorting_btn" data-isotope-option='{ "sortBy": "original-order" }'><span><a href="/home?action=categories&sorting=0">Default Sorting</a></span></li>
-												<li class="type_sorting_btn" data-isotope-option='{ "sortBy": "price" }'><span><a href="/home?action=categories&sorting=1">Price</a></span></li>
-												<li class="type_sorting_btn" data-isotope-option='{ "sortBy": "name" }'><span><a href="/home?action=categories&sorting=2">Product Name</a></span></li>
+												<li class="type_sorting_btn"><span><a href="/home?action=categories&sorting=0">Default Sorting</a></span></li>
+												<li class="type_sorting_btn"><span><a href="/home?action=categories&sorting=1">price: Low to High</a></span></li>
+												<li class="type_sorting_btn"><span><a href="/home?action=categories&sorting=2">price: High to Low</a></span></li>
+												<li class="type_sorting_btn"><span><a href="/home?action=categories&sorting=3">Product Name</a></span></li>
 											</ul>
 										</li>
 										<li>

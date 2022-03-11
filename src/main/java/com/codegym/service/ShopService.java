@@ -43,9 +43,10 @@ public class ShopService implements IShopService {
     }
 
     @Override
-    public List<Product> sortProductByPrice() {
-        return shopDao.sortProductByPrice();
+    public List<Product> sortProduct(int sortID) {
+        return shopDao.sortProduct(sortID);
     }
+
 
     @Override
     public void Payment() {

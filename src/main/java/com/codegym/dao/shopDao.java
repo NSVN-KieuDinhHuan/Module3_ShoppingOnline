@@ -16,7 +16,9 @@ public class shopDao implements IShopDao {
     public static final String SQL_FIND_PRODUCT_BY_CATEGORY = "SELECT * FROM product Where category_id=?;";
     public static final String SQL_ADD_USER = "INSERT INTO user(username, email,address, phone, password, role_id,status) VALUES (?,?,?,?,?,1,true);";
     public static final String SQL_FIND_USER_BY_EMAIL = "SELECT * FROM user Where email=?;";
-    public static final String SQL_SORT_PRODUCT_BY_PRICE = "SELECT * FROM product  ORDER BY price DESC;";
+    public static final String SQL_SORT_PRODUCT_LOW_TO_HIGHT_PRICE= "SELECT * FROM product ORDER BY price ASC;";
+    public static final String SQL_SORT_PRODUCT_HIGHT_TO_LOW_PRICE = "SELECT * FROM product ORDER BY price DESC;";
+    public static final String SQL_SORT_PRODUCT_BY_NAME="SELECT * FROM product ORDER BY name DESC;";
 
 
     @Override
@@ -98,10 +100,21 @@ public class shopDao implements IShopDao {
     }
 
     @Override
-    public List<Product> sortProductByPrice() {
+    public List<Product> sortProduct(int sortID) {
         List<Product> products = new ArrayList<>();
+        String SQL=null;
+        if (sortID==1) {
+            SQL = SQL_SORT_PRODUCT_LOW_TO_HIGHT_PRICE;
+        }else if(sortID==2) {
+            SQL = SQL_SORT_PRODUCT_HIGHT_TO_LOW_PRICE;
+        }else if(sortID==3) {
+            SQL = SQL_SORT_PRODUCT_BY_NAME;
+        }else {
+            SQL=SQL_SELECT_ALL_PRODUCT;
+        }
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL_SORT_PRODUCT_BY_PRICE);
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");

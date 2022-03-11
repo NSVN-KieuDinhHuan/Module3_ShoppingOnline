@@ -12,7 +12,7 @@ public interface IShopService {
     List<Product>findbycategory(int category_id);
     boolean register(User user);
     User findUserbyEmail(String email);
-    List<Product>sortProductByPrice();
+    List<Product> sortProduct(int sortID);
     void Payment();
 }
 
