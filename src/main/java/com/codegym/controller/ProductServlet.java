@@ -22,6 +22,9 @@ public class ProductServlet extends HttpServlet {
             action = "";
         }
         switch (action){
+            case "view": {
+                break;
+            }
             default:{
                 showListProduct(request, response);
             }
