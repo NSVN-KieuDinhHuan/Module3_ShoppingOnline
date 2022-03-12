@@ -81,13 +81,20 @@ public class UserDao implements IUserDao{
         return false;
     }
 
-    @Override
-    public boolean editStatus(int id) {
-        return false;
-    }
 
     @Override
     public int countUser() {
-        return 0;
+        int countUser = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select count(id) as count from user where role_id = 2");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                countUser = resultSet.getInt("count");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return countUser;
     }
 }

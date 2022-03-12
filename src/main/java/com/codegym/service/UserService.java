@@ -32,4 +32,9 @@ public class UserService implements IUserService{
     public boolean delete(int id) {
         return userDao.delete(id);
     }
+
+    @Override
+    public int countUser() {
+        return userDao.countUser();
+    }
 }
