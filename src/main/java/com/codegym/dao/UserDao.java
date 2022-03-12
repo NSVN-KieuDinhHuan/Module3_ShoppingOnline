@@ -18,13 +18,15 @@ public class UserDao implements IUserDao{
             PreparedStatement preparedStatement = connection.prepareStatement("select * from user where role_id = 2");
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
+                int id = resultSet.getInt("id");
                 String username = resultSet.getString("username");
                 String address = resultSet.getString("address");
                 String phone = resultSet.getString("phone");
                 String password = resultSet.getString("password");
                 String email = resultSet.getString("email");
+                int role_id = resultSet.getInt("role_id");
                 boolean status = resultSet.getBoolean("status");
-                User user = new User(username,email,address,phone,password,status);
+                User user = new User(id,username,email,address,phone,password,role_id,status);
                 users.add(user);
             }
         } catch (SQLException e) {

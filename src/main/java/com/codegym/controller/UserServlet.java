@@ -39,14 +39,17 @@ public class UserServlet extends HttpServlet {
                 break;
             }
             default:{
-                List<User> users = userService.findAll();
-                request.setAttribute("users",users);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/user/list.jsp");
-                dispatcher.forward(request,response);
+                showUserList(request, response);
             }
         }
     }
 
+    private void showUserList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<User> users = userService.findAll();
+        request.setAttribute("users",users);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/user/list.jsp");
+        dispatcher.forward(request, response);
+    }
 
 
     @Override
