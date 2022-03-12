@@ -19,6 +19,11 @@ public class OderDetail {
         this.quantity = quantity;
     }
 
+    public OderDetail(int product_id, int quantity) {
+        this.product_id = product_id;
+        this.quantity = quantity;
+    }
+
     public OderDetail() {
     }
 

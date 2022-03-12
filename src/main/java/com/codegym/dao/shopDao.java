@@ -24,7 +24,7 @@ public class shopDao implements IShopDao {
     public static final String SQL_FIND_PRODUCT_BY_NAME="SELECT * FROM product where name like ?";
     public static final String SQL_FIND_PRODUCT_BY_ID="SELECT * FROM product where id=?;";
     public static final String  SQL_INSERT_CART="INSERT INTO cart(user_id,orderDate)VALUE (?,?);";
-    public static final String  SQL_INSERT_ODER_DETAIL="INSERT INTO orderdetail(cart_id,product_id,quantity)VALUE (?,?.?);";
+    public static final String  SQL_INSERT_ODER_DETAIL="INSERT INTO orderdetail(cart_id,product_id,quantity)VALUE (?,?,?);";
 
 
     @Override
@@ -97,6 +97,8 @@ public class shopDao implements IShopDao {
         }
         return false;
     }
+
+
 
 
     @Override
@@ -201,10 +203,7 @@ public class shopDao implements IShopDao {
         return products;
     }
 
-    @Override
-    public void Payment() {
 
-    }
 
     @Override
     public boolean register(User user) {
@@ -224,6 +223,5 @@ public class shopDao implements IShopDao {
     }
 
 
-    //Them san pham vao gio hang
-//
+
 }

@@ -116,7 +116,7 @@
 <%--								<li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>--%>
 <%--								<li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>--%>
 								<li class="checkout">
-									<a href="#">
+									<a href="/home?action=orderDetail">
 										<i class="fa fa-shopping-cart" aria-hidden="true"></i>
 										<span id="checkout_items" class="checkout_items">${productInCart.size()}</span>
 									</a>
@@ -205,9 +205,9 @@
 					<div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
 						<span>Quantity:</span>
 						<div class="quantity_selector">
-							<span class="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>
-							<span id="quantity_value">1</span>
-							<span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
+							<a href="/home?action=detailProduct&id=${product.id}&quantity=-1"><span class="minus"><i class="fa fa-minus" aria-hidden="true"></i></span></a>
+							<span id="quantity_value">${quantity}</span>
+							<a href="/home?action=detailProduct&id=${product.id}&quantity=1"><span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span></a>
 						</div>
 						<div class="red_button add_to_cart_button"><a href="/home?action=detailProduct&id=${product.id}&add=yes">add to cart</a></div>
 						<div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div>
@@ -496,7 +496,7 @@
 <script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
 <script src="plugins/easing/easing.js"></script>
 <script src="plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-<script src="js/single_custom.js"></script>
+<%--<script src="js/single_custom.js"></script>--%>
 </body>
 
 </html>

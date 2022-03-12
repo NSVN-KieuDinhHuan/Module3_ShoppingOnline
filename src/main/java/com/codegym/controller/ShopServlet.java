@@ -1,6 +1,8 @@
 package com.codegym.controller;
 
 import com.codegym.dao.shopDao;
+import com.codegym.model.Cart;
+import com.codegym.model.OderDetail;
 import com.codegym.model.Product;
 import com.codegym.model.User;
 import com.codegym.service.IShopService;
@@ -14,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,9 +25,13 @@ import java.util.List;
 public class ShopServlet extends HttpServlet {
     IShopService shopService;
     List<Product> productInCart;
+    Cart cart;
+    List<OderDetail> oderDetails;
+    int quantity=1;
     public ShopServlet() {
         this.shopService = new ShopService(new shopDao());
         productInCart=new ArrayList<>();
+        oderDetails=new ArrayList<>();
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
@@ -43,6 +51,7 @@ public class ShopServlet extends HttpServlet {
                 logout(request, response);
                 break;
             }case "categories": {
+                quantity=1;
                 showCategories(request, response);
                 break;
             }case "contact": {
@@ -53,6 +62,9 @@ public class ShopServlet extends HttpServlet {
                 break;
             }case "orderDetail": {
                 OrderDetail(request, response);
+                break;
+            }case "payment": {
+                Payment(request, response);
                 break;
             } default: {
                 showhome(request, response);
@@ -67,21 +79,25 @@ public class ShopServlet extends HttpServlet {
         if (user!=null){
             request.setAttribute("username",user.getName());
         }
-
+        String incr=request.getParameter("quantity");
+        if(incr!=null) {
+            quantity = quantity + Integer.parseInt(incr);
+        }
         Product product=null;
         String add=request.getParameter("add");
         String productID=request.getParameter("id");
         if (productID!=null) {
             product=shopService.findProductByID(Integer.parseInt(productID));
             request.setAttribute("product",product);
-
         }
 
         if (product!=null && add!=null) {
             productInCart.add(product);
+            OderDetail oderDetail=new OderDetail(product.getId(),quantity);
+            oderDetails.add(oderDetail);
         }
+        request.setAttribute("quantity",quantity);
         request.setAttribute("productInCart",productInCart);
-
         RequestDispatcher dispatcher = request.getRequestDispatcher("/single.jsp");
         try {
             dispatcher.forward(request, response);
@@ -92,8 +108,38 @@ public class ShopServlet extends HttpServlet {
         }
     }
 
-    private void OrderDetail(HttpServletRequest request, HttpServletResponse response) {
+    private void Payment(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        User user =(User) session.getAttribute("user");
         request.setAttribute("productInCart",productInCart);
+        if (user!=null) {
+
+            shopService.CreateCart(cart);
+           for (int i = 0; i <oderDetails.size() ; i++) {
+               oderDetails.get(i).setCart_id(cart.getId());
+               shopService.CreateOderDetail(oderDetails.get(i));
+           }
+            oderDetails.clear();
+            productInCart.clear();
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/payment.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        }
+    }
+    private void OrderDetail(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        User user =(User) session.getAttribute("user");
+        if (user!=null){
+            request.setAttribute("user",user);
+        }
+        request.setAttribute("productInCart",productInCart);
+        request.setAttribute("oderDetail",oderDetails);
+        request.setAttribute("shopService",shopService);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/oderDetailView.jsp");
         try {
             dispatcher.forward(request, response);
@@ -138,6 +184,7 @@ public class ShopServlet extends HttpServlet {
 
 
     private void signIn(HttpServletRequest request, HttpServletResponse response)  {
+
         String email=request.getParameter("email");
         String password = request.getParameter("password");
         User user=shopService.findUserbyEmail(email);
@@ -145,6 +192,9 @@ public class ShopServlet extends HttpServlet {
         RequestDispatcher rq;
         if(user!=null&& user.getPassword().equals(password) && user.getRole_id()==2){
             session.setAttribute("user", user);
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
+            cart=new Cart(user.getId(),dtf.format(now));
             request.setAttribute("username",user.getName());
             rq = request.getRequestDispatcher("/customerView.jsp");
         }else if(user!=null&& user.getPassword().equals(password) && user.getRole_id()==1){

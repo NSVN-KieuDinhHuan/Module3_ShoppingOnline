@@ -1,3 +1,5 @@
+<%@ page import="com.codegym.service.ShopService" %>
+<%@ page import="com.codegym.dao.shopDao" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
@@ -115,9 +117,9 @@
 <%--								<li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>--%>
 <%--								<li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>--%>
 								<li class="checkout">
-									<a href="#">
+									<a href="/home?action=orderDetail">
 										<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-										<span id="checkout_items" class="checkout_items">${productNumberInCart}</span>
+										<span id="checkout_items" class="checkout_items">${productInCart.size()}</span>
 									</a>
 								</li>
 							</ul>
@@ -154,42 +156,76 @@
 
 					</ul>
 				</div>
-               <form style="text-align: center"  action="" method="post">
-	           <caption ><h2>ORDER DETALIES</h2></caption>
+<c:if test = "${productInCart.size()==0}">
+	<h3 style="">Cart is empty !</h3>
+</c:if>
+
+				<c:if test = "${productInCart.size()>0}">
+				<div class="row">
+					<div class="col-lg-5">
+
+						<div class="invoice-to">
+							<h3>Delivery address</h3>
+							<hr st>
+					<c:if test = "${user!=null}">
+							<address class="m-t-5 m-b-5">
+								<strong class="text-inverse">${user.name}</strong><br>
+								Address: ${user.address}<br>
+								Phone: ${user.phone}<br>
+								email: ${user.email}<br>
+							</address>
+					</c:if>
+					<c:if test = "${user==null}">
+						<div class="alert alert-primary" role="alert">
+							you have not signed in
+						</div>
+						<a href="/signin.jsp"   class="btn btn-primary">Signed in</a>
+
+					</c:if>
+						</div>
+					</div>
+					<div class="col-md-6">
+
+				<caption><h3 style="margin-bottom: 50px">ORDER DETALIES</h3></caption>
 				<table class="table">
 					<thead>
-					<tr>
-						<th scope="col">ID</th>
-						<th scope="col">Product Name</th>
-						<th scope="col">Amount</th>
-						<th scope="col">Price</th>
-						<th scope="col">Money</th>
+					<tr style="text-align: center">
+						<th style="width: 10%" scope="col">Code</th>
+						<th style="width: 30%" scope="col">Name</th>
+						<th style="width: 15%" scope="col">Quantity</th>
+						<th style="width: 15%" scope="col">Price</th>
+						<th style="width: 15%" scope="col">Money</th>
+						<th style="width: 15%" scope="col">Delete</th>
 					</tr>
 					</thead>
 					<tbody>
-					<tr>
-						<th scope="row">1</th>
-						<td>Long Dress</td>
-						<td>1</td>
-						<td>30</td>
-						<td>30</td>
+					<c:set var = "totalMoney" scope = "request" value = "${0}"/>
+					<c:forEach var="oder"  items="${oderDetail}">
+
+					<tr style="text-align: center">
+						<th  scope="code">${oder.product_id}</th>
+						<td>${shopService.findProductByID(oder.product_id).name}</td>
+						<td>${oder.quantity}</td>
+						<td>${shopService.findProductByID(oder.product_id).price}</td>
+						<c:set var = "money" scope = "request" value = "${oder.quantity*shopService.findProductByID(oder.product_id).price}"/>
+						<td><c:out value = "${money}"/> $</td>
+						<c:set var = "totalMoney" scope = "request" value = "${Math.round((totalMoney+money)*100/100)}"/>
+						<td></td>
 					</tr>
+
+					</c:forEach>
 					<tr>
-						<th scope="row">2</th>
-						<td>Graphic T-Shirt</td>
-						<td>2</td>
-						<td>25</td>
-						<td>50</td>
-					</tr>
-					<tr>
-						<th scope="row">3</th>
-						<td colspan="3">Total Money</td>
-						<td>8</td>
+						<td colspan="4"><h3>Total</h3></td>
+						<td colspan="2"><h4><c:out value = "${totalMoney}"/> $</h4></td>
 					</tr>
 					</tbody>
 				</table>
-				   <button style="float: right" type="submit" class="btn btn-primary">Payment</button>
-			   </form>
+					<div style="margin-left: auto;margin-right: auto">
+					<a href="/home?action=payment"   class="btn btn-primary">Make Payment</a>
+					</div>
+				</c:if>
+					</div>
+				</div>
 		</div>
 	</div>
 
@@ -247,26 +283,7 @@
 		</div>
 	</div>
 
-	<!-- Newsletter -->
 
-	<div class="newsletter">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6">
-					<div class="newsletter_text d-flex flex-column justify-content-center align-items-lg-start align-items-md-center text-center">
-						<h4>Newsletter</h4>
-						<p>Subscribe to our newsletter and get 20% off your first purchase</p>
-					</div>
-				</div>
-				<div class="col-lg-6">
-					<div class="newsletter_form d-flex flex-md-row flex-column flex-xs-column align-items-center justify-content-lg-end justify-content-center">
-						<input id="newsletter_email" type="email" placeholder="Your email" required="required" data-error="Valid email is required.">
-						<button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300" value="Submit">subscribe</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 
 	<!-- Footer -->
 

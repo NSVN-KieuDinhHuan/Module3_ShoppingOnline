@@ -154,42 +154,7 @@
 
 					</ul>
 				</div>
-               <form style="text-align: center"  action="" method="post">
-	           <caption ><h2>ORDER DETALIES</h2></caption>
-				<table class="table">
-					<thead>
-					<tr>
-						<th scope="col">ID</th>
-						<th scope="col">Product Name</th>
-						<th scope="col">Amount</th>
-						<th scope="col">Price</th>
-						<th scope="col">Money</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr>
-						<th scope="row">1</th>
-						<td>Long Dress</td>
-						<td>1</td>
-						<td>30</td>
-						<td>30</td>
-					</tr>
-					<tr>
-						<th scope="row">2</th>
-						<td>Graphic T-Shirt</td>
-						<td>2</td>
-						<td>25</td>
-						<td>50</td>
-					</tr>
-					<tr>
-						<th scope="row">3</th>
-						<td colspan="3">Total Money</td>
-						<td>8</td>
-					</tr>
-					</tbody>
-				</table>
-				   <button style="float: right" type="submit" class="btn btn-primary">Payment</button>
-			   </form>
+
 		</div>
 	</div>
 
@@ -202,50 +167,7 @@
 
 
 
-	<!-- Benefit -->
 
-	<div class="benefit">
-		<div class="container">
-			<div class="row benefit_row">
-				<div class="col-lg-3 benefit_col">
-					<div class="benefit_item d-flex flex-row align-items-center">
-						<div class="benefit_icon"><i class="fa fa-truck" aria-hidden="true"></i></div>
-						<div class="benefit_content">
-							<h6>free shipping</h6>
-							<p>Suffered Alteration in Some Form</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 benefit_col">
-					<div class="benefit_item d-flex flex-row align-items-center">
-						<div class="benefit_icon"><i class="fa fa-money" aria-hidden="true"></i></div>
-						<div class="benefit_content">
-							<h6>cach on delivery</h6>
-							<p>The Internet Tend To Repeat</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 benefit_col">
-					<div class="benefit_item d-flex flex-row align-items-center">
-						<div class="benefit_icon"><i class="fa fa-undo" aria-hidden="true"></i></div>
-						<div class="benefit_content">
-							<h6>45 days return</h6>
-							<p>Making it Look Like Readable</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 benefit_col">
-					<div class="benefit_item d-flex flex-row align-items-center">
-						<div class="benefit_icon"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
-						<div class="benefit_content">
-							<h6>opening all week</h6>
-							<p>8AM - 09PM</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 
 	<!-- Newsletter -->
 
