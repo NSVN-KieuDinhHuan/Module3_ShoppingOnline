@@ -218,20 +218,20 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-header">
-                                <form action="/users">
-                                <div class="form-inline" align="right">
-                                    <div class="input-group" data-widget="sidebar-search">
-                                        <input class="form-control form-control-sidebar" type="search" placeholder="Input username" aria-label="Search" name="q">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-sidebar">
-                                                <i class="fas fa-search fa-fw"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                </form>
-                            </div>
+<%--                            <div class="card-header">--%>
+<%--                                <form action="/users">--%>
+<%--                                <div class="form-inline" align="right">--%>
+<%--                                    <div class="input-group" data-widget="sidebar-search">--%>
+<%--                                        <input class="form-control form-control-sidebar" type="search" placeholder="Input username" aria-label="Search" name="q">--%>
+<%--                                        <div class="input-group-append">--%>
+<%--                                            <button class="btn btn-sidebar">--%>
+<%--                                                <i class="fas fa-search fa-fw"></i>--%>
+<%--                                            </button>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                </form>--%>
+<%--                            </div>--%>
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <table id="example2" class="table table-bordered table-hover">

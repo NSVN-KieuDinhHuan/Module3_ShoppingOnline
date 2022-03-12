@@ -37,7 +37,25 @@ public class UserDao implements IUserDao{
 
     @Override
     public User findByID(int id) {
-        return null;
+        User user = new User();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from user where id = ?");
+            preparedStatement.setInt(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                String name = resultSet.getString("username");
+                String address = resultSet.getString("address");
+                String phone = resultSet.getString("phone");
+                String password = resultSet.getString("password");
+                int role_id = resultSet.getInt("role_id");
+                String email = resultSet.getString("email");
+                boolean status = resultSet.getBoolean("status");
+                user = new User(id,name,email,address,phone,password,role_id,status);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 
     @Override
@@ -67,5 +85,10 @@ public class UserDao implements IUserDao{
     public boolean editStatus(int id) {
 
         return false;
+    }
+
+    @Override
+    public int countUser() {
+        return 0;
     }
 }

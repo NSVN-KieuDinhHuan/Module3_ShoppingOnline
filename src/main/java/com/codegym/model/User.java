@@ -30,6 +30,9 @@ public class User {
         this.status = status;
     }
 
+    public User() {
+    }
+
     public User(String name, String email, String address, String phone, String password) {
         this.name = name;
         this.email = email;

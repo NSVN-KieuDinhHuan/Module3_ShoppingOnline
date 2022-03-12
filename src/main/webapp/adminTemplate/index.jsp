@@ -163,7 +163,7 @@
 <%--          <i class="bi bi-person-square"></i>--%>
 <%--        </div>--%>
         <div class="info">
-          <a href="#" class="d-block"><span><i class="bi bi-person-square"></i></span>&nbsp&nbsp&nbsp&nbsp${usename}</a>
+          <a href="#" class="d-block"><span><i class="bi bi-person-square"></i></span>&nbsp&nbsp&nbsp&nbsp${username}</a>
         </div>
       </div>
 
