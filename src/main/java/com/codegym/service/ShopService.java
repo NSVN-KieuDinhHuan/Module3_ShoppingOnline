@@ -17,10 +17,7 @@ public class ShopService implements IShopService {
         return shopDao.displayAll();
     }
 
-    @Override
-    public Product findByName(int id) {
-        return null;
-    }
+
 
     @Override
     public List<Product> addProductIntoCart() {
@@ -45,6 +42,12 @@ public class ShopService implements IShopService {
     @Override
     public List<Product> sortProduct(int sortID) {
         return shopDao.sortProduct(sortID);
+    }
+
+    @Override
+    public List<Product> findProductByName(String keyword) {
+        keyword="%"+keyword+"%";
+        return shopDao.findProductByName(keyword);
     }
 
 
