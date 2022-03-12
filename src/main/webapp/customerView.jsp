@@ -73,20 +73,20 @@
                 </li>
                 <li class="account">
                   <a href="#">
-                    <c:if test="${usename!=null}">
-                      ${usename}
+                    <c:if test="${username!=null}">
+                      ${username}
                     </c:if>
-                    <c:if test="${usename==null}">
+                    <c:if test="${username==null}">
                       My Account
 
                     </c:if>
                     <i class="fa fa-angle-down"></i>
                   </a>
                   <ul class="account_selection">
-                    <c:if test="${usename!=null}">
+                    <c:if test="${username!=null}">
                     <li><a href="/home?action=logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
                      </c:if>
-                     <c:if test="${usename==null}">
+                     <c:if test="${username==null}">
                     <li><a href="/signin.jsp"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
                     <li><a href="/register.jsp"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
                      </c:if>
@@ -115,15 +115,15 @@
                 <li><a href="#">promotion</a></li>
                 <li><a href="#">pages</a></li>
                 <li><a href="#">blog</a></li>
-                <li><a href="contact.jsp">contact</a></li>
+                <li><a href="/home?action=contact">contact</a></li>
               </ul>
               <ul class="navbar_user">
-                <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
-                <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+<%--                <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>--%>
+<%--                <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>--%>
                 <li class="checkout">
                   <a href="#">
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                    <span id="checkout_items" class="checkout_items">2</span>
+                    <span id="checkout_items" class="checkout_items">${productInCart.size()}</span>
                   </a>
                 </li>
               </ul>
