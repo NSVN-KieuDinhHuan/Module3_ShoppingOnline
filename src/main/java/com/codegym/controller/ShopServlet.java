@@ -20,10 +20,10 @@ import java.util.List;
 @WebServlet(name = "ShopServlet", value = "/home")
 public class ShopServlet extends HttpServlet {
     IShopService shopService;
-    List<String> productIDsCart;
+    List<Product> productInCart;
     public ShopServlet() {
         this.shopService = new ShopService(new shopDao());
-        productIDsCart=new ArrayList<>();
+        productInCart= new ArrayList<>();
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
@@ -48,6 +48,12 @@ public class ShopServlet extends HttpServlet {
             }case "contact": {
                 showContact(request, response);
                 break;
+            }case "detailProduct": {
+                detailProduct(request, response);
+                break;
+            }case "orderDetail": {
+                OrderDetail(request, response);
+                break;
             } default: {
                 showhome(request, response);
                 break;
@@ -55,7 +61,52 @@ public class ShopServlet extends HttpServlet {
         }
     }
 
+    private void detailProduct(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        User user =(User) session.getAttribute("user");
+        if (user!=null){
+            request.setAttribute("username",user.getName());
+        }
+
+        Product product=null;
+        String add=request.getParameter("add");
+        String productID=request.getParameter("id");
+        if (productID!=null) {
+            product=shopService.findProductByID(Integer.parseInt(productID));
+            request.setAttribute("product",product);
+
+        }
+
+        if (product!=null && add!=null) {
+            productInCart.add(product);
+        }
+        request.setAttribute("productInCart",productInCart);
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/single.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void OrderDetail(HttpServletRequest request, HttpServletResponse response) {
+        request.setAttribute("productInCart",productInCart);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/oderDetailView.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void logout(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        session.removeAttribute("user");
         request.setAttribute("username",null);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/customerView.jsp");
         try {
@@ -146,7 +197,7 @@ public class ShopServlet extends HttpServlet {
     private void showContact(HttpServletRequest request, HttpServletResponse response)  {
         HttpSession session = request.getSession();
         User user =(User) session.getAttribute("user");
-        request.setAttribute("productNumberInCart",productIDsCart.size());
+        request.setAttribute("productInCart",productInCart);
         if (user!=null){
             request.setAttribute("username",user.getName());
         }
@@ -168,14 +219,12 @@ public class ShopServlet extends HttpServlet {
     private void showCategories(HttpServletRequest request, HttpServletResponse response)  {
         List<Product> products = shopService.displayAll();
         HttpSession session = request.getSession();
+        session.setAttribute("allProduct",products);
+
         User user =(User) session.getAttribute("user");
         String category_id = request.getParameter("category_id");
         String sorting=request.getParameter("sorting");
-        String productID=request.getParameter("productID");
-        if (productID!=null) {
-            productIDsCart.add(productID);
-            productID=null;
-        }
+        request.setAttribute("productInCart",productInCart);
         String search=(String) session.getAttribute("searchContent");
         if (user!=null){
             request.setAttribute("username",user.getName());
@@ -190,7 +239,7 @@ public class ShopServlet extends HttpServlet {
         if (search!=null){
             products=shopService.findProductByName(search);
         }
-        request.setAttribute("productNumberInCart",productIDsCart.size());
+
         request.setAttribute("search",search);
         request.setAttribute("sorting",sorting);
         request.setAttribute("categorySevelet",category_id);
@@ -211,7 +260,7 @@ public class ShopServlet extends HttpServlet {
     private void showhome(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         User user =(User) session.getAttribute("user");
-        request.setAttribute("productNumberInCart",productIDsCart.size());
+        request.setAttribute("productInCart",productInCart);
         if (user!=null) {
             request.setAttribute("username", user.getName());
         }

@@ -115,9 +115,9 @@
 <%--								<li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>--%>
 <%--								<li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>--%>
 								<li class="checkout">
-									<a href="/home?action=orderDetail">
+									<a href="#">
 										<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-										<span id="checkout_items" class="checkout_items">${productInCart.size()}</span>
+										<span id="checkout_items" class="checkout_items">${productNumberInCart}</span>
 									</a>
 								</li>
 							</ul>
@@ -148,120 +148,59 @@
 					<ul>
 						<li><a href="/home?action=categories">Shop</a></li>
 
-						<c:if test="${categorySevelet==3}">
-							<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Men's</a></li>
-						</c:if>
-						<c:if test="${categorySevelet==2}">
-							<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Accessories</a></li>
-						</c:if>
-						<c:if test="${categorySevelet==1}">
-							<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>women</a></li>
-						</c:if>
-						<c:if test="${categorySevelet==0}">
-							<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>All products</a></li>
-						</c:if>
+
+							<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Payment</a></li>
+
 
 					</ul>
 				</div>
-
-				<!-- Sidebar -->
-
-				<div class="sidebar">
-					<div class="sidebar_section">
-						<div class="sidebar_title">
-							<h5>Product Category</h5>
-						</div>
-						<ul class="sidebar_categories">
-							<li ><a href="/home?action=categories&category_id=1">women</a></li>
-							<li><a href="/home?action=categories&category_id=2">Accessories</a></li>
-							<li><a href="/home?action=categories&category_id=3">Men</a></li>
-							<li><a href="/home?action=categories&category_id=">All products</a></li>
-						</ul>
-					</div>
-				</div>
-
-
-
-				<!-- Main Content -->
-
-				<div class="main_content">
-
-					<!-- Products -->
-
-					<div class="products_iso">
-						<div class="row">
-							<div class="col">
-								<!-- Product Sorting -->
-								 <div class="product_sorting_container product_sorting_container_top">
-									<ul class="product_sorting" style="float: right">
-										<li>
-                                            <c:choose>
-                                                <c:when test="${sorting==1}">
-                                                    <span class="type_sorting_text">price: Low to High </span>
-                                                </c:when>
-                                                <c:when test="${sorting==2}">
-                                                    <span class="type_sorting_text">price: High to Low</span>
-                                                </c:when>
-												<c:when test="${sorting==3}">
-													<span class="type_sorting_text">Product Name</span>
-												</c:when>
-                                                <c:otherwise>
-                                                    <span class="type_sorting_text">Default Sorting</span>
-                                                </c:otherwise>
-                                            </c:choose>
-											<i class="fa fa-angle-down"></i>
-											<ul class="sorting_type">
-												<li class="type_sorting_btn"><span><a href="/home?action=categories&sorting=0">Default Sorting</a></span></li>
-												<li class="type_sorting_btn"><span><a href="/home?action=categories&sorting=1">price: Low to High</a></span></li>
-												<li class="type_sorting_btn"><span><a href="/home?action=categories&sorting=2">price: High to Low</a></span></li>
-												<li class="type_sorting_btn"><span><a href="/home?action=categories&sorting=3">Product Name</a></span></li>
-											</ul>
-										</li>
-									</ul>
-
-                                    <div style="float: left">
-                                        <form action="/home" method="get">
-                                            <div class="input-group rounded">
-                                                <input  name="search" value="${search}" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                                                <button class="btn btn-search fa fa-search" type="submit" ></button>
-                                            </div>
-                                        </form>
-                                    </div></li>
-								</div>
-
-								<!-- Product Grid -->
-								<div class="product-grid">
-                                             <c:forEach var="product"  items="${showAllproducts}">
-									            <div class="product-item">
-										            <div class="product product_filter">
-											            <div class="product_image">
-															<a href="/home?action=detailProduct&id=${product.id}"><img src=${product.productImage} alt="link"></a>
-                                                        </div>
-											            <div class="favorite"></div>
-											            <div class="product_info">
-												           <h6 class="product_name"><a href="/home?action=detailProduct&id=${product.id}">${product.name}</a></h6>
-												           <div class="product_price">${product.price} $</div>
-											            </div>
-										            </div>
-										           <div class="red_button add_to_cart_button">
-                                                     <a href="/home?action=detailProduct&id=${product.id}">add to cart</a>
-                                                   </div>
-									            </div>
-                                             </c:forEach>
-                                </div>
-								<!-- Product Sorting -->
-
-							</div>
-
-
-
-
-						</div>
-					</div>
-				</div>
-			</div>
+               <form style="text-align: center"  action="" method="post">
+	           <caption ><h2>ORDER DETALIES</h2></caption>
+				<table class="table">
+					<thead>
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col">Product Name</th>
+						<th scope="col">Amount</th>
+						<th scope="col">Price</th>
+						<th scope="col">Money</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<th scope="row">1</th>
+						<td>Long Dress</td>
+						<td>1</td>
+						<td>30</td>
+						<td>30</td>
+					</tr>
+					<tr>
+						<th scope="row">2</th>
+						<td>Graphic T-Shirt</td>
+						<td>2</td>
+						<td>25</td>
+						<td>50</td>
+					</tr>
+					<tr>
+						<th scope="row">3</th>
+						<td colspan="3">Total Money</td>
+						<td>8</td>
+					</tr>
+					</tbody>
+				</table>
+				   <button style="float: right" type="submit" class="btn btn-primary">Payment</button>
+			   </form>
 		</div>
 	</div>
+
+				<!-- Breadcrumbs -->
+
+
+
+
+
+
+
 
 	<!-- Benefit -->
 
@@ -374,7 +313,7 @@
 <script src="/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
 <script src="/plugins/easing/easing.js"></script>
 <script src="/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-<script src="/js/categories_custom.js"></script>
+<%--<script src="/js/categories_custom.js"></script>--%>
 </body>
 
 </html>

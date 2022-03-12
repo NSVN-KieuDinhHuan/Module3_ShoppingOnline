@@ -1,5 +1,7 @@
 package com.codegym.dao;
 
+import com.codegym.model.Cart;
+import com.codegym.model.OderDetail;
 import com.codegym.model.Product;
 import com.codegym.model.User;
 
@@ -20,6 +22,9 @@ public class shopDao implements IShopDao {
     public static final String SQL_SORT_PRODUCT_HIGHT_TO_LOW_PRICE = "SELECT * FROM product ORDER BY price DESC;";
     public static final String SQL_SORT_PRODUCT_BY_NAME="SELECT * FROM product ORDER BY name DESC;";
     public static final String SQL_FIND_PRODUCT_BY_NAME="SELECT * FROM product where name like ?";
+    public static final String SQL_FIND_PRODUCT_BY_ID="SELECT * FROM product where id=?;";
+    public static final String  SQL_INSERT_CART="INSERT INTO cart(user_id,orderDate)VALUE (?,?);";
+    public static final String  SQL_INSERT_ODER_DETAIL="INSERT INTO orderdetail(cart_id,product_id,quantity)VALUE (?,?.?);";
 
 
     @Override
@@ -45,14 +50,54 @@ public class shopDao implements IShopDao {
     }
 
     @Override
-    public Product findByName(int id) {
-        return null;
+    public Product findProductByID(int id) {
+        Product product = null;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_PRODUCT_BY_ID);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int category_id=resultSet.getInt("category_id");
+                String name = resultSet.getString("name");
+                double price = resultSet.getDouble("price");
+                String description = resultSet.getString("description");
+                String productImage = resultSet.getString("image");
+                product=new Product(id, name, price, description,category_id,productImage);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return product;
+
     }
 
     @Override
-    public List<Product> addProductIntoCart() {
-        return null;
+    public boolean CreateCart(Cart cart) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_CART);
+            preparedStatement.setInt(1, cart.getUser_id());
+            preparedStatement.setString(2, cart.getOrderDate());
+            return preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
+
+    @Override
+    public boolean CreateOderDetail(OderDetail oderDetail) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_ODER_DETAIL);
+            preparedStatement.setInt(1, oderDetail.getCart_id());
+            preparedStatement.setInt(2, oderDetail.getProduct_id());
+            preparedStatement.setInt(3, oderDetail.getQuantity());
+            return preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
     @Override
     public List<Product> findbycategory(int category_id) {
