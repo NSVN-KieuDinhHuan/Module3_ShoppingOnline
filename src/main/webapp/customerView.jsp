@@ -123,7 +123,7 @@
                 <li class="checkout">
                   <a href="#">
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                    <span id="checkout_items" class="checkout_items">${productNumberInCart}</span>
+                    <span id="checkout_items" class="checkout_items">${productInCart.size()}</span>
                   </a>
                 </li>
               </ul>

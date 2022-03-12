@@ -118,7 +118,7 @@
 								<li class="checkout">
 									<a href="#">
 										<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-										<span id="checkout_items" class="checkout_items">${productNumberInCart}</span>
+										<span id="checkout_items" class="checkout_items">${productInCart.size()}</span>
 									</a>
 								</li>
 							</ul>
@@ -209,7 +209,7 @@
 							<span id="quantity_value">1</span>
 							<span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
 						</div>
-						<div class="red_button add_to_cart_button"><a href="/home?action=detailProduct&productID=${product.id}">add to cart</a></div>
+						<div class="red_button add_to_cart_button"><a href="/home?action=detailProduct&id=${product.id}&add=yes">add to cart</a></div>
 						<div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div>
 					</div>
 
