@@ -15,14 +15,15 @@ import java.util.List;
 @WebServlet(name = "ProductServlet", value = "/products")
 public class ProductServlet extends HttpServlet {
     ProductService productService = new ProductService();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-        if(action == null){
+        if (action == null) {
             action = "";
         }
-        switch (action){
-            default:{
+        switch (action) {
+            default: {
                 showListProduct(request, response);
             }
         }
@@ -30,18 +31,17 @@ public class ProductServlet extends HttpServlet {
 
     private void showListProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String q = request.getParameter("q");
-        if(q == null){
+        if (q == null) {
             List<Product> products = productService.findAll();
-            request.setAttribute("products",products);
+            request.setAttribute("products", products);
             RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/product/list.jsp");
             dispatcher.forward(request, response);
         } else {
             List<Product> products = productService.searchByName(q);
-            request.setAttribute("products",products);
+            request.setAttribute("products", products);
             RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/product/list.jsp");
             dispatcher.forward(request, response);
         }
-
     }
 
     @Override

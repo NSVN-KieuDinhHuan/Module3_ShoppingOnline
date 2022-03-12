@@ -69,3 +69,11 @@ alter table user add column email varchar(50) unique;
 
 
 
+
+delimiter //
+create procedure delete_category(in inputId int)
+begin
+update product set category_id = null where category_id = inputId;
+delete from category where id = inputId;
+end //
+delimiter ;
