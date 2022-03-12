@@ -33,6 +33,11 @@ public class UserServlet extends HttpServlet {
                 break;
             }
             case "edit":{
+                int id = Integer.parseInt(request.getParameter("id"));
+                User user = userService.findByID(id);
+                request.setAttribute("user",user);
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/adminTemplate/user/edit.jsp");
+                requestDispatcher.forward(request,response);
                 break;
             }
             case "delete":{
@@ -63,6 +68,26 @@ public class UserServlet extends HttpServlet {
                 break;
             }
             case "edit":{
+                int id = Integer.parseInt(request.getParameter("id"));
+                boolean status = Boolean.parseBoolean(request.getParameter("status"));
+                User user = new User(status);
+                String message;
+                boolean isUpdated = userService.update(id,user);
+                if(isUpdated){
+                    message = "Changed successfully";
+                } else {
+                    message = "Change failed";
+                }
+                request.setAttribute("message",message);
+                request.setAttribute("isUpdated",isUpdated);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/user/edit.jsp");
+                try {
+                    dispatcher.forward(request,response);
+                } catch (ServletException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break;
             }
             case "delete":{

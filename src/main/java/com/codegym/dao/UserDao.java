@@ -47,11 +47,25 @@ public class UserDao implements IUserDao{
 
     @Override
     public boolean update(int id, User user) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("update user set status=? where id=?");
+            preparedStatement.setBoolean(1,user.getStatus());
+            preparedStatement.setInt(2,id);
+            return preparedStatement.executeUpdate()>0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 
     @Override
     public boolean delete(int id) {
+        return false;
+    }
+
+    @Override
+    public boolean editStatus(int id) {
+
         return false;
     }
 }
