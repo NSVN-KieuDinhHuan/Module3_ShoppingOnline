@@ -25,11 +25,12 @@ public class UserDao implements IUserDao{
                 String email = resultSet.getString("email");
                 boolean status = resultSet.getBoolean("status");
                 User user = new User(username,email,address,phone,password,status);
+                users.add(user);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return users;
     }
 
     @Override

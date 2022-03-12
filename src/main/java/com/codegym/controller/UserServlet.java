@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "ProductServlet", value = "/users")
+@WebServlet(name = "UserServlet", value = "/users")
 public class UserServlet extends HttpServlet {
     UserService userService = new UserService();
     @Override
@@ -40,7 +40,7 @@ public class UserServlet extends HttpServlet {
             }
             default:{
                 List<User> users = userService.findAll();
-                request.setAttribute("user",users);
+                request.setAttribute("users",users);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/user/list.jsp");
                 dispatcher.forward(request,response);
             }
