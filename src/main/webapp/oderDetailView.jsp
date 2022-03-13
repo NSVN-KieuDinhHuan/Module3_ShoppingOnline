@@ -119,8 +119,9 @@
 									</a>
 									<ul class="account_selection">
 										<c:if test="${user!=null}">
-											<li><a href="/home?action=logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
-										</c:if>
+											<li><a href="/home?action=history "><i class="fa fa-history" aria-hidden="true"></i>History</a></li>
+											<li><a href="/home?action=profile "><i class="fa fa-user" aria-hidden="true"></i>Profile</a></li>
+											<li><a href="/home?action=logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>										</c:if>
 										<c:if test="${user==null}">
 											<li><a href="/signin.jsp"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
 											<li><a href="/register.jsp"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
@@ -242,7 +243,7 @@
 				<table class="table">
 					<thead>
 					<tr style="text-align: center">
-						<th style="width: 10%" scope="col">Code</th>
+
 						<th style="width: 30%" scope="col">Name</th>
 						<th style="width: 15%" scope="col">Quantity</th>
 						<th style="width: 15%" scope="col">Price</th>
@@ -255,14 +256,15 @@
 					<c:forEach var="order"  items="${oderDetails}">
 
 					<tr style="text-align: center">
-						<th  scope="code">${order.product_id}</th>
+
 						<td>${shopService.findProductByID(order.product_id).name}</td>
 						<td>${order.quantity}</td>
 						<td>${shopService.findProductByID(order.product_id).price}</td>
 						<c:set var = "money" scope = "request" value = "${order.quantity*shopService.findProductByID(order.product_id).price}"/>
 						<td><c:out value = "${money}"/> $</td>
 						<c:set var = "totalMoney" scope = "request" value = "${Math.round((totalMoney+money)*100/100)}"/>
-						<td><a href="/home?action=orderDetail&orderid=${order.getId()}">Delete</a></td>
+						<c:set var="orderid" scope = "request" value ="${order.getId()}"/>
+						<td><a href="/home?action=orderDetail&id=${orderid}">delete</a></td>
 					</tr>
 
 					</c:forEach>

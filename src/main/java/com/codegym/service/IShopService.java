@@ -9,14 +9,17 @@ import java.util.List;
 
 public interface IShopService {
     List<Product> displayAll();
-    boolean CreateCart(Cart cart);
-    boolean CreateOderDetail(OderDetail oderDetail);
+    List<Product>bestSeller();
     List<Product>findbycategory(int category_id);
-    boolean register(User user);
     User findUserbyEmail(String email);
     List<Product> sortProduct(int sortID);
     List<Product> findProductByName(String keyword);
     Product findProductByID(int id);
     int findMaxIDCart();
+    List<OderDetail> PurchaseHistory(int user_id);
+    boolean CreateOderDetail(OderDetail oderDetail);
+    boolean CreateCart(Cart cart);
+    boolean register(User user);
+    Cart findCartbyID(int cart_id);
 }
 

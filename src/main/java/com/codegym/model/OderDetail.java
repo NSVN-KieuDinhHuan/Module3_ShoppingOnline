@@ -13,8 +13,8 @@ public class OderDetail {
         this.quantity = quantity;
     }
 
-    public OderDetail(int cart_id, int product_id, int quantity) {
-        this.cart_id = cart_id;
+    public OderDetail(int id, int product_id, int quantity) {
+        this.id = id;
         this.product_id = product_id;
         this.quantity = quantity;
     }

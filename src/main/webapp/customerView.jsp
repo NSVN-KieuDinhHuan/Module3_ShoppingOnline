@@ -11,10 +11,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Colo Shop</title>
+  <title> Fashion Shop</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="Colo Shop Template">
+  <meta name="description" content="fashion Shop Template">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="/styles/bootstrap4/bootstrap.min.css">
   <link href="/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -84,6 +84,8 @@
                   </a>
                   <ul class="account_selection">
                     <c:if test="${username!=null}">
+                      <li><a href="/home?action=history "><i class="fa fa-history" aria-hidden="true"></i>History</a></li>
+                      <li><a href="/home?action=profile "><i class="fa fa-user" aria-hidden="true"></i>Profile</a></li>
                     <li><a href="/home?action=logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
                      </c:if>
                      <c:if test="${username==null}">
@@ -106,7 +108,7 @@
         <div class="row">
           <div class="col-lg-12 text-right">
             <div class="logo_container">
-              <a href="#">colo<span>shop</span></a>
+              <a href="#">H2H2<span>shop</span></a>
             </div>
             <nav class="navbar">
               <ul class="navbar_menu">
@@ -206,24 +208,23 @@
             <div class="owl-carousel owl-theme product_slider">
 
               <!-- Slide 1 -->
-
+<c:forEach var="product" items="${bestseller}">
               <div class="owl-item product_slider_item">
                 <div class="product-item">
                   <div class="product discount">
                     <div class="product_image">
-                      <img src="images/product_1.png" alt="">
+                     <a href="/home?action=detailProduct&id=${product.id}"> <img src="${product.productImage}" alt=""></a>
                     </div>
                     <div class="favorite favorite_left"></div>
-                    <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
+                    <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-10%</span></div>
                     <div class="product_info">
-                      <h6 class="product_name"><a href="single.jsp">Fujifilm X100T 16 MP Digital Camera (Silver)</a></h6>
-                      <div class="product_price">$520.00<span>$590.00</span></div>
+                      <h6 class="product_name"><a href="/home?action=detailProduct&id=${product.id}">${product.name}</a></h6>
+                      <div class="product_price">$ ${Math.round(1.1*product.price)}<span>$ ${product.price}</span></div>
                     </div>
                   </div>
                 </div>
               </div>
-
-
+</c:forEach>
 
 
 

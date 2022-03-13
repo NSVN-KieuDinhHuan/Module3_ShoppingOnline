@@ -25,6 +25,11 @@ public class ShopService implements IShopService {
     }
 
     @Override
+    public List<Product> bestSeller() {
+        return shopDao.bestSeller();
+    }
+
+    @Override
     public boolean CreateOderDetail(OderDetail oderDetail) {
         return shopDao.CreateOderDetail(oderDetail);
     }
@@ -38,6 +43,11 @@ public class ShopService implements IShopService {
     @Override
     public boolean register(User user) {
         return shopDao.register(user);
+    }
+
+    @Override
+    public Cart findCartbyID(int cart_id) {
+        return shopDao.findCartbyID(cart_id);
     }
 
     @Override
@@ -64,6 +74,11 @@ public class ShopService implements IShopService {
     @Override
     public int findMaxIDCart() {
         return shopDao.findMaxIDCart();
+    }
+
+    @Override
+    public List<OderDetail> PurchaseHistory(int user_id) {
+        return shopDao.PurchaseHistory(user_id);
     }
 
 

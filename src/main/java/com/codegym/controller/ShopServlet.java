@@ -24,14 +24,14 @@ import java.util.List;
 @WebServlet(name = "ShopServlet", value = "/home")
 public class ShopServlet extends HttpServlet {
     IShopService shopService;
-    List<Product> productInCart;
+    int orderDetailID;
     Cart cart;
     List<OderDetail> oderDetails;
     int quantity=1;
     public ShopServlet() {
         this.shopService = new ShopService(new shopDao());
-        productInCart=new ArrayList<>();
         oderDetails=new ArrayList<>();
+        orderDetailID=1;
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
@@ -66,14 +66,39 @@ public class ShopServlet extends HttpServlet {
             }case "payment": {
                 Payment(request, response);
                 break;
-            } default: {
+             }case "history": {
+                PurchaseHistory(request, response);
+            break;
+             } default: {
                 showhome(request, response);
                 break;
             }
         }
     }
 
-    private void detailProduct(HttpServletRequest request, HttpServletResponse response) {
+       private void PurchaseHistory(HttpServletRequest request, HttpServletResponse response) {
+           HttpSession session = request.getSession();
+           User user =(User) session.getAttribute("user");
+           if (user!=null){
+               request.setAttribute("username",user.getName());
+               List<OderDetail> purchaseHistory =shopService.PurchaseHistory(user.getId());
+               request.setAttribute("purchaseHistory",purchaseHistory);
+               request.setAttribute("shopService",shopService);
+               request.setAttribute("oderDetails",oderDetails);
+               RequestDispatcher dispatcher = request.getRequestDispatcher("/purchaseHistoryView.jsp");
+           try {
+               dispatcher.forward(request, response);
+           } catch (ServletException e) {
+               e.printStackTrace();
+           } catch (IOException e) {
+               e.printStackTrace();
+           }
+           }
+
+
+       }
+
+        private void detailProduct(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         User user =(User) session.getAttribute("user");
         if (user!=null){
@@ -92,9 +117,9 @@ public class ShopServlet extends HttpServlet {
         }
 
         if (product!=null && add!=null) {
-//            productInCart.add(product);
-            OderDetail oderDetail=new OderDetail(product.getId(),quantity);
+            OderDetail oderDetail=new OderDetail(orderDetailID,product.getId(),quantity);
             oderDetails.add(oderDetail);
+            orderDetailID=orderDetailID+1;
         }
         request.setAttribute("quantity",quantity);
         request.setAttribute("oderDetails",oderDetails);
@@ -130,7 +155,6 @@ public class ShopServlet extends HttpServlet {
                shopService.CreateOderDetail(oderDetails.get(i));
            }
             oderDetails.clear();
-            productInCart.clear();
           dispatcher = request.getRequestDispatcher("/payment.jsp");
         }else {
              dispatcher = request.getRequestDispatcher("/signin.jsp");
@@ -150,7 +174,7 @@ public class ShopServlet extends HttpServlet {
         if (user!=null){
             request.setAttribute("user",user);
         }
-        String oderDetailId=request.getParameter("orderid");
+        String oderDetailId=request.getParameter("id");
         if (oderDetailId!=null) {
             for (int i = 0; i < oderDetails.size(); i++) {
                 if (oderDetails.get(i).getId()==Integer.parseInt(oderDetailId)){
@@ -158,17 +182,9 @@ public class ShopServlet extends HttpServlet {
                 }
             }
 
-        }
-//        if (productId!=null) {
-//            for (int i = 0; i < productInCart.size(); i++) {
-//                if (productInCart.get(i).getId()==Integer.parseInt(productId)){
-//                    productInCart.remove(i);
-//                }
-//
-//            }
-//
-//        }
 
+
+        }
 
         request.setAttribute("oderDetails",oderDetails);
         request.setAttribute("shopService",shopService);
@@ -338,9 +354,11 @@ public class ShopServlet extends HttpServlet {
 
 
     private void showhome(HttpServletRequest request, HttpServletResponse response) {
+        List<Product> bestseller=shopService.bestSeller();
         HttpSession session = request.getSession();
         User user =(User) session.getAttribute("user");
         request.setAttribute("oderDetails",oderDetails);
+        request.setAttribute("bestseller",bestseller);
         if (user!=null) {
             request.setAttribute("username", user.getName());
         }

@@ -78,6 +78,8 @@
 									</a>
 									<ul class="account_selection">
 										<c:if test="${username!=null}">
+											<li><a href="/home?action=history "><i class="fa fa-history" aria-hidden="true"></i>History</a></li>
+											<li><a href="/home?action=profile "><i class="fa fa-user" aria-hidden="true"></i>Profile</a></li>
 											<li><a href="/home?action=logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
 										</c:if>
 										<c:if test="${username==null}">

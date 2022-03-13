@@ -5,10 +5,7 @@ import com.codegym.model.OderDetail;
 import com.codegym.model.Product;
 import com.codegym.model.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +23,9 @@ public class shopDao implements IShopDao {
     public static final String  SQL_INSERT_CART="INSERT INTO cart(id,user_id,orderDate)VALUE (?,?,?);";
     public static final String  SQL_INSERT_ODER_DETAIL="INSERT INTO orderdetail(cart_id,product_id,quantity)VALUE (?,?,?);";
     public static final String  SQL_FIND_MAX_CART_ID="SELECT MAX(id) as id FROM cart;";
+    public static final String  SQL_CALL_PROCEDURE_BESTSELLER= "call best_seller();";
+    public static final String  SQL_CALL_PROCEDURE_PURCHASE_HISTORY= "call PurchaseHistory(?);";
+    public static final String SQL_FIND_CART_BY_ID="SELECT * FROM cart where id=?;";
 
 
     @Override
@@ -84,6 +84,25 @@ public class shopDao implements IShopDao {
             e.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public Cart findCartbyID(int cart_id) {
+        Cart cart = null;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_CART_BY_ID);
+            preparedStatement.setInt(1, cart_id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id=resultSet.getInt("id");
+                int user_id = resultSet.getInt("user_id");
+                String orderDate = resultSet.getString("orderDate");
+                cart=new Cart(id, user_id,orderDate);
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cart;
     }
 
     @Override
@@ -197,6 +216,50 @@ public class shopDao implements IShopDao {
         }
         return products;
 
+    }
+
+    @Override
+    public List<Product> bestSeller() {
+        List<Product> products = new ArrayList<>();
+        try {
+            CallableStatement callableStatement = connection.prepareCall(SQL_CALL_PROCEDURE_BESTSELLER);
+            ResultSet resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("product_id");
+                String name = resultSet.getString("name");
+                double price = resultSet.getDouble("price");
+                String description = resultSet.getString("description");
+                int categoryId = resultSet.getInt("category_id");
+                String productImage = resultSet.getString("image");
+                Product product = new Product(id, name, price, description, categoryId, productImage);
+                products.add(product);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return products;
+    }
+
+    @Override
+    public List<OderDetail> PurchaseHistory(int user_id) {
+           List<OderDetail> oderDetails = new ArrayList<>();
+        try {
+            CallableStatement callableStatement = connection.prepareCall(SQL_CALL_PROCEDURE_PURCHASE_HISTORY);
+            callableStatement.setInt(1, user_id);
+            ResultSet resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                int cart_id = resultSet.getInt("cart_id");
+                int quantity = resultSet.getInt("quantity");
+                int product_id = resultSet.getInt("product_id");
+                OderDetail oderDetail = new OderDetail(id, cart_id , product_id,quantity);
+                oderDetails.add(oderDetail);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return oderDetails;
     }
 
     @Override
