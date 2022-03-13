@@ -14,9 +14,8 @@ public interface IShopDao{
     boolean CreateOderDetail(OderDetail oderDetail);
     List<Product>findbycategory(int category_id);
     User findUserbyEmail(String email);
+    int findMaxIDCart();
     List<Product> sortProduct(int sortID);
     List<Product> findProductByName(String keyword);
-
-    void Payment();
     boolean register(User user);
 }

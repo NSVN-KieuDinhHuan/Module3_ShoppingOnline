@@ -228,7 +228,7 @@
 <div class="grid">
 
 
-    <div style="text-align: center;color: #24fa03;font-size: 20px">
+    <div style="text-align: center;color: #ff0000;font-size: 20px">
         <c:if test="${notify!=null}">
             <p class="alert alert-success">${notify}</p>
         </c:if>
