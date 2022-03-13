@@ -204,6 +204,13 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="/orders" class="nav-link">
+              <p>
+                Order Management
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="/signin.jsp" class="nav-link">
               <button>
                 Sign out

@@ -4,6 +4,22 @@ public class Cart {
    private int id;
    private  int user_id;
    private String orderDate;
+   private String username;
+
+    public Cart(int id, int user_id, String orderDate, String username) {
+        this.id = id;
+        this.user_id = user_id;
+        this.orderDate = orderDate;
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public Cart() {
     }

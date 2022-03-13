@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Product List</title>
+    <title>Order List</title>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
@@ -221,60 +221,51 @@
     <div class="content-wrapper">
         <section class="content">
             <div class="container-fluid">
-                <h1 align="center">PRODUCT LIST</h1>
+                <h1 align="center">ORDER LIST</h1>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-header">
-                               <h4 class="card-title"><a href="/products?action=create">Create New Product</a> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</h4>
-                                <form action="/products">
-                                <div class="form-inline" align="right">
-                                    <div class="input-group" data-widget="sidebar-search">
-                                        <input class="form-control form-control-sidebar" type="search" placeholder="Input product name" aria-label="Search" name="q">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-sidebar">
-                                                <i class="fas fa-search fa-fw"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                </form>
-                            </div>
+<%--                            <div class="card-header">--%>
+<%--                                <form action="/users">--%>
+<%--                                <div class="form-inline" align="right">--%>
+<%--                                    <div class="input-group" data-widget="sidebar-search">--%>
+<%--                                        <input class="form-control form-control-sidebar" type="search" placeholder="Input username" aria-label="Search" name="q">--%>
+<%--                                        <div class="input-group-append">--%>
+<%--                                            <button class="btn btn-sidebar">--%>
+<%--                                                <i class="fas fa-search fa-fw"></i>--%>
+<%--                                            </button>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                </form>--%>
+<%--                            </div>--%>
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Name</th>
-                                        <th>Price</th>
-                                        <th>Description</th>
-                                        <th>Image</th>
-                                        <th></th>
-                                        <th></th>
+                                        <th>Username</th>
+                                        <th>Order Date</th>
+                                        <th>Order Details</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach items="${products}" var="product" varStatus="loop">
+                                    <c:forEach items="${orders}" var="order" varStatus="loop">
                                         <tr>
                                             <td>${loop.count}</td>
-                                            <td><a href="/products?action=view&id=${product.id}">${product.name}</a></td>
-                                            <td>${product.price}</td>
-                                            <td>${product.description}</td>
-                                            <td><img src="${product.productImage}" alt="product image"></td>
-                                            <td><a class="btn btn-info" href="/products?action=edit&id=${product.id}"><i class="bi bi-pencil-square"></i></a></td>
-                                            <td><a class="btn btn-danger" href="/products?action=delete&id=${product.id}"><i class="bi bi-trash3"></i></a></td>
+                                            <td>${order.username}</td>
+                                            <td>${order.orderDate}</td>
+                                            <td><a href="/orders?action=view&id=${order.id}">Click here</a></td>
                                         </tr>
                                     </c:forEach>
-
                                     </tbody>
                                     <tfoot>
                                     <tr>
                                         <th>#</th>
-                                        <th>Name</th>
-                                        <th>Price</th>
-                                        <th>Description</th>
-                                        <th>Image</th>
+                                        <th>UserName</th>
+                                        <th>Order Date</th>
+                                        <th>Order Details</th>
                                     </tr>
                                     </tfoot>
                                 </table>
