@@ -50,6 +50,10 @@ public class User {
         this.status = status;
     }
 
+    public User(String name) {
+        this.name = name;
+    }
+
     public User(int id, String name, String email, String address, String phone, String password, int role_id, boolean status) {
         this.id = id;
         this.name = name;

@@ -199,6 +199,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="/orders" class="nav-link">
+                            <p>
+                                Order Management
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="/signin.jsp" class="nav-link">
                             <button>
                                 Sign out
@@ -247,9 +254,9 @@
                                     <c:forEach items="${orders}" var="order" varStatus="loop">
                                         <tr>
                                             <td>${loop.count}</td>
-                                            <td>${order.user_id}</td>
+                                            <td>${order.username}</td>
                                             <td>${order.orderDate}</td>
-                                            <td><a href="/orders?action=view&id=${order.id}"></a>$Order Details</td>
+                                            <td><a href="/orders?action=view&id=${order.id}">Click here</a></td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>

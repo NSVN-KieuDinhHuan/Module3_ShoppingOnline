@@ -3,6 +3,7 @@ package com.codegym.service;
 import com.codegym.dao.IOrderDao;
 import com.codegym.dao.OrderDao;
 import com.codegym.model.Cart;
+import com.codegym.model.User;
 
 import java.util.List;
 
@@ -31,5 +32,10 @@ public class OrderService implements IOrderService{
     @Override
     public boolean delete(int id) {
         return orderDao.delete(id);
+    }
+
+    @Override
+    public List<User> findAllUserHavingOrder() {
+        return orderDao.findAllUserHavingOrder();
     }
 }

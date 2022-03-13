@@ -3,6 +3,7 @@ package com.codegym.controller;
 import com.codegym.model.Cart;
 import com.codegym.model.Category;
 import com.codegym.model.Product;
+import com.codegym.model.User;
 import com.codegym.service.CategoryService;
 import com.codegym.service.OrderService;
 import com.codegym.service.ProductService;
@@ -39,12 +40,16 @@ public class OrderServlet extends HttpServlet {
                 break;
             }
             default:{
-                List<Cart> orders = orderService.findAll();
-                request.setAttribute("orders",orders);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/order/list.jsp");
-                dispatcher.forward(request,response);
+                showListOrder(request, response);
             }
         }
+    }
+
+    private void showListOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Cart> orders = orderService.findAll();
+        request.setAttribute("orders",orders);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/order/list.jsp");
+        dispatcher.forward(request, response);
     }
 
     @Override
