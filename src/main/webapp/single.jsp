@@ -18,6 +18,12 @@
 <link rel="stylesheet" type="text/css" href="plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
 <link rel="stylesheet" type="text/css" href="styles/single_styles.css">
 <link rel="stylesheet" type="text/css" href="styles/single_responsive.css">
+	<style>
+		pre{
+			font-family: "Times New Roman";
+			font-size: 14px;
+		}
+	</style>
 </head>
 
 <body>
@@ -110,7 +116,7 @@
 								<li><a href="#">promotion</a></li>
 								<li><a href="#">pages</a></li>
 								<li><a href="#">blog</a></li>
-								<li><a href="contact.jsp">contact</a></li>
+								<li><a href="/home?action=contact">contact</a></li>
 							</ul>
 							<ul class="navbar_user">
 <%--								<li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>--%>
@@ -146,7 +152,7 @@
 				<div class="breadcrumbs d-flex flex-row align-items-center">
 					<ul>
 						<li><a href="/home">Home</a></li>
-						<li><a href="categories.jsp"><i class="fa fa-angle-right" aria-hidden="true"></i>Men's</a></li>
+						<li><a href="/home?action=categories"><i class="fa fa-angle-right" aria-hidden="true"></i>All product</a></li>
 						<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Single Product</a></li>
 					</ul>
 				</div>
@@ -178,8 +184,8 @@
 			<div class="col-lg-5">
 				<div class="product_details">
 					<div class="product_details_title">
-						<h2>${product.name}</h2>
-						<p>${product.description}</p>
+						<h3>${product.name}</h3>
+						<pre>${product.description}</pre>
 					</div>
 					<div class="free_delivery d-flex flex-row align-items-center justify-content-center">
 						<span class="ti-truck"></span><span>free delivery</span>
@@ -263,8 +269,8 @@
 									<img src="${product.productImage}"  alt="">
 								</div>
 								<div class="tab_text_block">
-									<h2>${product.name}</h2>
-									<p>${product.description}</p>
+									<h3>${product.name}</h3>
+									<pre>${product.description}</pre>
 								</div>
 								<div class="tab_image desc_last">
 									<img src="${product.productImage}"  alt="">
