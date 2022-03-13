@@ -117,26 +117,30 @@ public class ProductServlet extends HttpServlet {
                 break;
             }
             case "delete":{
-                int id = Integer.parseInt(request.getParameter("id"));
-                boolean isUpdated = productService.delete(id);
-                String message;
-                if(isUpdated){
-                    message = "Successfully deleted!";
-                } else {
-                    message = "Delete failed";
-                }
-                request.setAttribute("message",message);
-                request.setAttribute("isUpdated",isUpdated);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/product/delete.jsp");
-                try {
-                    dispatcher.forward(request, response);
-                } catch (ServletException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                deleteProduct(request, response);
                 break;
             }
+        }
+    }
+
+    private void deleteProduct(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        boolean isUpdated = productService.delete(id);
+        String message;
+        if(isUpdated){
+            message = "Successfully deleted!";
+        } else {
+            message = "Delete failed";
+        }
+        request.setAttribute("message",message);
+        request.setAttribute("isUpdated",isUpdated);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/product/delete.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -174,7 +178,6 @@ public class ProductServlet extends HttpServlet {
         int category_id = Integer.parseInt(request.getParameter("category_id"));
         String image = request.getParameter("image");
         Product product = new Product(name,price,description,category_id,image);
-        productService.create(product);
         boolean isUpdated = productService.create(product);
         String message;
         if(isUpdated){

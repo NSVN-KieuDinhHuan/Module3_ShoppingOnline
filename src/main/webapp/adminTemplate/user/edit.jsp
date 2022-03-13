@@ -9,27 +9,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>User List</title>
+    <title>User Change Status</title>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="adminTemplate/plugins/fontawesome-free/css/all.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- Tempusdominus Bootstrap 4 -->
-    <link rel="stylesheet" href="adminTemplate/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="adminTemplate/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- JQVMap -->
-    <link rel="stylesheet" href="adminTemplate/plugins/jqvmap/jqvmap.min.css">
+    <link rel="stylesheet" href="/adminTemplate/plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="adminTemplate/dist/css/adminlte.min.css">
-    <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="adminTemplate/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-    <!-- Daterange picker -->
-    <link rel="stylesheet" href="adminTemplate/plugins/daterangepicker/daterangepicker.css">
-    <!-- summernote -->
-    <link rel="stylesheet" href="adminTemplate/plugins/summernote/summernote-bs4.min.css">
+    <link rel="stylesheet" href="/adminTemplate/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -63,7 +49,7 @@
                     <a href="#" class="dropdown-item">
                         <!-- Message Start -->
                         <div class="media">
-                            <img src="/adminTemplate/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                            <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                             <div class="media-body">
                                 <h3 class="dropdown-item-title">
                                     Brad Diesel
@@ -156,7 +142,7 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="index3.html" class="brand-link">
-            <img src="/adminTemplate/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+            <img src="adminTemplate/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
             <span class="brand-text font-weight-light">Group 2 - Shop</span>
         </a>
 
@@ -165,7 +151,7 @@
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="/adminTemplate/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                    <img src="adminTemplate/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
                     <a href="#" class="d-block">Alexander Pierce</a>
@@ -212,84 +198,56 @@
         <!-- /.sidebar -->
     </aside>
     <div class="content-wrapper">
-        <section class="content">
+        <section class="content-header">
             <div class="container-fluid">
-                <h1 align="center">USER LIST</h1>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-<%--                            <div class="card-header">--%>
-<%--                                <form action="/users">--%>
-<%--                                <div class="form-inline" align="right">--%>
-<%--                                    <div class="input-group" data-widget="sidebar-search">--%>
-<%--                                        <input class="form-control form-control-sidebar" type="search" placeholder="Input username" aria-label="Search" name="q">--%>
-<%--                                        <div class="input-group-append">--%>
-<%--                                            <button class="btn btn-sidebar">--%>
-<%--                                                <i class="fas fa-search fa-fw"></i>--%>
-<%--                                            </button>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                                </form>--%>
-<%--                            </div>--%>
-                            <!-- /.card-header -->
-                            <div class="card-body">
-                                <table id="example2" class="table table-bordered table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Username</th>
-                                        <th>Address</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                        <th>Password</th>
-                                        <th>Status</th>
-                                        <th></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <c:forEach items="${users}" var="user" varStatus="loop">
-                                        <tr>
-                                            <td>${loop.count}</td>
-                                            <td>${user.name}</td>
-                                            <td>${user.address}</td>
-                                            <td>${user.email}</td>
-                                            <td>${user.phone}</td>
-                                            <td>${user.password}</td>
-                                            <c:if test="${user.status}">
-                                                <td>Active</td>
-                                            </c:if>
-                                            <c:if test="${!user.status}">
-                                                <td><p style="color:lightgrey">Inactive</p></td>
-                                            </c:if>
-                                            <td><a href="/users?action=edit&id=${user.id}">Change status</a></td>
-                                        </tr>
-                                    </c:forEach>
-
-                                    </tbody>
-                                    <tfoot>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Username</th>
-                                        <th>Address</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                        <th>Password</th>
-                                        <th>Status</th>
-                                        <th></th>
-                                    </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                            <!-- /.card-body -->
-                        </div>
-                        <!-- /.card -->
-
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Change User Status</h1>
                     </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/users">Back To User List</a></li>
+                        </ol>
                     </div>
-                    </div>
+                </div>
+            </div>
         </section>
-</div>
+        <!-- Main content -->
+        <section class="content">
+            <form action="/users?action=edit&id=${user.id}" method="post">
+<%--                <form action="/products?action=edit&id=${product.id}" method="post">--%>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Edit user status below</h3>
+                        </div>
+                        <div class="card-body">
+                            <c:if test="${message != null}"><p class="success">${message}</p></c:if>
+                            <div class="form-group">
+                                <label for="inputStatus">Status</label>
+                                <select id="inputStatus" class="form-control custom-select" name="status">
+                                    <option selected disabled>Select one</option>
+                                    <option value="true">Active</option>
+                                    <option value="false">Inactive</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                    <button class="btn btn-primary">Change</button>
+                </div>
+<%--               <div class="row">--%>
+<%--                    <div class="col-12">--%>
+<%--                        <a href="#" class="btn btn-secondary">Cancel</a>--%>
+<%--                        <input type="submit" value="Create new Project" class="btn btn-success">--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+            </div>
+          </form>
+        </section>
+    </div>
 
 </div>
 

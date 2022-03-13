@@ -15,21 +15,26 @@ public class UserService implements IUserService{
 
     @Override
     public User findByID(int id) {
-        return null;
+        return userDao.findByID(id);
     }
 
     @Override
     public boolean create(User user) {
-        return false;
+        return userDao.create(user);
     }
 
     @Override
     public boolean update(int id, User user) {
-        return false;
+        return userDao.update(id,user);
     }
 
     @Override
     public boolean delete(int id) {
-        return false;
+        return userDao.delete(id);
+    }
+
+    @Override
+    public int countUser() {
+        return userDao.countUser();
     }
 }

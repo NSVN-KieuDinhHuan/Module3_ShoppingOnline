@@ -30,6 +30,9 @@ public class User {
         this.status = status;
     }
 
+    public User() {
+    }
+
     public User(String name, String email, String address, String phone, String password) {
         this.name = name;
         this.email = email;
@@ -105,5 +108,8 @@ public class User {
 
     public void setPassword(String password) {
         Password = password;
+    }
+    public boolean getStatus(){
+        return status;
     }
 }

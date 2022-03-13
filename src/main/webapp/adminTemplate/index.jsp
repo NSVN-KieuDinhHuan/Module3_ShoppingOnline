@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="/adminTemplate/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="/adminTemplate/plugins/summernote/summernote-bs4.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -157,11 +158,12 @@
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="/adminTemplate/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
+<%--        <div class="image">--%>
+<%--          <img src="webapp/images/user.jpg" class="img-circle elevation-2" alt="User Image">--%>
+<%--          <i class="bi bi-person-square"></i>--%>
+<%--        </div>--%>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block"><span><i class="bi bi-person-square"></i></span>&nbsp&nbsp&nbsp&nbsp${username}</a>
         </div>
       </div>
 

@@ -37,7 +37,25 @@ public class UserDao implements IUserDao{
 
     @Override
     public User findByID(int id) {
-        return null;
+        User user = new User();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from user where id = ?");
+            preparedStatement.setInt(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                String name = resultSet.getString("username");
+                String address = resultSet.getString("address");
+                String phone = resultSet.getString("phone");
+                String password = resultSet.getString("password");
+                int role_id = resultSet.getInt("role_id");
+                String email = resultSet.getString("email");
+                boolean status = resultSet.getBoolean("status");
+                user = new User(id,name,email,address,phone,password,role_id,status);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 
     @Override
@@ -47,11 +65,36 @@ public class UserDao implements IUserDao{
 
     @Override
     public boolean update(int id, User user) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("update user set status=? where id=?");
+            preparedStatement.setBoolean(1,user.getStatus());
+            preparedStatement.setInt(2,id);
+            return preparedStatement.executeUpdate()>0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 
     @Override
     public boolean delete(int id) {
         return false;
+    }
+
+
+    @Override
+    public int countUser() {
+        int countUser = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select count(id) as count from user where role_id = 2");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                countUser = resultSet.getInt("count");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return countUser;
     }
 }
