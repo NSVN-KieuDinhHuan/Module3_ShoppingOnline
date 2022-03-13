@@ -261,7 +261,7 @@ public class ShopServlet extends HttpServlet {
         User user=shopService.findUserbyEmail(email);
         HttpSession session = request.getSession();
         RequestDispatcher rq;
-        if(user!=null&& user.getPassword().equals(password) && user.getRole_id()==2){
+        if(user!=null&& user.getPassword().equals(password) && user.getRole_id()==2 && user.getStatus()){
             session.setAttribute("user", user);
             request.setAttribute("username",user.getName());
             rq = request.getRequestDispatcher("/customerView.jsp");
