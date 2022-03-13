@@ -16,7 +16,7 @@ public class shopDao implements IShopDao {
     private Connection connection = DBConnection.getConnection();
     public static final String SQL_SELECT_ALL_PRODUCT = "SELECT * FROM product;";
     public static final String SQL_FIND_PRODUCT_BY_CATEGORY = "SELECT * FROM product Where category_id=?;";
-    public static final String SQL_ADD_USER = "INSERT INTO user(username, email,address, phone, password, role_id,status) VALUES (?,?,?,?,?,1,true);";
+    public static final String SQL_ADD_USER = "INSERT INTO user(username, email,address, phone, password, role_id,status) VALUES (?,?,?,?,?,2,true);";
     public static final String SQL_FIND_USER_BY_EMAIL = "SELECT * FROM user Where email=?;";
     public static final String SQL_SORT_PRODUCT_LOW_TO_HIGHT_PRICE= "SELECT * FROM product ORDER BY price ASC;";
     public static final String SQL_SORT_PRODUCT_HIGHT_TO_LOW_PRICE = "SELECT * FROM product ORDER BY price DESC;";

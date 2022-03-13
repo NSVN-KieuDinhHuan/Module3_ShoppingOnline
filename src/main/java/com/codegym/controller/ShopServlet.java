@@ -219,12 +219,12 @@ public class ShopServlet extends HttpServlet {
 
         String email=request.getParameter("email");
         String password = request.getParameter("password");
+        request.setAttribute("oderDetails",oderDetails);
         User user=shopService.findUserbyEmail(email);
         HttpSession session = request.getSession();
         RequestDispatcher rq;
         if(user!=null&& user.getPassword().equals(password) && user.getRole_id()==2){
             session.setAttribute("user", user);
-
             request.setAttribute("username",user.getName());
             rq = request.getRequestDispatcher("/customerView.jsp");
         }else if(user!=null&& user.getPassword().equals(password) && user.getRole_id()==1){
@@ -259,7 +259,7 @@ public class ShopServlet extends HttpServlet {
         Boolean checkRegister=shopService.register(user);
 
         if (checkRegister=true) {
-           notification="Login sussesful";
+           notification="Register sussesful !";
         }
 
         request.setAttribute("notify",notification);
