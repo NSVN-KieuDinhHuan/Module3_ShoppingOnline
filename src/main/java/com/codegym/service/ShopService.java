@@ -61,9 +61,10 @@ public class ShopService implements IShopService {
         return shopDao.findProductByID(id);
     }
 
-
     @Override
-    public void Payment() {
-
+    public int findMaxIDCart() {
+        return shopDao.findMaxIDCart();
     }
+
+
 }

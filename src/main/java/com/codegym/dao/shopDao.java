@@ -23,8 +23,9 @@ public class shopDao implements IShopDao {
     public static final String SQL_SORT_PRODUCT_BY_NAME="SELECT * FROM product ORDER BY name DESC;";
     public static final String SQL_FIND_PRODUCT_BY_NAME="SELECT * FROM product where name like ?";
     public static final String SQL_FIND_PRODUCT_BY_ID="SELECT * FROM product where id=?;";
-    public static final String  SQL_INSERT_CART="INSERT INTO cart(user_id,orderDate)VALUE (?,?);";
+    public static final String  SQL_INSERT_CART="INSERT INTO cart(id,user_id,orderDate)VALUE (?,?,?);";
     public static final String  SQL_INSERT_ODER_DETAIL="INSERT INTO orderdetail(cart_id,product_id,quantity)VALUE (?,?,?);";
+    public static final String  SQL_FIND_MAX_CART_ID="SELECT MAX(id) as id FROM cart;";
 
 
     @Override
@@ -75,8 +76,9 @@ public class shopDao implements IShopDao {
     public boolean CreateCart(Cart cart) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_CART);
-            preparedStatement.setInt(1, cart.getUser_id());
-            preparedStatement.setString(2, cart.getOrderDate());
+            preparedStatement.setInt(1, cart.getId());
+            preparedStatement.setInt(2, cart.getUser_id());
+            preparedStatement.setString(3, cart.getOrderDate());
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -145,6 +147,22 @@ public class shopDao implements IShopDao {
             e.printStackTrace();
         }
         return user;
+    }
+
+    @Override
+    public int findMaxIDCart() {
+        int id=0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_MAX_CART_ID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                id = resultSet.getInt("id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
+
     }
 
     @Override

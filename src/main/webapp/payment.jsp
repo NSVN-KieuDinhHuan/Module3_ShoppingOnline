@@ -117,7 +117,7 @@
 								<li class="checkout">
 									<a href="#">
 										<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-										<span id="checkout_items" class="checkout_items">${productNumberInCart}</span>
+										<span id="checkout_items" class="checkout_items">${oderDetails.size()}</span>
 									</a>
 								</li>
 							</ul>
@@ -160,8 +160,16 @@
 
 				<!-- Breadcrumbs -->
 
-
-
+		<div class="jumbotron text-center">
+			<h1 class="display-3">Thank You for Oder!</h1>
+			<hr>
+			<p>
+				Do you want to continue shopping?
+			</p>
+			<p class="lead">
+				<a class="btn btn-primary btn-sm" href="/home?action=categories" role="button">Continue to Shop</a>
+			</p>
+		</div>
 
 
 

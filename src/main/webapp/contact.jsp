@@ -117,7 +117,7 @@
 								<li class="checkout">
 									<a href="/home?action=orderDetail">
 										<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-										<span id="checkout_items" class="checkout_items">${productNumberInCart}</span>
+										<span id="checkout_items" class="checkout_items">${oderDetails.size()}</span>
 									</a>
 								</li>
 							</ul>

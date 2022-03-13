@@ -19,6 +19,45 @@
 	<link rel="stylesheet" type="text/css" href="/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
 	<link rel="stylesheet" type="text/css" href="/styles/categories_styles.css">
 	<link rel="stylesheet" type="text/css" href="/styles/categories_responsive.css">
+<style>
+	@import url(http://fonts.googleapis.com/css?family=Calibri:400,300,700);
+
+
+
+
+	.card {
+		margin-bottom: 30px;
+		border: 0;
+		-webkit-transition: all .3s ease;
+		transition: all .3s ease;
+		letter-spacing: .5px;
+		border-radius: 8px;
+		-webkit-box-shadow: 1px 5px 24px 0 rgba(68, 102, 242, .05);
+		box-shadow: 1px 5px 24px 0 rgba(68, 102, 242, .05)
+	}
+
+	.card  {
+		border-bottom: none;
+		padding: 24px;
+		border-top-left-radius: 8px;
+		border-top-right-radius: 8px
+	}
+
+
+
+	.card .card-body {
+		padding: 30px;
+		background-color: transparent
+	}
+
+	.btn-primary,
+	.btn-primary.disabled,
+	.btn-primary:disabled {
+		background-color: #4466f2 !important;
+		border-color: #4466f2 !important
+	}
+</style>
+
 </head>
 
 <body>
@@ -119,7 +158,7 @@
 								<li class="checkout">
 									<a href="/home?action=orderDetail">
 										<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-										<span id="checkout_items" class="checkout_items">${productInCart.size()}</span>
+										<span id="checkout_items" class="checkout_items">${oderDetails.size()}</span>
 									</a>
 								</li>
 							</ul>
@@ -156,11 +195,24 @@
 
 					</ul>
 				</div>
-<c:if test = "${productInCart.size()==0}">
-	<h3 style="">Cart is empty !</h3>
+<c:if test = "${oderDetails.size()==0}">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-body cart">
+						<div class="col-sm-12 empty-cart-cls text-center"> <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3">
+							<h3><strong>Your Cart is Empty</strong></h3>
+							<h4>Add something to make me happy :)</h4> <a href="/home?action=categories" class="btn btn-primary cart-btn-transform m-3" data-abc="true">continue shopping</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </c:if>
 
-				<c:if test = "${productInCart.size()>0}">
+				<c:if test = "${oderDetails.size()>0}">
 				<div class="row">
 					<div class="col-lg-5">
 
@@ -176,7 +228,7 @@
 							</address>
 					</c:if>
 					<c:if test = "${user==null}">
-						<div class="alert alert-primary" role="alert">
+						<div class="alert alert-danger" role="alert">
 							you have not signed in
 						</div>
 						<a href="/signin.jsp"   class="btn btn-primary">Signed in</a>
@@ -200,17 +252,17 @@
 					</thead>
 					<tbody>
 					<c:set var = "totalMoney" scope = "request" value = "${0}"/>
-					<c:forEach var="oder"  items="${oderDetail}">
+					<c:forEach var="order"  items="${oderDetails}">
 
 					<tr style="text-align: center">
-						<th  scope="code">${oder.product_id}</th>
-						<td>${shopService.findProductByID(oder.product_id).name}</td>
-						<td>${oder.quantity}</td>
-						<td>${shopService.findProductByID(oder.product_id).price}</td>
-						<c:set var = "money" scope = "request" value = "${oder.quantity*shopService.findProductByID(oder.product_id).price}"/>
+						<th  scope="code">${order.product_id}</th>
+						<td>${shopService.findProductByID(order.product_id).name}</td>
+						<td>${order.quantity}</td>
+						<td>${shopService.findProductByID(order.product_id).price}</td>
+						<c:set var = "money" scope = "request" value = "${order.quantity*shopService.findProductByID(order.product_id).price}"/>
 						<td><c:out value = "${money}"/> $</td>
 						<c:set var = "totalMoney" scope = "request" value = "${Math.round((totalMoney+money)*100/100)}"/>
-						<td></td>
+						<td><a href="/home?action=orderDetail&orderid=${order.getId()}">Delete</a></td>
 					</tr>
 
 					</c:forEach>
@@ -238,50 +290,6 @@
 
 
 
-	<!-- Benefit -->
-
-	<div class="benefit">
-		<div class="container">
-			<div class="row benefit_row">
-				<div class="col-lg-3 benefit_col">
-					<div class="benefit_item d-flex flex-row align-items-center">
-						<div class="benefit_icon"><i class="fa fa-truck" aria-hidden="true"></i></div>
-						<div class="benefit_content">
-							<h6>free shipping</h6>
-							<p>Suffered Alteration in Some Form</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 benefit_col">
-					<div class="benefit_item d-flex flex-row align-items-center">
-						<div class="benefit_icon"><i class="fa fa-money" aria-hidden="true"></i></div>
-						<div class="benefit_content">
-							<h6>cach on delivery</h6>
-							<p>The Internet Tend To Repeat</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 benefit_col">
-					<div class="benefit_item d-flex flex-row align-items-center">
-						<div class="benefit_icon"><i class="fa fa-undo" aria-hidden="true"></i></div>
-						<div class="benefit_content">
-							<h6>45 days return</h6>
-							<p>Making it Look Like Readable</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 benefit_col">
-					<div class="benefit_item d-flex flex-row align-items-center">
-						<div class="benefit_icon"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
-						<div class="benefit_content">
-							<h6>opening all week</h6>
-							<p>8AM - 09PM</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 
 
 

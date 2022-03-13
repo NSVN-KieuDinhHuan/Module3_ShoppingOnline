@@ -17,6 +17,6 @@ public interface IShopService {
     List<Product> sortProduct(int sortID);
     List<Product> findProductByName(String keyword);
     Product findProductByID(int id);
-    void Payment();
+    int findMaxIDCart();
 }
 

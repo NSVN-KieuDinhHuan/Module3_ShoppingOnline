@@ -117,7 +117,7 @@
 								<li class="checkout">
 									<a href="/home?action=orderDetail">
 										<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-										<span id="checkout_items" class="checkout_items">${productInCart.size()}</span>
+										<span id="checkout_items" class="checkout_items">${oderDetails.size()}</span>
 									</a>
 								</li>
 							</ul>
@@ -244,7 +244,7 @@
 											            </div>
 										            </div>
 										           <div class="red_button add_to_cart_button">
-                                                     <a href="/home?action=detailProduct&id=${product.id}">add to cart</a>
+                                                     <a href="/home?action=detailProduct&id=${product.id}&add=yes1">add to cart</a>
                                                    </div>
 									            </div>
                                              </c:forEach>
