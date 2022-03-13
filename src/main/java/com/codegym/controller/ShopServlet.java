@@ -69,10 +69,32 @@ public class ShopServlet extends HttpServlet {
              }case "history": {
                 PurchaseHistory(request, response);
             break;
+            }case "profile": {
+                profile(request, response);
+                break;
+
              } default: {
                 showhome(request, response);
                 break;
             }
+        }
+    }
+
+    private void profile(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        User user =(User) session.getAttribute("user");
+        if (user!=null){
+            request.setAttribute("user",user);
+
+        }
+        request.setAttribute("oderDetails",oderDetails);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/profile.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
