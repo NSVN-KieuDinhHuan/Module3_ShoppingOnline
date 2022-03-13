@@ -1,12 +1,10 @@
 package com.codegym.controller;
 
-import com.codegym.model.Cart;
-import com.codegym.model.Category;
-import com.codegym.model.Product;
-import com.codegym.model.User;
+import com.codegym.model.*;
 import com.codegym.service.CategoryService;
 import com.codegym.service.OrderService;
 import com.codegym.service.ProductService;
+import com.sun.org.apache.xpath.internal.operations.Or;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -28,6 +26,16 @@ public class OrderServlet extends HttpServlet {
         }
         switch (action){
             case "view": {
+                int order_id = Integer.parseInt(request.getParameter("id"));
+                List<OderDetail> oderDetails = orderService.findOrderDetailByOrderID(order_id);
+                request.setAttribute("orderDetails",oderDetails);
+                Double totalAmount = 0.0;
+                for (int i = 0; i < oderDetails.size(); i++) {
+                    totalAmount += oderDetails.get(i).getPrice() * oderDetails.get(i).getQuantity();
+                }
+                request.setAttribute("totalAmount",totalAmount);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/order/view.jsp");
+                dispatcher.forward(request,response);
                 break;
             }
             case "create":{

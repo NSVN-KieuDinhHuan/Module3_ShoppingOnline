@@ -1,6 +1,7 @@
 package com.codegym.dao;
 
 import com.codegym.model.Cart;
+import com.codegym.model.OderDetail;
 import com.codegym.model.User;
 
 import java.sql.Connection;
@@ -70,5 +71,31 @@ public class OrderDao implements IOrderDao{
         }
 
         return users;
+    }
+
+    @Override
+    public List<OderDetail> findOrderDetailByOrderID(int order_id) {
+        List<OderDetail> oderDetails = new ArrayList<>();
+        Double totalAmount = 0.0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select *\n" +
+                    "from orderdetail join product p on orderDetail.product_id = p.id\n" +
+                    "where cart_id = ?;");
+            preparedStatement.setInt(1,order_id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                String productName = resultSet.getString("name");
+                int quantity = resultSet.getInt("quantity");
+                double price = resultSet.getDouble("price");
+                double amountForEachProduct = quantity * price;
+                OderDetail oderDetail = new OderDetail(quantity,productName,price,amountForEachProduct);
+                oderDetails.add(oderDetail);
+                totalAmount += price * quantity;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return oderDetails;
     }
 }
