@@ -44,4 +44,29 @@ public class OrderService implements IOrderService{
     public List<OderDetail> findOrderDetailByOrderID(int order_id) {
         return orderDao.findOrderDetailByOrderID(order_id);
     }
+
+    @Override
+    public int countOrder() {
+        return orderDao.countOrder();
+    }
+
+    @Override
+    public List<OderDetail> findAllOrderDetails() {
+        return orderDao.findAllOrderDetails();
+    }
+
+    @Override
+    public int totalQuantityOfProduct() {
+        return orderDao.totalQuantityOfProduct();
+    }
+
+    @Override
+    public double totalRevenue() {
+        double totalRevenue = 0;
+        List<OderDetail> oderDetails = this.findAllOrderDetails();
+        for (int i = 0; i < oderDetails.size(); i++) {
+            totalRevenue += oderDetails.get(i).getPrice() * oderDetails.get(i).getQuantity();
+        }
+        return totalRevenue;
+    }
 }
