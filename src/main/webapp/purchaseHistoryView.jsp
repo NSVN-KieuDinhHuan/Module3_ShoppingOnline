@@ -142,7 +142,7 @@
 				<div class="row">
 					<div class="col-lg-12 text-right">
 						<div class="logo_container">
-							<a href="#">GROUP2<span>shop</span></a>
+							<a href="/home">GROUP2<span>shop</span></a>
 						</div>
 						<nav class="navbar">
 							<ul class="navbar_menu">
@@ -215,11 +215,11 @@
 
 				<c:if test = "${purchaseHistory.size()>0}">
 				<div class="row">
-					<div class="col-lg-3">
+					<div class="col-lg-2">
 
 
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-8">
 
 				<caption><h3 style="margin-bottom: 50px">Purchase History</h3></caption>
 				<table class="table">
@@ -261,7 +261,7 @@
 				</c:if>
 					</div>
 
-					<div class="col-lg-3">
+					<div class="col-lg-2">
 
 
 					</div>

@@ -102,7 +102,7 @@
 				<div class="row">
 					<div class="col-lg-12 text-right">
 						<div class="logo_container">
-							<a href="#">colo<span>shop</span></a>
+							<a href="/home?action=home">GROUP2<span>shop</span></a>
 						</div>
 						<nav class="navbar">
 							<ul class="navbar_menu">
