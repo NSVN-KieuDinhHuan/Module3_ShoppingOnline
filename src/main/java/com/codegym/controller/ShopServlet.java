@@ -6,7 +6,9 @@ import com.codegym.model.OderDetail;
 import com.codegym.model.Product;
 import com.codegym.model.User;
 import com.codegym.service.IShopService;
+import com.codegym.service.OrderService;
 import com.codegym.service.ShopService;
+import com.codegym.service.UserService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -27,6 +29,8 @@ public class ShopServlet extends HttpServlet {
     int orderDetailID;
     Cart cart;
     List<OderDetail> oderDetails;
+    UserService userService = new UserService();
+    OrderService orderService = new OrderService();
     int quantity=1;
     public ShopServlet() {
         this.shopService = new ShopService(new shopDao());
@@ -268,14 +272,20 @@ public class ShopServlet extends HttpServlet {
         }else if(user!=null&& user.getPassword().equals(password) && user.getRole_id()==1){
             session.setAttribute("user", user);
             request.setAttribute("username",user.getName());
+            int countUser = userService.countUser();
+            request.setAttribute("countUser",countUser);
+            int countOrder = orderService.countOrder();
+            request.setAttribute("countOrder",countOrder);
+            int totalProductQuantity = orderService.totalQuantityOfProduct();
+            request.setAttribute("totalProductQuantity",totalProductQuantity);
+            Double totalAvenue = orderService.totalRevenue();
+            request.setAttribute("totalAvenue",totalAvenue);
             rq = request.getRequestDispatcher("/adminTemplate/index.jsp");
         }else {
             String error = "Username or Password is wrong";
             request.setAttribute("error", error);
             rq = request.getRequestDispatcher("/signin.jsp");
         }
-
-
         try {
             rq.forward(request, response);
         } catch (ServletException e) {

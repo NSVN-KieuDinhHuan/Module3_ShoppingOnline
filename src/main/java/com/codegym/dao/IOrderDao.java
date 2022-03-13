@@ -9,4 +9,7 @@ import java.util.List;
 public interface IOrderDao extends IGeneralDao<Cart>{
     List<User> findAllUserHavingOrder();
     List<OderDetail> findOrderDetailByOrderID(int order_id);
+    int countOrder();
+    List<OderDetail> findAllOrderDetails();
+    int totalQuantityOfProduct();
 }

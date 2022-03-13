@@ -98,4 +98,55 @@ public class OrderDao implements IOrderDao{
         }
         return oderDetails;
     }
+
+    @Override
+    public int countOrder() {
+        int countOrder = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select count(id) as countID from cart");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                countOrder = resultSet.getInt("countID");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return countOrder;
+    }
+
+    @Override
+    public List<OderDetail> findAllOrderDetails() {
+        List<OderDetail> oderDetails = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select *\n" +
+                    "from orderdetail join product p on orderDetail.product_id = p.id");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                String productName = resultSet.getString("name");
+                int quantity = resultSet.getInt("quantity");
+                double price = resultSet.getDouble("price");
+                double amountForEachProduct = quantity * price;
+                OderDetail oderDetail = new OderDetail(quantity,productName,price,amountForEachProduct);
+                oderDetails.add(oderDetail);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return oderDetails;
+    }
+
+    @Override
+    public int totalQuantityOfProduct() {
+        int totalQuantity = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select sum(quantity) as totalQuantity from orderdetail join product p on orderDetail.product_id = p.id;");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                totalQuantity = resultSet.getInt("totalQuantity");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalQuantity;
+    }
 }
