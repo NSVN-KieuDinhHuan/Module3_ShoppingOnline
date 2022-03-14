@@ -42,11 +42,10 @@ public class CategoryServlet extends HttpServlet {
                 showViewCategory(request, response);
                 break;
             }
-//            case "showHome":
-//            {
-//                showAdminHome(request, response);
-//                break;
-//            }
+            case "showHome": {
+                showAdminHome(request, response);
+                break;
+            }
             default: {
                 showListCategory(request, response);
                 break;
