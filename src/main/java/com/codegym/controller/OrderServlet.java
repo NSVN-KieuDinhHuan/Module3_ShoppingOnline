@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -26,16 +27,7 @@ public class OrderServlet extends HttpServlet {
         }
         switch (action){
             case "view": {
-                int order_id = Integer.parseInt(request.getParameter("id"));
-                List<OderDetail> oderDetails = orderService.findOrderDetailByOrderID(order_id);
-                request.setAttribute("orderDetails",oderDetails);
-                Double totalAmount = 0.0;
-                for (int i = 0; i < oderDetails.size(); i++) {
-                    totalAmount += oderDetails.get(i).getPrice() * oderDetails.get(i).getQuantity();
-                }
-                request.setAttribute("totalAmount",totalAmount);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/order/view.jsp");
-                dispatcher.forward(request,response);
+                showOrderdetail(request, response);
                 break;
             }
             case "create":{
@@ -53,7 +45,26 @@ public class OrderServlet extends HttpServlet {
         }
     }
 
+    private void showOrderdetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User user =(User) session.getAttribute("user");
+        request.setAttribute("username",user.getName());
+        int order_id = Integer.parseInt(request.getParameter("id"));
+        List<OderDetail> oderDetails = orderService.findOrderDetailByOrderID(order_id);
+        request.setAttribute("orderDetails",oderDetails);
+        Double totalAmount = 0.0;
+        for (int i = 0; i < oderDetails.size(); i++) {
+            totalAmount += oderDetails.get(i).getPrice() * oderDetails.get(i).getQuantity();
+        }
+        request.setAttribute("totalAmount",totalAmount);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/order/view.jsp");
+        dispatcher.forward(request, response);
+    }
+
     private void showListOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User user =(User) session.getAttribute("user");
+        request.setAttribute("username",user.getName());
         List<Cart> orders = orderService.findAll();
         request.setAttribute("orders",orders);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/order/list.jsp");
@@ -62,6 +73,7 @@ public class OrderServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+
         String action = request.getParameter("action");
         if(action == null){
             action = "";

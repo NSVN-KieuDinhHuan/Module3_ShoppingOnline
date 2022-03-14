@@ -262,7 +262,7 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>${totalProductQuantity}<sup style="font-size: 20px">%</sup></h3>
+                <h3>${totalProductQuantity}</h3>
 
                 <p>Products Sold</p>
               </div>
@@ -277,7 +277,7 @@
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>${totalAvenue}</h3>
+                <h3>${totalAvenue} $</h3>
 
                 <p>Total Avenue</p>
               </div>

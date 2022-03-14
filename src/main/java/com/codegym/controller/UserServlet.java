@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -50,6 +51,9 @@ public class UserServlet extends HttpServlet {
     }
 
     private void showUserList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User user =(User) session.getAttribute("user");
+        request.setAttribute("username",user.getName());
         List<User> users = userService.findAll();
         request.setAttribute("users",users);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/user/list.jsp");
@@ -68,31 +72,38 @@ public class UserServlet extends HttpServlet {
                 break;
             }
             case "edit":{
-                int id = Integer.parseInt(request.getParameter("id"));
-                boolean status = Boolean.parseBoolean(request.getParameter("status"));
-                User user = new User(status);
-                String message;
-                boolean isUpdated = userService.update(id,user);
-                if(isUpdated){
-                    message = "Changed successfully";
-                } else {
-                    message = "Change failed";
-                }
-                request.setAttribute("message",message);
-                request.setAttribute("isUpdated",isUpdated);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/user/edit.jsp");
-                try {
-                    dispatcher.forward(request,response);
-                } catch (ServletException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                editUser(request, response);
                 break;
             }
             case "delete":{
                 break;
             }
+        }
+    }
+
+    private void editUser(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        User user1 =(User) session.getAttribute("user1");
+        request.setAttribute("username",user1.getName());
+        int id = Integer.parseInt(request.getParameter("id"));
+        boolean status = Boolean.parseBoolean(request.getParameter("status"));
+        User user = new User(status);
+        String message;
+        boolean isUpdated = userService.update(id,user);
+        if(isUpdated){
+            message = "Changed successfully";
+        } else {
+            message = "Change failed";
+        }
+        request.setAttribute("message",message);
+        request.setAttribute("isUpdated",isUpdated);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/user/edit.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
