@@ -4,7 +4,9 @@ import com.codegym.model.Category;
 import com.codegym.model.Product;
 import com.codegym.model.User;
 import com.codegym.service.CategoryService;
+import com.codegym.service.OrderService;
 import com.codegym.service.ProductService;
+import com.codegym.service.UserService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,7 +22,8 @@ import java.util.List;
 public class ProductServlet extends HttpServlet {
     ProductService productService = new ProductService();
     CategoryService categoryService = new CategoryService();
-
+    UserService userService = new UserService();
+    OrderService orderService = new OrderService();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -45,11 +48,32 @@ public class ProductServlet extends HttpServlet {
                 showDeleteForm(request, response);
                 break;
             }
+            case "showHome":
+            {
+               showAdminHome(request, response);
+                break;
+            }
             default:{
                 showListProduct(request, response);
             }
         }
     }
+    void showAdminHome(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User user =(User) session.getAttribute("user");
+        request.setAttribute("username",user.getName());
+        int countUser = userService.countUser();
+        request.setAttribute("countUser",countUser);
+        int countOrder = orderService.countOrder();
+        request.setAttribute("countOrder",countOrder);
+        int totalProductQuantity = orderService.totalQuantityOfProduct();
+        request.setAttribute("totalProductQuantity",totalProductQuantity);
+        Double totalAvenue = orderService.totalRevenue();
+        request.setAttribute("totalAvenue",totalAvenue);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/index.jsp");
+        dispatcher.forward(request, response);
+
+    };
 
     private void showDeleteForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
