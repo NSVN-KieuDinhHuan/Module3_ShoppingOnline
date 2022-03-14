@@ -2,6 +2,7 @@ package com.codegym.controller;
 
 import com.codegym.model.Category;
 import com.codegym.model.Product;
+import com.codegym.model.User;
 import com.codegym.service.CategoryService;
 import com.codegym.service.ProductService;
 
@@ -11,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -18,8 +20,10 @@ import java.util.List;
 public class ProductServlet extends HttpServlet {
     ProductService productService = new ProductService();
     CategoryService categoryService = new CategoryService();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         String action = request.getParameter("action");
         if(action == null){
             action = "";
@@ -48,6 +52,9 @@ public class ProductServlet extends HttpServlet {
     }
 
     private void showDeleteForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User user =(User) session.getAttribute("user");
+        request.setAttribute("username",user.getName());
         int id = Integer.parseInt(request.getParameter("id"));
         Product product = productService.findByID(id);
         request.setAttribute("product",product);
@@ -60,6 +67,9 @@ public class ProductServlet extends HttpServlet {
     }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User user =(User) session.getAttribute("user");
+        request.setAttribute("username",user.getName());
         List<Category> categories = categoryService.findAll();
         request.setAttribute("categories",categories);
         int id = Integer.parseInt(request.getParameter("id"));
@@ -70,6 +80,9 @@ public class ProductServlet extends HttpServlet {
     }
 
     private void showCreateForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User user =(User) session.getAttribute("user");
+        request.setAttribute("username",user.getName());
         List<Category> categories = categoryService.findAll();
         request.setAttribute("categories",categories);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/adminTemplate/product/create.jsp");
@@ -77,6 +90,9 @@ public class ProductServlet extends HttpServlet {
     }
 
     private void showProductDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User user =(User) session.getAttribute("user");
+        request.setAttribute("username",user.getName());
         int id = Integer.parseInt(request.getParameter("id"));
         Product product = productService.findByID(id);
         Category category = categoryService.findByID(product.getCategory_id());
@@ -87,6 +103,9 @@ public class ProductServlet extends HttpServlet {
     }
 
     private void showListProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User user =(User) session.getAttribute("user");
+        request.setAttribute("username",user.getName());
         String q = request.getParameter("q");
         if (q == null) {
             List<Product> products = productService.findAll();
