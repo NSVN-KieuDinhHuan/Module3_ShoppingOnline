@@ -158,7 +158,7 @@ public class shopDao implements IShopDao {
                 String phone = resultSet.getString("phone");
                 String password = resultSet.getString("password");
                 int role_id = resultSet.getInt("role_id");
-                boolean staus = resultSet.getBoolean("role_id");
+                boolean staus = resultSet.getBoolean("status");
                 user = new User(id, name, email, address, phone, password,role_id,staus);
 
             }

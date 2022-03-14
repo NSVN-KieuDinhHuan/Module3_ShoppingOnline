@@ -45,7 +45,7 @@
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="index3.html" class="nav-link">Home</a>
+                <a href="/adminTemplate/index.jsp" class="nav-link">Home</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="#" class="nav-link">Contact</a>
@@ -229,43 +229,96 @@
                             </p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="/users" class="nav-link">
+                            <p>
+                                User Management
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/orders" class="nav-link">
+                            <p>
+                                Order Management
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/signin.jsp" class="nav-link">
+                            <button>
+                                Sign out
+                            </button>
+                        </a>
+                    </li>
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->
         </div>
         <!-- /.sidebar -->
     </aside>
+
     <div class="content-wrapper">
         <section class="content">
             <div class="container-fluid">
                 <a href="/categories" class="btn btn-default">Return Category list</a>
                 <a href="categories?action=add" class="btn btn-file">Add new Category(ies)</a>
                 <h1>View Product(s)</h1>
-                <form method="post">
-                    <table class="table table-bordered table-hover" border="5px" cellpadding="2px">
-                        <thead style="background-color: lightsteelblue">
-                        <tr>
-                            <th scope="col">Index</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Image</th>
-                        </tr>
-                        </thead>
-                        </tbody>
-                        <c:forEach items="${products}" var="product" varStatus="loop">
-                            <tr>
-                                <td>${loop.count}</td>
-                                <td>${product.name}</td>
-                                <td>${product.price}</td>
-                                <td>${product.description}</td>
-                                <td><img src="${product.productImage}" alt="product image"></td>
-                            </tr>
-                        </c:forEach>
-                    </table>
-                    </tbody>
-                    <a href="/categories.jsp"></a>
-                </form>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title"><a href="/products?action=create">Create New Product</a> &nbsp
+                                    &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp
+                                    &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp
+                                    &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                                    &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                                    &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp
+                                    &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp
+                                    &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                                    &nbsp &nbsp &nbsp &nbsp</h4>
+                                <form action="/products">
+                                    <div class="form-inline" align="right">
+                                        <div class="input-group" data-widget="sidebar-search">
+                                            <input class="form-control form-control-sidebar" type="search"
+                                                   placeholder="Input product name" aria-label="Search" name="q">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-sidebar">
+                                                    <i class="fas fa-search fa-fw"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <form method="post">
+                                    <table class="table table-bordered table-hover" border="5px"
+                                           cellpadding="2px">
+                                        <thead style="background-color: lightsteelblue">
+                                        <tr>
+                                            <th scope="col">Index</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Description</th>
+                                            <th scope="col">Image</th>
+                                        </tr>
+                                        </thead>
+                                        </tbody>
+                                        <c:forEach items="${products}" var="product" varStatus="loop">
+                                            <tr>
+                                                <td>${loop.count}</td>
+                                                <td>${product.name}</td>
+                                                <td>${product.price}</td>
+                                                <td>${product.description}</td>
+                                                <td><img src="${product.productImage}" alt="product image"></td>
+                                            </tr>
+                                        </c:forEach>
+                                    </table>
+                                    </tbody>
+                                    <a href="/categories.jsp"></a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
         <!-- jQuery -->

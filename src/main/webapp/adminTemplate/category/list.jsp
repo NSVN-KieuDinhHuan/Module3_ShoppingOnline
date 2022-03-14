@@ -45,7 +45,7 @@
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="index3.html" class="nav-link">Home</a>
+                <a href="adminTemplate/index.jsp" class="nav-link">Home</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="#" class="nav-link">Contact</a>
@@ -180,7 +180,7 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a href="index3.html" class="brand-link">
+        <a href="/adminTemplate/index.jsp" class="brand-link">
             <img src="adminTemplate/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
                  class="brand-image img-circle elevation-3" style="opacity: .8">
             <span class="brand-text font-weight-light">Group 2 - Shop</span>
@@ -199,17 +199,17 @@
             </div>
 
             <!-- SidebarSearch Form -->
-            <div class="form-inline">
-                <div class="input-group" data-widget="sidebar-search">
-                    <input class="form-control form-control-sidebar" type="search" placeholder="Search"
-                           aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-sidebar">
-                            <i class="fas fa-search fa-fw"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
+<%--            <div class="form-inline">--%>
+<%--                <div class="input-group" data-widget="sidebar-search">--%>
+<%--                    <input class="form-control form-control-sidebar" type="search" placeholder="Search"--%>
+<%--                           aria-label="Search">--%>
+<%--                    <div class="input-group-append">--%>
+<%--                        <button class="btn btn-sidebar">--%>
+<%--                            <i class="fas fa-search fa-fw"></i>--%>
+<%--                        </button>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
 
             <!-- Sidebar Menu -->
             <nav class="mt-2">
@@ -229,40 +229,107 @@
                             </p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="/users" class="nav-link">
+                            <p>
+                                User Management
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/orders" class="nav-link">
+                            <p>
+                                Order Management
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/signin.jsp" class="nav-link">
+                            <button>
+                                Sign out
+                            </button>
+                        </a>
+                    </li>
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->
         </div>
         <!-- /.sidebar -->
     </aside>
+    <%--    <div class="content-wrapper">--%>
+    <%--        <section class="content">--%>
+    <%--            <div class="container-fluid">--%>
+    <%--                <h1>Category List</h1>--%>
+    <%--                <a href="categories?action=add">Add new Category(ies)</a>--%>
+    <%--                <table class="table table-bordered" border="5px" cellpadding="2px">--%>
+    <%--                    <thead style="background-color: lightsteelblue">--%>
     <div class="content-wrapper">
         <section class="content">
             <div class="container-fluid">
-                <h1>Category List</h1>
-                <a href="categories?action=add">Add new Category(ies)</a>
-                <table class="table table-bordered" border="5px" cellpadding="2px">
-                    <thead style="background-color: lightsteelblue">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th colspan="2">Edit/Delete</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach var="category" items="${listCategory}" varStatus="loop">
-                        <tr>
-                            <td>${loop.count}</td>
-                            <td><a href="/categories?action=view&id=${category.id}">${category.name}</a></td>
-                            <td colspan="2"><a class="btn btn-primary" href="/categories?action=edit&id=${category.id}"><i
-                                    class="fa-solid fa-pen-to-square"></i></a>
-                                <a class="btn btn-danger" href="/categories?action=delete&id=${category.id}"><i
-                                        class="fa-solid fa-trash"></i></a></td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
+                <h1 align="center">CATEGORY LIST</h1>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title"><a href="/categories?action=add">Create New Category</a> &nbsp
+                                    &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp
+                                    &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp
+                                    &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                                    &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                                    &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp
+                                    &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp
+                                    &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                                    &nbsp &nbsp &nbsp &nbsp</h4>
+                                <form action="/categories">
+                                    <div class="form-inline" align="right">
+                                        <div class="input-group" data-widget="sidebar-search">
+                                            <input class="form-control form-control-sidebar" type="search"
+                                                   placeholder="Input product name" aria-label="Search" name="q">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-sidebar">
+                                                    <i class="fas fa-search fa-fw"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th colspan="2">Edit/Delete</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach var="category" items="${listCategory}" varStatus="loop">
+                                        <tr>
+                                            <td>${loop.count}</td>
+                                            <td><a href="/categories?action=view&id=${category.id}">${category.name}</a>
+                                            </td>
+                                            <td colspan="2"><a class="btn btn-primary"
+                                                               href="/categories?action=edit&id=${category.id}"><i
+                                                    class="fa-solid fa-pen-to-square"></i></a>
+                                                <a class="btn btn-danger"
+                                                   href="/categories?action=delete&id=${category.id}"><i
+                                                        class="fa-solid fa-trash"></i></a></td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+
+                    </div>
+                </div>
             </div>
         </section>
+    </div>
         <!-- jQuery -->
     </div>
     <script src="plugins/jquery/jquery.min.js"></script>
