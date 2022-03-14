@@ -42,7 +42,7 @@
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="index3.html" class="nav-link">Home</a>
+                <a href="/adminTemplate/index.jsp" class="nav-link">Home</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="#" class="nav-link">Contact</a>
@@ -219,6 +219,27 @@
                             <p>
                                 Category Management
                             </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/users" class="nav-link">
+                            <p>
+                                User Management
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/orders" class="nav-link">
+                            <p>
+                                Order Management
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/signin.jsp" class="nav-link">
+                            <button>
+                                Sign out
+                            </button>
                         </a>
                     </li>
                 </ul>
