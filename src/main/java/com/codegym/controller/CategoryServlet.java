@@ -2,6 +2,7 @@ package com.codegym.controller;
 
 import com.codegym.model.Category;
 import com.codegym.model.Product;
+import com.codegym.model.User;
 import com.codegym.service.CategoryService;
 
 import javax.servlet.*;
@@ -45,6 +46,9 @@ public class CategoryServlet extends HttpServlet {
     }
 
     private void showViewCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User user =(User) session.getAttribute("user");
+        request.setAttribute("username",user.getName());
         int category_id = Integer.parseInt(request.getParameter("id"));
         List<Product> products = categoryService.getProductListByCategory(category_id);
         request.setAttribute("products", products);
@@ -53,6 +57,9 @@ public class CategoryServlet extends HttpServlet {
     }
 
     private void showEditCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User user =(User) session.getAttribute("user");
+        request.setAttribute("username",user.getName());
         int id = Integer.parseInt(request.getParameter("id"));
         Category category = categoryService.findByID(id);
         request.setAttribute("category", category);
@@ -61,6 +68,9 @@ public class CategoryServlet extends HttpServlet {
     }
 
     private void showDeleteCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User user =(User) session.getAttribute("user");
+        request.setAttribute("username",user.getName());
         int id = Integer.parseInt(request.getParameter("id"));
         Category category = categoryService.findByID(id);
         request.setAttribute("category", category);
@@ -69,11 +79,17 @@ public class CategoryServlet extends HttpServlet {
     }
 
     private void showAddCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User user =(User) session.getAttribute("user");
+        request.setAttribute("username",user.getName());
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/adminTemplate/category/add.jsp");
         requestDispatcher.forward(request, response);
     }
 
     private void showListCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User user =(User) session.getAttribute("user");
+        request.setAttribute("username",user.getName());
         List<Category> categoryList = categoryService.findAll();
         request.setAttribute("listCategory", categoryList);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/adminTemplate/category/list.jsp");
